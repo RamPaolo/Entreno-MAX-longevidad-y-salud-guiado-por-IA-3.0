@@ -642,6 +642,9 @@ ul.no li::before { content: "✕"; background: var(--bad-bg); color: var(--bad);
 
 /* ===== v4: entrenador a largo plazo, GitHub, conversación ===== */
 .coach-card { border-color: var(--accent); }
+.join-card { border-color: var(--ok); background: var(--ok-bg); }
+.join-card .sec-title { margin-top: 0; }
+.join-card .nt-row input { background: var(--surface); }
 .cc-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .cc-k { font-stretch: 78%; font-weight: 800; font-size: 20px; margin-right: 4px; }
 .cc-first { margin: 10px 0 0; max-width: 62ch; }
@@ -1248,10 +1251,10 @@ const EX = {
    en modo normal; en descarga o con filtro, la página los recalcula. */
 const CONFIGS = [
   ["Las 2 principales", "Tu par armable. Hoy, 7.5 kg de discos en cada una (2.5 + 1.25 por lado). Cuando la escalera pide otro peso, la app te dice qué discos poner. Los kilos son de discos; cada barra con sus collares suma 1.5 kg."],
-  ["1 principal · 15 kg", "Los discos de 2.5 y 1.25 en una sola (2.5 + 2.5 + 1.25 + 1.25 por lado); la otra queda vacía. Antes se llamaba «consolidada»."],
+  ["1 principal · 15 kg", "Los discos de 2.5 y 1.25 en una sola (2.5 + 2.5 + 1.25 + 1.25 por lado); la otra queda vacía."],
   ["Discos de 0.5 kg", "Tienes 4. No van en las cargas de partida: son tu primer paso para subir de peso (por ejemplo, 2.5 + 1.25 + 0.5 por lado = 8.5 kg cada una)."],
   ["Las 2 principales sin discos", "Solo las barras con sus collares, 1.5 kg cada una."],
-  ["La antigua (5 kg)", "Tu mancuerna vieja de una pieza. Antes: «fija de 5 kg»."],
+  ["La antigua (5 kg)", "Tu mancuerna vieja de una pieza."],
   ["2 vinilos (1 kg c/u)", "Las de vinilo. Antes: «dos de 1 kg»."],
   ["Mochila", "Libros o botellas de agua; empieza con 5 kg."],
   ["Saco de arena", "Arena en bolsas dobles dentro de una mochila o bolso viejo, 20-30 kg. Lo más barato por kilo cuando los discos se queden cortos."]
@@ -3657,10 +3660,10 @@ function eqLegendHTML() {
   var inv = eqInv();
   var rows = [
     ["2 principales · " + kgTxt(inv.guard) + " kg c/u", "Tu par armable, como lo guardas. Antes decía «completas». Con otro peso, la app te dice qué discos poner."],
-    ["1 principal · 15 kg", "Los discos de 2.5 y 1.25 en una sola; la otra queda vacía. Antes decía «consolidada»."],
+    ["1 principal · 15 kg", "Los discos de 2.5 y 1.25 en una sola; la otra queda vacía."],
     ["2 principales · 8.5 kg c/u", "Tu primer paso para subir: un disco de 0.5 por lado en cada una."],
     ["2 principales sin discos", "Solo las barras con sus collares."],
-    ["La antigua (5 kg)", "Tu mancuerna vieja de una pieza. Antes decía «fija de 5 kg»."],
+    ["La antigua (5 kg)", "Tu mancuerna vieja de una pieza."],
     ["2 vinilos (1 kg c/u)", "Las de vinilo. Antes decía «dos de 1 kg»."]
   ];
   return '<div class="eq-legend">' + rows.map(function (r) { return '<div class="eq-li">' + eqHTML(r[0]) + '<p class="muted">' + esc(r[1]) + "</p></div>"; }).join("") + "</div>";
@@ -5656,7 +5659,7 @@ function photoHTML() {
    4. Conversación en tiempo real: Gemini Live (gratis, con internet) o conversación
       local (Ollama o las respuestas sin internet), con voz que no espera a terminar.
    ===================================================================== */
-var APP_VER = "4.0";
+var APP_VER = "4.1";
 var DATAV = 0;   // sube con cada cambio de datos: el entrenador recalcula solo cuando hace falta
 PREF_DEF.coachAuto = true; PREF_DEF.liveVad = true; PREF_DEF.live = true;
 
@@ -5776,9 +5779,10 @@ function mergeRec(a, b) {
 /* ---------- Ajustes que viajan entre equipos ----------
    Solo lo que es del entrenamiento (tu equipo de discos, cómo registras y tempo).
    Voz, volumen, cámara, IA y claves son de cada equipo y no viajan. */
-var SYNC_PREFS = { equip: 1, eq05: 1, coachAuto: 1, tempo: 1, tempoWords: 1, logsets: 1, autoItems: 1, camGest: 1 };
+var SYNC_PREFS = { equip: 1, eq05: 1, coachAuto: 1, tempo: 1, tempoWords: 1, logsets: 1, autoItems: 1, camGest: 1, voice: 1, vozRate: 1, aiSpeak: 1, aiSet: 1, aiVision: 1, live: 1, liveCam: 1, liveVad: 1, camAuto: 1, camCount: 1 };
 var PREFSYNC = { applying: false };
 function prefSyncPut(k, v) {
+  if (k === "aiKey_gemini" && typeof keysPut === "function") { keysPut(); return; }   // viaja cifrada, no en «ajustes»
   if (PREFSYNC.applying || !SYNC_PREFS[k]) return;
   var r = clone(rec("ajustes") || { id: "ajustes", k: "prefs", p: {}, pt: {} });
   r.p = r.p || {}; r.pt = r.pt || {};
@@ -5926,15 +5930,27 @@ function ghSync(manual) {
     st.last = Date.now(); GH.err = ""; ghSave(); return "ok";
   }, function (e) {
     GH.err = (e && e.message) || String(e); ghSave();
-    if (e && e.status === 401) { var cc = ghCfg(); if (cc) { cc.ok = false; ghSetCfg(cc); } }
+    if (e && e.status === 401) {
+      /* ¿Cambiaste la clave de GitHub en otro equipo? Si estás unido con la contraseña, la tomo sola de equipos.json */
+      if (vLocal() && !GH.recov) { GH.recov = true; return vaultRecover().then(function (ok) { GH.recov = false; if (ok) return "retry"; ghBadKey(); return "error"; }); }
+      ghBadKey();
+    }
     return "error";
   }).then(function (res) {
     GH.busy = false;
     if (GH.changed) { GH.changed = false; saveLocal(); prefSyncApply(); DATAV++; ghOnChange(); }
-    ghPaint();
-    if (GH.again) { GH.again = false; ghSoon(1500); }
-    return res;
+    if (res === "retry") return ghSync(manual);
+    var keys = res === "ok" ? keysApply().then(function (got) { if (got || VAULT.stale) renderGlobal(); }, function () {}) : Promise.resolve();
+    return keys.then(function () {
+      ghPaint();
+      if (GH.again) { GH.again = false; ghSoon(1500); }
+      return res;
+    });
   });
+}
+function ghBadKey() {
+  var cc = ghCfg(); if (cc) { cc.ok = false; ghSetCfg(cc); }
+  GH.err = vLocal() ? "La clave de GitHub venció o la cambiaste. En el equipo donde pusiste la clave nueva: «Descargar equipos.json» y súbelo; este equipo se arregla solo." : "La clave no sirve (venció o se copió mal). Crea otra en GitHub y pégala aquí.";
 }
 function ghDirtyN() { return Object.keys(ghState().dirty).length; }
 function ghMark(r) {
@@ -5980,28 +5996,34 @@ function ghConnect() {
     c.ok = true; ghSetCfg(c); GH.err = ""; GH.st = null;
     var s = ghState(); s.dirty = {}; ghLocalShards().forEach(function (p) { s.dirty[p] = 1; }); s.sha = {}; s.hash = {}; ghSave();
     say2("Conectado a " + c.owner + "/" + c.repo + ". Juntando tus datos…");
-    return ghSync(true).then(function (r) { say2(r === "ok" ? "Listo: tus datos ya están en " + c.owner + "/" + c.repo + ". En tus otros equipos, pon la misma clave (o una nueva) y se juntan solos." : ghStatusText()); renderGlobal(); return r === "ok"; });
+    return ghSync(true).then(function (r) { renderGlobal(); var el = $("gh-st"); if (el) el.textContent = r === "ok" ? "Listo: tus datos ya están en " + c.owner + "/" + c.repo + "." + (vLocal() ? "" : " Ahora crea la contraseña de tus equipos (aquí abajo): los demás equipos solo te la pedirán una vez.") : ghStatusText(); return r === "ok"; });
   }, function (e) { ghSetCfg(c); say2(e.message); return false; });
 }
-function ghForget() { var c = ghCfg(); if (c) { c.token = ""; c.ok = false; ghSetCfg(c); } GH.st = null; lsSet(GHS_KEY, null); renderGlobal(); }
+function ghForget() { var c = ghCfg(); if (c) { c.token = ""; c.ok = false; ghSetCfg(c); } GH.st = null; lsSet(GHS_KEY, null); lsSet(VK_KEY, null); renderGlobal(); }
 function ghSettingsHTML() {
-  var c = ghCfg() || {}, owner = c.owner || ghHostOwner(), repo = c.repo || "entreno-datos";
-  var h = '<details class="card" data-k="github"><summary>Tus datos en todos tus equipos (GitHub)</summary>' +
-    '<p class="muted">Tu celular y tu laptop guardan en un repositorio privado tuyo de GitHub y se juntan solos: lo que haces en uno aparece en el otro, sin pasar archivos. Funciona igual sin internet: sube cuando vuelve la conexión.</p>' +
-    '<details class="tests"><summary>Cómo conectarlo (una sola vez, 3 minutos)</summary><ol class="steps">' +
-    "<li>En github.com toca <b>+</b> → <b>New repository</b>. Nombre: <b>" + esc(repo) + "</b>. Marca <b>Private</b> y <b>Add a README file</b>. Toca <b>Create repository</b>. Es otro repositorio, aparte del de la página: tus datos de salud no deben ser públicos.</li>" +
+  var c = ghCfg() || {}, owner = c.owner || ghHostOwner(), repo = c.repo || "entreno-datos", ready = ghReady();
+  var h = '<details class="card" data-k="github"' + (!ready && VAULT.file ? " open" : "") + '><summary>Tus datos en todos tus equipos (GitHub)</summary>' +
+    '<p class="muted">Tus equipos guardan en un repositorio privado tuyo de GitHub y se juntan solos: lo que haces en uno aparece en los otros. Sin internet, sube cuando vuelve la conexión.</p>';
+  if (!ready && VAULT.file) h += '<h3 class="mini">Unir este equipo</h3><p class="muted">Escribe la contraseña de tus equipos: este recibe tus datos y tu clave de Google.</p>' +
+    '<div class="nt-row"><input id="join-pass2" type="password" autocomplete="current-password" placeholder="Contraseña de tus equipos" aria-label="Contraseña de tus equipos"><button class="pbtn" data-v4="vjoin2" type="button">Unir</button></div><p class="gh-st" id="join-st2" aria-live="polite"></p>';
+  if (ready) h += '<p class="gh-st" id="gh-st" aria-live="polite">' + esc(ghStatusText()) + "</p>" +
+    '<div class="set-grid"><div class="set-row"><span>Guardar solo (unos segundos después de cada cambio, y al cerrar la sesión)</span><button class="switch" role="switch" aria-checked="' + (c.auto !== false) + '" data-v4="ghauto"><i></i><b>' + (c.auto !== false ? "Sí" : "No") + "</b></button></div></div>" +
+    '<div class="hero-actions"><button class="btn" data-v4="ghnow" type="button">Guardar ahora</button></div>' + vaultBlockHTML();
+  var manual = '<ol class="steps">' +
+    "<li>En github.com toca <b>+</b> → <b>New repository</b>. Nombre: <b>" + esc(repo) + "</b>. Marca <b>Private</b> y <b>Add a README file</b>. Toca <b>Create repository</b>. Es otro repositorio, aparte del de la app: tus datos de salud no deben ser públicos.</li>" +
     "<li>Crea la clave: tu foto (arriba a la derecha) → <b>Settings</b> → <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b>.</li>" +
     "<li>Nombre: <b>Entreno</b>. Vencimiento: el que quieras (por ejemplo, 1 año). <b>Repository access</b>: «Only select repositories» y elige <b>" + esc(repo) + "</b>.</li>" +
     "<li><b>Permissions</b> → Repository permissions → <b>Contents</b>: «Read and write». Nada más. <b>Generate token</b> y copia la clave (empieza con <code>github_pat_</code>).</li>" +
-    "<li>Pégala aquí abajo y toca <b>Probar y guardar</b>. En tu otro equipo haz solo este último paso, con la misma clave.</li></ol></details>" +
+    "<li>Pégala aquí y toca <b>Probar y guardar</b>. Después crea la <b>contraseña de tus equipos</b>: los demás equipos solo te pedirán esa contraseña.</li></ol>" +
     '<div class="ai-form"><label>Usuario de GitHub<input id="gh-o" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(owner) + '"></label>' +
     '<label>Repositorio privado<input id="gh-r" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(repo) + '"></label>' +
-    '<label>Clave<input id="gh-t" type="password" autocomplete="off" spellcheck="false" placeholder="' + (c.token ? "guardada (escribe otra para cambiarla)" : "github_pat_…") + '"></label>' +
+    '<label>Clave de GitHub<input id="gh-t" type="password" autocomplete="off" spellcheck="false" placeholder="' + (c.token ? "guardada (escribe otra para cambiarla)" : "github_pat_…") + '"></label>' +
     '<label>Nombre de este equipo (para el historial)<input id="gh-dev" autocomplete="off" spellcheck="false" placeholder="' + esc(ghDevName()) + '" value="' + esc(pref("devName", "") || "") + '"></label></div>' +
-    '<div class="set-grid">' + '<div class="set-row"><span>Guardar solo (unos segundos después de cada cambio, y al cerrar la sesión)</span><button class="switch" role="switch" aria-checked="' + (c.auto !== false) + '" data-v4="ghauto"><i></i><b>' + (c.auto !== false ? "Sí" : "No") + "</b></button></div></div>" +
-    '<p class="gh-st" id="gh-st" aria-live="polite">' + esc(ghStatusText()) + "</p>" +
-    '<div class="hero-actions"><button class="btn primary" data-v4="ghsave" type="button">Probar y guardar</button>' + (c.ok ? '<button class="btn" data-v4="ghnow" type="button">Guardar ahora</button>' : "") + (c.token ? '<button class="btn quiet" data-v4="ghforget" type="button">Olvidar la clave</button>' : "") + "</div>" +
-    '<p class="muted">La clave queda solo en este equipo: no va en el respaldo ni a GitHub. Si pierdes el equipo, bórrala en GitHub (Settings → Developer settings → Fine-grained tokens) y crea otra.</p></details>';
+    (ready ? "" : '<p class="gh-st" id="gh-st" aria-live="polite">' + esc(ghStatusText()) + "</p>") +
+    '<div class="hero-actions"><button class="btn' + (ready ? "" : " primary") + '" data-v4="ghsave" type="button">Probar y guardar</button>' + (c.token ? '<button class="btn quiet" data-v4="ghforget" type="button">Desconectar este equipo</button>' : "") + "</div>";
+  h += ready || VAULT.file ? '<details class="tests"><summary>' + (ready ? "Cambiar la clave de GitHub o desconectar este equipo" : "Conectar con una clave de GitHub (solo si no tienes la contraseña)") + "</summary>" + manual + "</details>" :
+    '<h3 class="mini">Primer equipo: conectarlo (una vez, 3 minutos)</h3>' + manual;
+  h += '<p class="muted">Las claves quedan solo en tus equipos; lo que se sube va cifrado con tu contraseña. Si pierdes un equipo, borra la clave en GitHub (Settings → Developer settings → Fine-grained tokens), crea otra y vuelve a subir equipos.json: tus otros equipos la toman solos.</p></details>';
   return h;
 }
 
@@ -6043,6 +6065,204 @@ function swRegister() {
     UPD.reg = reg; UPD.last = Date.now();
     setInterval(updCheck, 30 * 60 * 1000);
   }).catch(function () {});
+}
+
+/* ---------- Contraseña de tus equipos (versión 4.1) ----------
+   Para no pegar claves en cada equipo:
+   1. En un equipo ya conectado creas una contraseña. La app cifra la clave de GitHub con ella
+      (AES-GCM de 256 bits; la llave sale de la contraseña con PBKDF2-SHA256 y 600 000 vueltas)
+      y arma «equipos.json», que subes una vez al repositorio de la app, junto a index.html.
+      También sirve un enlace «#unir=…» que te mandas por WhatsApp.
+   2. Un equipo nuevo abre la app, escribe la contraseña y queda unido: baja tus datos y tu
+      clave de Google, que viaja cifrada dentro de tus datos (registro «llaves»).
+   La contraseña nunca se guarda ni se sube. Cada equipo unido guarda solo la llave derivada. */
+var VAULT_ITER = 600000;
+var VK_KEY = LS_KEY + ".k";            // { kid, salt, iter, key, t } — solo en este equipo
+var VAULT = { file: null, site: null, checked: false, busy: false, stale: false, msg: "", hide: false };
+var KEYS = { applying: false };
+function vOK() { return !!(window.crypto && window.crypto.subtle && window.TextEncoder); }
+function bytesB64(u8) { var s = "", CH = 0x8000; for (var i = 0; i < u8.length; i += CH) s += String.fromCharCode.apply(null, u8.subarray(i, i + CH)); return btoa(s); }
+function b64Bytes(b) { var bin = atob(String(b || "")), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a; }
+function b64url(str) { return b64enc(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+function unb64url(s) { s = String(s || "").replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return b64dec(s); }
+function vKid(salt) { return strHash("kid|" + salt); }
+function vDerive(pass, salt, iter) {
+  var S = window.crypto.subtle;
+  return S.importKey("raw", new TextEncoder().encode(String(pass).normalize("NFC")), "PBKDF2", false, ["deriveBits"]).then(function (base) {
+    return S.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: b64Bytes(salt), iterations: iter || VAULT_ITER }, base, 256);
+  }).then(function (bits) { return new Uint8Array(bits); });
+}
+function vAes(raw) { return window.crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["encrypt", "decrypt"]); }
+function vEnc(raw, obj) {
+  var iv = window.crypto.getRandomValues(new Uint8Array(12));
+  return vAes(raw).then(function (k) { return window.crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, k, new TextEncoder().encode(JSON.stringify(obj))); })
+    .then(function (ct) { return { iv: bytesB64(iv), data: bytesB64(new Uint8Array(ct)) }; });
+}
+function vDec(raw, box) {
+  return vAes(raw).then(function (k) { return window.crypto.subtle.decrypt({ name: "AES-GCM", iv: b64Bytes(box.iv) }, k, b64Bytes(box.data)); })
+    .then(function (pt) { return JSON.parse(new TextDecoder().decode(pt)); });
+}
+function vLocal() { var v = lsGet(VK_KEY); return v && v.key && v.salt ? v : null; }
+function vRaw() { var v = vLocal(); return v ? b64Bytes(v.key) : null; }
+function passProblem(p, p2) {
+  p = String(p || "");
+  if (p.length < 10) return "Usa al menos 10 caracteres. Lo más fácil y seguro: 3 o 4 palabras al azar que recuerdes (como «sapo-montaña-guitarra-azul», pero inventa las tuyas).";
+  if (p2 != null && p !== p2) return "Las dos contraseñas no son iguales.";
+  if (/sapo.?monta[ñn]a.?guitarra.?azul/i.test(p)) return "Esa es la del ejemplo: inventa tus propias 3 o 4 palabras.";
+  if (/^(.)\1+$/.test(p) || /^(0123456789|1234567890|abcdefghij|qwertyuiop)/i.test(p)) return "Esa contraseña es muy fácil de adivinar.";
+  return "";
+}
+/* El archivo que se sube: solo datos cifrados y cómo derivar la llave (la sal no es secreta) */
+function vaultFile() {
+  var v = vLocal(), c = ghCfg();
+  if (!v || !c || !c.token) return Promise.resolve(null);
+  return vEnc(b64Bytes(v.key), { owner: c.owner, repo: c.repo, token: c.token, t: Date.now() }).then(function (box) {
+    return { app: "sistema3", tipo: "equipos", v: 1, kdf: { alg: "PBKDF2-SHA256", iter: v.iter || VAULT_ITER, salt: v.salt }, kid: v.kid, iv: box.iv, data: box.data, creado: TODAY() };
+  });
+}
+function vaultCreate(pass) {
+  if (!vOK()) return Promise.reject(new Error("Este navegador no puede cifrar: usa Chrome actualizado."));
+  if (!ghReady()) return Promise.reject(new Error("Primero conecta este equipo a GitHub."));
+  var salt = bytesB64(window.crypto.getRandomValues(new Uint8Array(16)));
+  return vDerive(pass, salt, VAULT_ITER).then(function (raw) {
+    lsSet(VK_KEY, { kid: vKid(salt), salt: salt, iter: VAULT_ITER, key: bytesB64(raw), t: Date.now() });
+    VAULT.stale = false; VAULT.site = null;
+    return keysPut().then(vaultFile);
+  });
+}
+/* Clave de Google (y lo que venga después) cifrada dentro de tus datos */
+function keysPut() {
+  var v = vLocal(); if (!v || KEYS.applying) return Promise.resolve();
+  return vEnc(b64Bytes(v.key), { gemini: aiKeyOf("gemini") || "" }).then(function (box) {
+    put({ id: "llaves", k: "keys", kid: v.kid, salt: v.salt, iter: v.iter || VAULT_ITER, iv: box.iv, data: box.data });
+    lsSet(LS_KEY + ".keysu", (rec("llaves") || {}).u || 0);
+  });
+}
+function keysApply() {
+  var v = vLocal(), r = rec("llaves");
+  if (!r || !r.data) return Promise.resolve(false);
+  if (!v || r.kid !== v.kid) { VAULT.stale = true; return Promise.resolve(false); }
+  VAULT.stale = false;
+  if ((r.u || 0) <= (lsGet(LS_KEY + ".keysu") || 0)) return Promise.resolve(false);
+  return vDec(b64Bytes(v.key), r).then(function (o) {
+    lsSet(LS_KEY + ".keysu", r.u || 0);
+    var g = o && o.gemini ? String(o.gemini) : "";
+    if (!g || g === aiKeyOf("gemini")) return false;
+    KEYS.applying = true;
+    try { setPref("aiKey_gemini", g); if (!aiProv()) setPref("aiProv", "gemini"); } finally { KEYS.applying = false; }
+    return true;
+  }, function () { VAULT.stale = true; return false; });
+}
+/* Leer la contraseña en un equipo ya conectado (o cuando cambiaste la contraseña en otro) */
+function keysUnlock(pass) {
+  var r = rec("llaves");
+  if (!r || !r.salt) return Promise.reject(new Error("Todavía no hay contraseña de tus equipos."));
+  return vDerive(pass, r.salt, r.iter || VAULT_ITER).then(function (raw) {
+    return vDec(raw, r).then(function () {
+      lsSet(VK_KEY, { kid: r.kid, salt: r.salt, iter: r.iter || VAULT_ITER, key: bytesB64(raw), t: Date.now() });
+      lsSet(LS_KEY + ".keysu", 0); VAULT.stale = false;
+      return keysApply();
+    }, function () { throw new Error("Contraseña incorrecta."); });
+  });
+}
+/* Dónde buscar el llavero en un equipo nuevo: el enlace #unir=… o equipos.json del sitio */
+function vaultFromHash() {
+  var m = String(location.hash || "").match(/[#&]unir=([^&]+)/);
+  if (!m) return null;
+  try { var f = JSON.parse(unb64url(decodeURIComponent(m[1]))); return f && f.kdf && f.data && f.iv ? f : null; } catch (e) { return null; }
+}
+function vaultFetchSite() {
+  if (window.claude || !/^https?:$/.test(location.protocol) || typeof fetch !== "function") return Promise.resolve(null);
+  return Promise.resolve().then(function () { return fetch("equipos.json?t=" + Date.now(), { cache: "no-store" }); }).then(function (r) { return r && r.ok ? r.json() : null; })
+    .then(function (f) { return f && f.tipo === "equipos" && f.kdf && f.data && f.iv ? f : null; }, function () { return null; });
+}
+function vaultInit() {
+  VAULT.initT = Date.now();
+  var h = vaultFromHash();
+  if (h) { VAULT.file = h; VAULT.checked = true; if (!ghReady()) rerender(); return Promise.resolve(h); }
+  if (ghReady()) { VAULT.checked = true; return keysApply().then(function (got) { if (got) renderGlobal(); if (VAULT.stale) renderGlobal(); return null; }); }
+  return vaultFetchSite().then(function (f) { VAULT.file = f; VAULT.checked = true; if (f && !P.active) rerender(); return f; });
+}
+function vaultJoin(pass) {
+  var f = VAULT.file;
+  if (!f) return Promise.reject(new Error("No encuentro equipos.json: súbelo al repositorio de la app o usa el enlace para unir."));
+  if (!vOK()) return Promise.reject(new Error("Este navegador no puede descifrar: usa Chrome actualizado."));
+  return vDerive(pass, f.kdf.salt, f.kdf.iter || VAULT_ITER).then(function (raw) {
+    return vDec(raw, f).then(function (o) {
+      if (!o || !o.token || !o.owner || !o.repo) throw new Error("El archivo de tus equipos está incompleto.");
+      var old = ghCfg() || {};
+      ghSetCfg({ owner: o.owner, repo: o.repo, token: o.token, ok: true, auto: old.auto !== false });
+      lsSet(VK_KEY, { kid: f.kid || vKid(f.kdf.salt), salt: f.kdf.salt, iter: f.kdf.iter || VAULT_ITER, key: bytesB64(raw), t: Date.now() });
+      lsSet(LS_KEY + ".keysu", 0);
+      GH.st = null; GH.err = "";
+      var s = ghState(); s.sha = {}; s.hash = {}; s.dirty = {}; ghLocalShards().forEach(function (p) { s.dirty[p] = 1; }); ghSave();
+      try { if (/unir=/.test(location.hash) && history.replaceState) history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+      VAULT.file = null;
+      return ghSync(true).then(function (res) { return keysApply().then(function () { return { res: res, key: !!aiKeyOf("gemini") }; }); });
+    }, function () { throw new Error("Contraseña incorrecta."); });
+  });
+}
+/* Si la clave de GitHub cambió (venció o la renovaste), los equipos unidos la toman solos de equipos.json */
+function vaultRecover() {
+  var v = vLocal(), c = ghCfg(); if (!v || !c) return Promise.resolve(false);
+  return vaultFetchSite().then(function (f) {
+    if (!f || (f.kid && f.kid !== v.kid)) return false;
+    return vDec(b64Bytes(v.key), f).then(function (o) {
+      if (!o || !o.token || o.token === c.token) return false;
+      ghSetCfg({ owner: o.owner || c.owner, repo: o.repo || c.repo, token: o.token, ok: true, auto: c.auto !== false });
+      return true;
+    }, function () { return false; });
+  });
+}
+/* ¿El equipos.json subido está al día con esta clave? */
+function vaultSiteCheck() {
+  var v = vLocal(), c = ghCfg(); VAULT.siteT = Date.now();
+  return vaultFetchSite().then(function (f) {
+    if (!f) return "falta";
+    if (!v || (f.kid && f.kid !== v.kid)) return "otra";
+    return vDec(b64Bytes(v.key), f).then(function (o) { return o && c && o.token === c.token ? "ok" : "vieja"; }, function () { return "otra"; });
+  }).then(function (st) { VAULT.site = st; return st; });
+}
+/* Vuelve a mirar si ya subiste equipos.json (al abrir los ajustes o al volver a la app) */
+function vaultSitePaint() { return vaultSiteCheck().then(function (st) { var el = $("vk-site"); if (el) el.textContent = vaultSiteText(st); return st; }); }
+function vaultSiteText(st) {
+  return st === "ok" ? "equipos.json ya está en tu app: los equipos nuevos solo piden la contraseña." :
+    st === "falta" ? "Falta un paso: sube equipos.json al repositorio de la app (donde está index.html). Sin ese archivo, usa el enlace para unir." :
+    st === "vieja" ? "El equipos.json de tu app tiene una clave de GitHub vieja: descárgalo y súbelo otra vez." :
+    st === "otra" ? "El equipos.json de tu app es de otra contraseña: descárgalo y súbelo otra vez." : "Revisando si equipos.json ya está en tu app…";
+}
+/* Tarjeta en la página del día de un equipo nuevo */
+function joinCardHTML() {
+  if (ghReady() || !VAULT.file || VAULT.hide) return "";
+  return '<section class="card join-card"><h2 class="sec-title">Une este equipo a tus datos</h2><p class="muted">Tus otros equipos ya guardan en GitHub. Escribe la contraseña de tus equipos y este recibe todo: sesiones, progreso y tu clave de Google.</p>' +
+    '<div class="nt-row"><input id="join-pass" type="password" autocomplete="current-password" placeholder="Contraseña de tus equipos" aria-label="Contraseña de tus equipos"><button class="pbtn" data-v4="vjoin" type="button">Unir</button></div>' +
+    '<p class="gh-st" id="join-st" aria-live="polite">' + esc(VAULT.msg || "") + '</p><button class="mini-btn quiet" data-v4="vlater" type="button">Ahora no</button></section>';
+}
+function vaultBlockHTML() {
+  var v = vLocal(), r = rec("llaves");
+  if (!ghReady()) return "";
+  var h = '<h3 class="mini">Contraseña de tus equipos</h3>';
+  if (!vOK()) return h + '<p class="muted">Este navegador no puede cifrar. Usa Chrome actualizado.</p>';
+  if (VAULT.stale || (!v && r && r.salt)) {
+    return h + '<p class="muted">' + (v ? "Cambiaste la contraseña de tus equipos en otro equipo." : "Ya creaste una contraseña de tus equipos en otro equipo.") + " Escríbela aquí una vez para recibir también tu clave de Google.</p>" +
+      '<div class="nt-row"><input id="vk-pass" type="password" autocomplete="current-password" placeholder="Contraseña de tus equipos" aria-label="Contraseña de tus equipos"><button class="pbtn" data-v4="vunlock" type="button">Guardar</button></div><p class="gh-st" id="vk-st" aria-live="polite"></p>';
+  }
+  if (!v) {
+    return h + '<p class="muted">Para no pegar claves en cada equipo: crea una contraseña. Los equipos nuevos solo te la piden una vez y reciben tus datos y tu clave de Google. La contraseña no se guarda en ningún lado: anótala donde no la pierdas.</p>' +
+      '<div class="ai-form"><label>Contraseña (3 o 4 palabras)<input id="vk-p1" type="password" autocomplete="new-password"></label><label>Repítela<input id="vk-p2" type="password" autocomplete="new-password"></label></div>' +
+      '<div class="hero-actions"><button class="btn primary" data-v4="vcreate" type="button">Crear contraseña</button></div><p class="gh-st" id="vk-st" aria-live="polite"></p>';
+  }
+  if (!VAULT.site || (VAULT.site !== "ok" && Date.now() - (VAULT.siteT || 0) > 15000)) setTimeout(vaultSitePaint, 0);
+  return h + '<p class="muted">Lista desde el ' + esc(shortDate(iso(new Date(v.t || Date.now())))) + '. En un equipo nuevo: abre la app, escribe la contraseña y listo.</p>' +
+    '<p class="gh-st" id="vk-site" aria-live="polite">' + esc(vaultSiteText(VAULT.site)) + "</p>" +
+    '<details class="tests"><summary>Cómo subir equipos.json (una vez, o cuando cambies la clave de GitHub)</summary><ol class="steps"><li>Toca <b>Descargar equipos.json</b>.</li><li>En github.com abre el repositorio de la app (el de index.html) → <b>Add file</b> → <b>Upload files</b> → arrastra <b>equipos.json</b> → <b>Commit changes</b>.</li><li>Desde el celular también sirve <b>Copiar equipos.json</b> → en GitHub <b>Add file</b> → <b>Create new file</b> → nombre <b>equipos.json</b> → pegar → <b>Commit changes</b>.</li></ol><p class="muted">Ese archivo es público pero va cifrado: sin la contraseña no sirve. Por eso conviene una contraseña larga.</p></details>' +
+    '<div class="hero-actions"><button class="btn" data-v4="vdl" type="button">Descargar equipos.json</button><button class="btn quiet" data-v4="vcopy" type="button">Copiar equipos.json</button><button class="btn quiet" data-v4="vlink" type="button">Copiar enlace para unir</button></div>' +
+    '<p class="gh-st" id="vk-st" aria-live="polite"></p>' +
+    '<details class="tests"><summary>Cambiar la contraseña</summary><div class="ai-form"><label>Nueva contraseña<input id="vk-p1" type="password" autocomplete="new-password"></label><label>Repítela<input id="vk-p2" type="password" autocomplete="new-password"></label></div><div class="hero-actions"><button class="btn" data-v4="vcreate" type="button">Cambiar contraseña</button></div><p class="muted">Después sube el equipos.json nuevo. Tus otros equipos siguen guardando; te pedirán la contraseña nueva una vez para recibir tu clave de Google.</p></details>';
+}
+function copyText(t) {
+  try { if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t).then(function () { return true; }, function () { return false; }); } catch (e) {}
+  return Promise.resolve(false);
 }
 
 /* ---------- 1. Entrenador a largo plazo ----------
@@ -6579,7 +6799,7 @@ function coachCardHTML() {
   h += '<div class="hero-actions"><button class="btn" data-v4="pgopen" type="button">Ver tu progreso</button><button class="btn quiet" data-v4="talk" type="button">' + (TALK.on ? "Terminar conversación" : "Conversar por voz") + "</button></div></section>";
   return h;
 }
-function injectCoach(h) { var i = h.indexOf("</section>"); var c = coachCardHTML(); return i < 0 || !c ? h : h.slice(0, i + 10) + c + h.slice(i + 10); }
+function injectCoach(h) { var i = h.indexOf("</section>"); var c = joinCardHTML() + coachCardHTML(); return i < 0 || !c ? h : h.slice(0, i + 10) + c + h.slice(i + 10); }
 function coachSettingsHTML() {
   var c = cfg(), B = blockInfo(TODAY());
   return '<details class="card" data-k="coach"><summary>Entrenador a largo plazo</summary><p class="muted">Lee tus series, el RIR, lo que mide la cámara, la rodilla y tus medidas, y te propone cambios con las reglas del 3.0. Tú decides en «Tu progreso».</p><div class="set-grid">' +
@@ -7220,6 +7440,40 @@ document.addEventListener("click", function (e) {
   else if (a === "ghforget") ghForget();
   else if (a === "ghauto") { var c = ghCfg() || {}; c.auto = c.auto === false; ghSetCfg(c); renderGlobal(); if (ghAuto()) ghSoon(500); }
   else if (a === "talk") talkToggle();
+  else if (a === "vjoin" || a === "vjoin2") {
+    var two = a === "vjoin2", pi = $(two ? "join-pass2" : "join-pass"), st2 = $(two ? "join-st2" : "join-st"), pw = pi ? String(pi.value || "") : "";
+    if (!pw) { if (st2) st2.textContent = "Escribe la contraseña."; return; }
+    if (st2) st2.textContent = "Comprobando… (tarda unos segundos)"; t.disabled = true;
+    vaultJoin(pw).then(function (r) {
+      VAULT.msg = ""; rerender(); renderGlobal();
+      var msg = r.res === "ok" ? "Listo: este equipo ya tiene tus datos" + (r.key ? " y tu clave de Google" : "") + "." : "Unido. " + ghStatusText();
+      var gs = $("gh-st"); if (gs) gs.textContent = msg; fbShow(msg, 6000); updBanner(msg); setTimeout(function () { var u = $("upd"); if (u && !UPD.ready) u.hidden = true; }, 6000);
+    }, function (e) { t.disabled = false; if (st2) st2.textContent = e.message; if (pi) { pi.value = ""; pi.focus(); } });
+  }
+  else if (a === "vlater") { VAULT.hide = true; rerender(); }
+  else if (a === "vcreate") {
+    var p1 = String(($("vk-p1") || {}).value || ""), p2 = String(($("vk-p2") || {}).value || ""), vs = $("vk-st"), pb = passProblem(p1, p2);
+    if (pb) { if (vs) vs.textContent = pb; return; }
+    if (vs) vs.textContent = "Creando… (tarda unos segundos)"; t.disabled = true;
+    vaultCreate(p1).then(function () { renderGlobal(); var d = document.querySelector('details[data-k="github"]'); if (d) d.open = true; var v2 = $("vk-st"); if (v2) v2.textContent = "Contraseña lista. Ahora descarga equipos.json y súbelo al repositorio de la app (o copia el enlace para unir)."; },
+      function (e) { t.disabled = false; if (vs) vs.textContent = e.message; });
+  }
+  else if (a === "vunlock") {
+    var pu = String(($("vk-pass") || {}).value || ""), vu = $("vk-st");
+    if (!pu) { if (vu) vu.textContent = "Escribe la contraseña."; return; }
+    if (vu) vu.textContent = "Comprobando…";
+    keysUnlock(pu).then(function (got) { renderGlobal(); var v3 = $("vk-st"); if (v3) v3.textContent = got ? "Listo: este equipo ya tiene tu clave de Google." : "Listo: contraseña guardada en este equipo."; }, function (e) { if (vu) vu.textContent = e.message; });
+  }
+  else if (a === "vdl" || a === "vcopy" || a === "vlink") {
+    var vo = $("vk-st");
+    vaultFile().then(function (f) {
+      if (!f) { if (vo) vo.textContent = "Primero conecta este equipo y crea la contraseña."; return; }
+      var txt = JSON.stringify(f, null, 1);
+      if (a === "vdl") { var okd = downloadText("equipos.json", txt, "application/json"); if (vo) vo.textContent = okd ? "Descargado equipos.json: súbelo al repositorio de la app, junto a index.html." : "No se pudo descargar: usa «Copiar equipos.json»."; }
+      else if (a === "vcopy") copyText(txt).then(function (ok) { if (vo) vo.textContent = ok ? "Copiado. En GitHub: Add file → Create new file → nombre equipos.json → pega → Commit changes." : "No pude copiar: usa «Descargar equipos.json»."; });
+      else { var link = location.origin + location.pathname + "#unir=" + encodeURIComponent(b64url(JSON.stringify(f))); copyText(link).then(function (ok) { if (vo) vo.textContent = ok ? "Enlace copiado: mándatelo (por ejemplo por WhatsApp), ábrelo en el equipo nuevo y escribe la contraseña." : link; }); }
+    });
+  }
   else if (a === "airev") { aiReview(); }
   else if (a === "noteadd") { var ni = $("note-in"); if (ni && String(ni.value).trim()) { memAdd(ni.value); ni.value = ""; pgRender(); } }
   else if (a === "notedel") { memDel(t.getAttribute("data-id")); pgRender(); }
@@ -7227,6 +7481,7 @@ document.addEventListener("click", function (e) {
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") { var pg = $("pg"); if (pg && !pg.hidden) { pgClose(); return; } }
   if (e.key === "Enter" && e.target && e.target.id === "note-in") { e.preventDefault(); var b = document.querySelector('[data-v4="noteadd"]'); if (b) b.click(); }
+  if (e.key === "Enter" && e.target && /^(join-pass2?|vk-pass)$/.test(e.target.id)) { e.preventDefault(); var jb = document.querySelector(e.target.id === "join-pass" ? '[data-v4="vjoin"]' : e.target.id === "join-pass2" ? '[data-v4="vjoin2"]' : '[data-v4="vunlock"]'); if (jb) jb.click(); }
   if (P.active && (e.key === "h" || e.key === "H") && !/^(INPUT|TEXTAREA)$/.test((e.target && e.target.tagName) || "")) talkToggle();
 });
 document.addEventListener("change", function (e) {
@@ -7237,16 +7492,20 @@ document.addEventListener("change", function (e) {
 
 /* ---------- Arranque de lo nuevo ---------- */
 function v4Init() {
-  chatLoad(); prefSyncSeed(); prefSyncApply();
+  chatLoad(); prefSyncSeed(); prefSyncApply(); vaultInit();
   if (ghAuto()) setTimeout(function () { ghSync(false); }, 1500);
   setInterval(function () { if (ghAuto() && !(P.active && !P.done) && document.visibilityState === "visible") ghSync(false); }, 5 * 60 * 1000);
   document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "visible") {
       if (ghAuto() && Date.now() - (ghState().last || 0) > 2 * 60 * 1000) ghSync(false);
       if (UPD.ready) updMaybe(); else if (UPD.reg && Date.now() - UPD.last > 10 * 60 * 1000) updCheck();
+      /* ¿Subiste equipos.json mientras tanto? */
+      if (!ghReady() && !VAULT.file && Date.now() - (VAULT.initT || 0) > 30000) vaultInit();
+      else if (ghReady() && vLocal() && $("vk-site") && VAULT.site !== "ok") vaultSitePaint();
     } else if (ghAuto() && ghDirtyN() && !(P.active && !P.done)) ghSync(false);
   });
   window.addEventListener("online", function () { if (ghAuto()) ghSoon(1000); });
+  document.addEventListener("toggle", function (e) { var d = e.target; if (d && d.getAttribute && d.getAttribute("data-k") === "github" && d.open && ghReady() && vLocal() && VAULT.site !== "ok") vaultSitePaint(); }, true);
   window.addEventListener("storage", function (e) { if (e.key === LS_KEY + ".recs" && !P.active) { ST.recs = lsGet(LS_KEY + ".recs") || {}; DATAV++; rerender(); } });
   talkPaint();
 }
