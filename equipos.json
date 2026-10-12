@@ -1,0 +1,14 @@
+{
+ "app": "sistema3",
+ "tipo": "equipos",
+ "v": 1,
+ "kdf": {
+  "alg": "PBKDF2-SHA256",
+  "iter": 600000,
+  "salt": "dsU01pLsu2DGJ4day7XMAg=="
+ },
+ "kid": "bh03r5.28",
+ "iv": "F1HUzIguJ8WaovMM",
+ "data": "F11Ce3UYJvxC5x75Fd4rwtDHrp4pFiN3/QC5aateR97NO9ezUkuyHxISy67rSIzxT+odwDaHOmg8oKeT65R6mB0RWT7jMpEfacp2QZXl0qmtgJDshChNd98cg3aHZfRpZpJBFRFCYQ8C7Z5daJ7Vn78KFV6MZ4dA0EnH/EEkpYd15riogIj2YHUmkSOgZIxcHFSju32FF9Au3Y50uTWr/PSHZT0jEQTxGliYuyRi4ukDHUgPCQ==",
+ "creado": "2026-10-12"
+}
