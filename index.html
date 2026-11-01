@@ -747,6 +747,128 @@ ul.no li::before { content: "✕"; background: var(--bad-bg); color: var(--bad);
 }
 @media (prefers-reduced-motion: reduce) { .talk-pill span::before, #p-talk[aria-pressed="true"]::before { animation: none; } }
 
+/* ===================== 5.0 ===================== */
+/* Colores de los estímulos: fuerza (rojo), regreso (azul), mantener (morado). Los mismos que suenan. */
+:root { --hold: #6B3FA0; --hold-bg: #ECE3F6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hold: #C3A8F7; --hold-bg: #2E2547; } }
+:root[data-theme="dark"] { --hold: #C3A8F7; --hold-bg: #2E2547; }
+.tb.pau { background: var(--hold-bg); color: var(--hold); }
+.tb.pau.now { background: var(--hold); color: var(--surface); }
+.pc-ph.pau { background: var(--hold-bg); color: var(--hold); }
+/* Demostración animada */
+svg.demo { display: block; width: 100%; height: auto; overflow: visible; }
+svg.demo .dseg { stroke: var(--ink); stroke-linecap: round; fill: none; }
+svg.demo .dseg.far { stroke: var(--ink-2); opacity: 0.55; }
+svg.demo .dseg.w-con { stroke: var(--con); opacity: 1; }
+svg.demo .dseg.w-ecc { stroke: var(--ecc); opacity: 1; }
+svg.demo .dseg.w-pau { stroke: var(--hold); opacity: 1; }
+svg.demo .dhead { fill: var(--surface); stroke: var(--ink); stroke-width: 3.5; }
+svg.demo .dnose { fill: var(--ink); }
+svg.demo .dshadow { fill: var(--line); opacity: 0.55; }
+svg.demo .dp { fill: var(--prep-bg); stroke: var(--ink-2); stroke-width: 1.2; stroke-linejoin: round; opacity: 0.9; }
+svg.demo .dp-top { fill: var(--surface); stroke: var(--ink-2); stroke-width: 1; opacity: 0.85; }
+svg.demo .dp.wood, svg.demo .dp-top.wood { fill: var(--control-bg); }
+svg.demo .dp.soft, svg.demo .dp-top.soft { fill: var(--hiper-bg); }
+svg.demo .dp.pack, svg.demo .dp-top.pack { fill: var(--aero-bg); }
+svg.demo .dp.wall, svg.demo .dp-top.wall { fill: var(--line); opacity: 0.35; stroke: none; }
+svg.demo .dpost { stroke: var(--control); stroke-width: 5; stroke-linecap: round; opacity: 0.8; }
+svg.demo .dband { stroke: var(--warn); stroke-width: 2.6; stroke-dasharray: 5 3; stroke-linecap: round; }
+svg.demo .dbar { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+svg.demo .dplate { fill: var(--ink-2); stroke: var(--ink); stroke-width: 1.2; }
+svg.demo .dpack { stroke: var(--aero); stroke-width: 13; stroke-linecap: round; opacity: 0.75; }
+/* Sesión más compacta (5.0): arriba y abajo delgados, más espacio para lo que importa */
+.p-head .p-top { padding: 6px 12px 2px; gap: 8px; }
+.p-head .p-top .pbtn { min-height: 38px; padding: 0 12px; font-size: 14px; }
+.p-mid { display: grid; justify-items: center; gap: 0; }
+.p-name { font-size: 12px; line-height: 1.25; }
+.p-clock { display: flex; align-items: baseline; gap: 6px; }
+.p-el { font-size: 22px; line-height: 1.05; }
+.p-plan { font-size: 13px; margin-left: 0; }
+.p-status { font-size: 12px; min-height: 0; line-height: 1.2; }
+.p-tools { padding: 2px 12px 4px; gap: 5px; }
+.tbtn { min-height: 30px; padding: 0 10px; font-size: 13px; gap: 5px; }
+.tbtn::before { width: 7px; height: 7px; }
+.p-hfmsg { font-size: 13px; padding: 0 12px 2px; }
+.p-route { padding: 2px 12px 4px; }
+.p-route .seg { height: 18px; padding: 1px 3px; border-bottom-width: 2px; }
+.p-route .seg-l { font-size: 11px; }
+.p-marker { bottom: 4px; }
+.p-body { padding: 2px 16px 10px; }
+.p-kind { font-size: 13px; margin: 2px 0 0; }
+.p-title { font-size: clamp(24px, 6.8vw, 46px); line-height: 1.04; }
+.p-hero { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 10px; align-items: center; }
+.p-hero.has-demo { grid-template-columns: minmax(0, 1fr) minmax(112px, 41%); }
+.p-hero.has-side { grid-template-columns: minmax(0, 1fr) auto; }
+.p-hero > .p-sub, .p-hero > .p-count { grid-column: 1; }
+.p-hero > .p-demo { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+.p-hero > .p-demo:empty { display: none; }
+.p-hero > .p-count.empty { display: none; }
+.p-sub { margin-top: 4px; font-size: 16px; }
+.p-setline { font-size: 15px; }
+.p-dose { font-size: clamp(26px, 7.4vw, 46px); }
+.p-count { margin: 2px 0 0; font-size: clamp(84px, 24vw, 200px); }
+.t-rest .p-count, .t-gap .p-count, .t-wait .p-count { font-size: clamp(76px, 22vw, 170px); }
+.p-demo svg.demo { max-height: 31vh; margin: 0 auto; }
+.p-demo .plus15 { min-height: 48px; padding: 0 18px; font-size: 18px; }
+.p-pacer { margin: 6px 0 2px; }
+.p-toast { margin: 8px 0 0; font-size: 15px; }
+.p-bottom { padding: 6px 12px 8px; }
+.p-next { margin: 0 0 6px; font-size: 13px; }
+.p-ctrls .pbtn { min-height: 50px; }
+.p-ctrls .big { min-height: 54px; font-size: 19px; }
+.p-keys { display: none; }
+@media (min-width: 900px) and (hover: hover) { .p-keys { display: block; } }
+@media (max-width: 600px) { .p-ctrls .pbtn { min-height: 52px; } }
+/* Registro en el descanso: los dos lados en un cuadro */
+.lg-head { margin: 10px 0 4px; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.lg-ed.lg-g { margin-top: 6px; padding: 8px 10px; }
+.lg-g .lg-name { margin-bottom: 4px; }
+.lg-g .lg-reps { gap: 4px 12px; }
+.lg-side { display: inline-flex; align-items: center; gap: 4px; }
+.lg-g .lg-l { min-width: 0; margin: 0 2px 0 0; }
+.lg-g .pbtn.sq { width: 42px; min-height: 42px; }
+.lg-g .rir { min-width: 42px; min-height: 40px; }
+/* Mientras descansas / Luego / Sigue */
+.pp-now, .pp-ahead, .pp-db, .pp-later, .pp-list { margin: 10px 0 0; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
+.pp-now { border-color: var(--warn); background: var(--warn-bg); }
+.pp-now .k, .pp-ahead .k, .pp-db .k, .pp-later .k, .pp-list .k { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.pp-now ul, .pp-ahead ol, .pp-later ul, .pp-list ul { margin: 0; padding-left: 18px; }
+.pp-now li { font-size: 16px; line-height: 1.35; }
+.pp-now li + li { margin-top: 4px; }
+.pp-for { color: var(--ink-2); font-size: 14px; }
+.pp-ahead li { font-size: 14px; line-height: 1.35; color: var(--ink-2); }
+.pp-ahead li b { color: var(--ink); font-weight: 650; }
+.pp-list ul { list-style: none; padding: 0; display: grid; gap: 6px; }
+.pp-chk { display: flex; align-items: flex-start; gap: 10px; width: 100%; text-align: left; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 15px; line-height: 1.3; cursor: pointer; }
+.pp-chk::before { content: ""; flex: none; width: 18px; height: 18px; margin-top: 1px; border-radius: 5px; border: 2px solid var(--ink-2); }
+.pp-chk[aria-pressed="true"] { color: var(--ink-2); }
+.pp-chk[aria-pressed="true"]::before { background: var(--ok); border-color: var(--ok); }
+.pp-small .pp-chk { font-size: 14px; padding: 7px 10px; }
+.pp-later li { font-size: 15px; line-height: 1.35; }
+.p-upnext.has-demo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(104px, 38%); gap: 8px; align-items: center; }
+.p-upnext .un-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.un-setup { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); line-height: 1.35; }
+.un-demo svg.demo { max-height: 24vh; }
+.how-demo { max-width: 280px; margin: 0 auto 6px; }
+.how-video { font-size: 14px; }
+.p-line { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; margin: 2px 0 0; }
+.p-line[hidden] { display: none; }
+.p-line .p-setline { font-size: 15px; }
+.p-line .p-side { display: block; width: 100%; color: var(--tc); font-weight: 700; font-size: 15px; }
+.p-hero .p-dose { font-size: clamp(22px, 6.4vw, 44px); }
+.p-hero .eq-chip { font-size: 15px; }
+.lg-g .lg-reps { flex-wrap: wrap; }
+.lg-g .pbtn.sq { width: 38px; min-height: 40px; font-size: 20px; }
+.lg-g .lg-v { min-width: 28px; font-size: 24px; }
+.lg-g .rir { min-width: 40px; }
+#p-asst.live { background: var(--bad); border-color: var(--bad); color: #fff; }
+#p-asst.live::before { background: #fff; animation: s3pulse 1.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { #p-asst.live::before { animation: none; } }
+.pc-ph.pc-lead { opacity: 0.6; }
+.pc-ph.pc-lead b { font-size: clamp(22px, 5.6vw, 40px); }
+.news { border-color: var(--accent); }
+.news li + li { margin-top: 6px; }
+/*V5CSS*/
 </style>
 </head>
 <body>
@@ -774,9 +896,10 @@ ul.no li::before { content: "✕"; background: var(--bad-bg); color: var(--bad);
       <button class="tbtn" data-p="voice" id="p-voice" type="button" aria-pressed="true">Voz</button>
       <button class="tbtn" data-p="tempo" id="p-tempo" type="button" aria-pressed="false">Tempo</button>
       <button class="tbtn" data-p="cam" id="p-camb" type="button" aria-pressed="false">Cámara</button>
-      <button class="tbtn" data-p="hf" id="p-hf" type="button" aria-pressed="false">Manos libres</button>
-      <button class="tbtn" data-v4="talk" id="p-talk" type="button" aria-pressed="false">Conversar</button>
-      <button class="tbtn act" data-p="snd" id="p-snd" type="button">Probar sonido</button>
+      <button class="tbtn" data-p="asst" id="p-asst" type="button" aria-pressed="false">Asistente</button>
+      <button class="tbtn" data-p="hf" id="p-hf" type="button" aria-pressed="false" hidden>Manos libres</button>
+      <button class="tbtn" data-v4="talk" id="p-talk" type="button" aria-pressed="false" hidden>Conversar</button>
+      <button class="tbtn act" data-p="snd" id="p-snd" type="button" hidden>Probar sonido</button>
     </div>
     <p class="p-hfmsg" id="p-hfmsg" hidden aria-live="polite"></p>
   </div>
@@ -784,7 +907,9 @@ ul.no li::before { content: "✕"; background: var(--bad-bg); color: var(--bad);
   <div class="p-body" id="p-body">
     <p class="p-kind" id="p-kind"></p>
     <h2 class="p-title" id="p-title"></h2>
-    <p class="p-sub" id="p-sub"></p>
+    <p class="p-line" id="p-line" hidden></p>
+    <div class="p-hero" id="p-hero"><p class="p-sub" id="p-sub"></p><div class="p-count" id="p-count"></div><div class="p-demo" id="p-demo"></div></div>
+    <p class="p-toast" id="p-toast" hidden role="status"></p>
     <div class="cam" id="cam" hidden>
       <div class="cam-stage" id="cam-stage">
         <video id="cam-v" playsinline muted autoplay></video>
@@ -801,13 +926,11 @@ ul.no li::before { content: "✕"; background: var(--bad-bg); color: var(--bad);
         <button class="pbtn" data-p="camlimit" id="cam-limit" type="button" hidden>Marcar mi profundidad segura</button>
       </div>
     </div>
-    <div class="p-count" id="p-count"></div>
     <div class="p-pacer" id="p-pacer" hidden aria-live="off"></div>
     <div class="p-extra" id="p-extra"></div>
     <details class="p-how" id="p-how"><summary>Cómo hacerlo</summary><div></div></details>
   </div>
   <div class="p-bottom">
-    <p class="p-toast" id="p-toast" hidden role="status"></p>
     <div class="p-log" id="p-log" hidden></div>
     <p class="p-next" id="p-next"></p>
     <div class="p-ctrls">
@@ -816,7 +939,7 @@ ul.no li::before { content: "✕"; background: var(--bad-bg); color: var(--bad);
       <button class="pbtn" data-p="plus" id="p-plus" type="button">+15 s</button>
       <button class="pbtn" data-p="pause" id="p-pause" type="button">Pausa</button>
     </div>
-    <p class="p-keys">Atajos: espacio = botón azul · flechas = mover · ↑↓ = repeticiones · 0-4 = RIR · P pausa · V voz · T tempo · M manos libres · H conversar · S sonido</p>
+    <p class="p-keys">Atajos: espacio = botón azul · flechas = mover · ↑↓ = repeticiones · 0-4 = RIR · P pausa · V voz · T tempo · M o H asistente · C cámara · S sonido</p>
   </div>
   <p class="sr" id="p-live" aria-live="polite"></p>
 </div>
@@ -2137,7 +2260,7 @@ function trainDayHTML(D) {
   var title = mode === "stop" && D.stopPlan ? D.stopPlan.title + " · " + D.day : null;
   var lead = mode === "stop" && D.stopPlan ? D.stopPlan.lead : null;
   var h = heroHTML(D, '<span class="hm-win">' + esc((plan.D || D).window) + '</span><span class="hm-dur">' + minLabel(plan.total) + (mode !== "full" || deload ? " (ajustada)" : "") + "</span>", chips, actions, title, lead);
-  h += pendingHTML(viewDate);
+  h += pendingHTML(viewDate) + whatsNewHTML();
   if (D.filter) h += filterHTML(D);
   if (deload) h += '<p class="banner">Semana de descarga: mismas sesiones, la mitad de las series y RIR 3-4. Las caminatas, iguales.</p>';
   h += routeSection(D, plan);
@@ -2236,8 +2359,10 @@ function progHTML(x) {
   else if (s && s.kind === "hold" && line) { var t = rirTarget(x); h += '<p class="pg-hold">' + (s.one ? "Una sesión más con el tope y subes." : "Objetivo: " + esc(x.hold ? secsLabel(x.hold) + " en todas las series" : "llegar a " + repsRange(x.reps)[1] + " en todas las series") + ", dos sesiones seguidas" + (x.knee && t && t.lo >= 2 ? ", con " + esc(x.rir) + " en reserva" : "") + ".") + "</p>"; }
   return h + "</div>";
 }
-function howHTML(x) {
+function howHTML(x, noDemo) {
   var h = "";
+  if (!noDemo && pref("demo", true) !== false && demoOf(x.id)) h += '<div class="how-demo">' + demoHTML(x, false) + "</div>";
+  h += '<p class="how-video"><a href="' + esc(videoURL(x)) + '" target="_blank" rel="noopener">Ver videos de la técnica en YouTube</a> <span class="muted">(con internet)</span></p>';
   if (x.setup) h += '<p><span class="k">Posición.</span> ' + esc(x.setup) + "</p>";
   if (x.steps) h += '<ol class="steps">' + x.steps.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>";
   if (x.side) h += '<p><span class="k">Lados.</span> Empieza por el lado más débil y que el otro iguale sus repeticiones.</p>';
@@ -2493,8 +2618,13 @@ function settingsHTML() {
     optRow("Volumen de los avisos", "vol", [["normal", "Normal"], ["alto", "Alto"], ["max", "Máximo"]], pref("vol", "alto")) +
     '<div class="set-row"><span>Escuchar los sonidos de la sesión</span><div class="opts"><button class="opt-btn" data-act="sndtest" type="button">Probar sonido</button></div></div><p class="muted" id="snd-out" aria-live="polite"></p>' +
     toggleRow("tempo", "Guía de tempo: cuenta las fases y las repeticiones", pref("tempo", false)) +
+    optRow("Sonido del tempo", "tempotone", [["largo", "Largo: dura lo que la fase"], ["corto", "Corto"]], pref("tempoTone", "largo")) +
     toggleRow("tempoWords", "En fases de 2 s o más, decir «baja», «quieto», «sube»", prefVal("tempoWords")) +
     toggleRow("logsets", "Registrar repeticiones y RIR de cada serie", pref("logsets", true)) +
+    toggleRow("prepScreen", "Al empezar, la pantalla «Prepara tu equipo»", prefVal("prepScreen")) +
+    toggleRow("sideAuto", "Ejercicios por lado: el lado 2 empieza solo", prefVal("sideAuto")) +
+    toggleRow("side2End", "Con el tempo, el lado 2 termina solo al igualar al lado 1", prefVal("side2End")) +
+    toggleRow("demo", "Figura animada que muestra cómo se hace cada ejercicio", prefVal("demo")) +
     camSettingsRows() +
     '<div class="set-row"><span>Tema</span><div class="opts">' + [["auto", "Automático"], ["light", "Claro"], ["dark", "Oscuro"]].map(function (o) { return '<button class="opt-btn' + (th === o[0] ? " on" : "") + '" data-act="theme" data-v="' + o[0] + '">' + o[1] + "</button>"; }).join("") + "</div></div>" +
     '<div class="set-row"><span>Martes de esta semana</span><div class="opts"><span class="chip on">Semana ' + weekAB(TODAY()) + '</span><button class="opt-btn" data-act="abflip">Cambiar</button></div></div>' +
@@ -2539,42 +2669,88 @@ function sndTone(o) {
   var a = audio(), dst = sndDest(); if (!a || !dst) return;
   try {
     var t = a.currentTime + 0.005 + (o.t || 0), d = o.d || 0.12, v = o.v == null ? 0.5 : o.v, f = o.f || 880;
-    var add = function (type, fr, fr2, vol) {
+    /* env: "hit" = golpe corto (toc), "bell" = campana que se apaga sola; si no, tono parejo */
+    var add = function (type, fr, vol) {
       var osc = a.createOscillator(), g = a.createGain();
       osc.type = type; osc.frequency.setValueAtTime(fr, t);
-      if (fr2) osc.frequency.exponentialRampToValueAtTime(fr2, t + d);
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
-      g.gain.setValueAtTime(vol, t + Math.max(0.01, d * 0.55));
-      g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+      if (o.hit || o.bell) {
+        g.gain.exponentialRampToValueAtTime(vol, t + (o.hit ? 0.002 : 0.004));
+        g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+      } else {
+        g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+        g.gain.setValueAtTime(vol, t + Math.max(0.01, d * 0.55));
+        g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+      }
       osc.connect(g); g.connect(dst); osc.start(t); osc.stop(t + d + 0.03);
     };
-    add(o.w || "triangle", f, o.f2, v);
-    if (o.w !== "square") add("sine", f * 2, o.f2 ? o.f2 * 2 : 0, v * 0.35);
+    add(o.w || (o.hit || o.bell ? "sine" : "triangle"), f, v);
+    if (o.w !== "square") add("sine", f * (o.bell ? 2.76 : 2), v * (o.bell ? 0.22 : 0.35));
   } catch (e) {}
 }
-/* Un sonido distinto para cada cosa: baja cae de tono, sube sube de tono, quieto hace tic-tic */
+/* Lenguaje de sonidos (5.0). Cada estímulo tiene SU sonido y ningún otro aviso lo imita:
+   - FUERZA (subes, empujas, tiras, levantas): «tuiii», un tono que SUBE.
+   - REGRESO (bajas o regresas el peso): «tiuuu», un tono que CAE.
+   - MANTENER (quieto, aguantar, resistir): «tu-tu-tu», un tono parejo que late.
+   Con «Largo» el tono dura lo mismo que la fase: te mueves al ritmo del sonido.
+   Todo lo demás son tonos parejos, golpes cortos o campanas: nunca suben ni caen. */
 var SNDS = {
-  ecc: [{ f: 1480, f2: 740, d: 0.24, w: "square", v: 0.3 }],
-  con: [{ f: 740, f2: 1480, d: 0.2, w: "square", v: 0.3 }],
-  pau: [{ f: 1975, d: 0.05, w: "square", v: 0.26 }, { f: 1975, d: 0.05, w: "square", v: 0.26, t: 0.11 }],
-  tick: [{ f: 2637, d: 0.035, w: "square", v: 0.2 }],
-  rep: [{ f: 1760, d: 0.09, v: 0.6 }],
-  top: [{ f: 1319, d: 0.1, v: 0.6 }, { f: 1760, d: 0.1, v: 0.6, t: 0.1 }, { f: 2637, d: 0.24, v: 0.6, t: 0.2 }],
-  count: [{ f: 1046, d: 0.13, v: 0.65 }],
-  go: [{ f: 1568, d: 0.38, v: 0.7 }],
-  end: [{ f: 1046, d: 0.55, v: 0.45 }, { f: 1319, d: 0.55, v: 0.4 }, { f: 1568, d: 0.55, v: 0.4 }],
-  warn: [{ f: 523, f2: 392, d: 0.32, w: "square", v: 0.38 }],
-  ok: [{ f: 1175, d: 0.09, v: 0.55 }, { f: 1760, d: 0.14, v: 0.55, t: 0.09 }],
-  lead: [{ f: 880, d: 0.1, v: 0.55 }]
+  rep: [{ f: 1568, d: 0.07, v: 0.55, hit: 1 }, { f: 2349, d: 0.05, v: 0.22, hit: 1 }],
+  top: [{ f: 1046, d: 1.1, v: 0.34, bell: 1 }, { f: 1319, d: 1.1, v: 0.3, bell: 1 }, { f: 1568, d: 1.1, v: 0.3, bell: 1 }, { f: 2093, d: 1.1, v: 0.2, bell: 1 }],
+  count: [{ f: 988, d: 0.12, v: 0.62 }],
+  lead: [{ f: 988, d: 0.12, v: 0.62 }],
+  go: [{ f: 988, d: 0.45, v: 0.7 }],
+  end: [{ f: 523, d: 1.0, v: 0.42, bell: 1 }, { f: 659, d: 1.0, v: 0.36, bell: 1 }, { f: 784, d: 1.0, v: 0.36, bell: 1 }],
+  warn: [{ f: 196, d: 0.16, w: "square", v: 0.3 }, { f: 196, d: 0.16, w: "square", v: 0.3, t: 0.22 }],
+  ok: [{ f: 1319, d: 0.4, v: 0.45, bell: 1 }],
+  side: [{ f: 1175, d: 0.35, v: 0.45, bell: 1 }, { f: 1175, d: 0.45, v: 0.45, bell: 1, t: 0.18 }],
+  tick: [{ f: 2200, d: 0.035, v: 0.16, hit: 1 }]
 };
-function snd(name) { var s = SNDS[name]; if (s) s.forEach(sndTone); }
+/* Sonido de un estímulo: kind = "con" (fuerza), "ecc" (regreso) o "pau" (mantener); dur = segundos de la fase */
+function stimTone(kind, dur) {
+  var a = audio(), dst = sndDest(); if (!a || !dst) return;
+  var long = pref("tempoTone", "largo") !== "corto";
+  var d = long ? clamp((dur || 1) * 0.9, 0.22, 4) : (kind === "pau" ? 0.36 : 0.26);
+  try {
+    var t = a.currentTime + 0.005, env = a.createGain(), pk = kind === "pau" ? 0.34 : 0.42, end = t + d;
+    env.gain.setValueAtTime(0.0001, t);
+    env.gain.exponentialRampToValueAtTime(pk, t + 0.015);
+    env.gain.exponentialRampToValueAtTime(pk * (d > 1.2 ? 0.45 : 0.75), Math.max(t + 0.02, end - 0.06));
+    env.gain.exponentialRampToValueAtTime(0.0001, end);
+    env.connect(dst);
+    var o1 = a.createOscillator(), o2 = a.createOscillator(), h = a.createGain(); h.gain.value = 0.3;
+    if (kind === "con") {        // tuiii: sube
+      o1.type = "triangle"; o1.frequency.setValueAtTime(420, t); o1.frequency.exponentialRampToValueAtTime(1260, end);
+      o2.type = "sine"; o2.frequency.setValueAtTime(840, t); o2.frequency.exponentialRampToValueAtTime(2520, end);
+    } else if (kind === "ecc") { // tiuuu: cae
+      o1.type = "sine"; o1.frequency.setValueAtTime(1180, t); o1.frequency.exponentialRampToValueAtTime(370, end);
+      o2.type = "sine"; o2.frequency.setValueAtTime(1770, t); o2.frequency.exponentialRampToValueAtTime(555, end); h.gain.value = 0.18;
+    } else {                     // tu-tu-tu: parejo y late
+      o1.type = "triangle"; o1.frequency.setValueAtTime(587, t);
+      o2.type = "sine"; o2.frequency.setValueAtTime(880, t); h.gain.value = 0.22;
+    }
+    var mix = a.createGain(); mix.gain.value = 1;
+    o1.connect(mix); o2.connect(h); h.connect(mix);
+    if (kind === "pau") {
+      var lfo = a.createOscillator(), lg = a.createGain(); lfo.type = "square"; lfo.frequency.value = 6.5;
+      mix.gain.value = 0.5; lg.gain.value = 0.5; lfo.connect(lg); lg.connect(mix.gain);
+      lfo.start(t); lfo.stop(end + 0.03);
+    }
+    mix.connect(env);
+    o1.start(t); o2.start(t); o1.stop(end + 0.03); o2.stop(end + 0.03);
+  } catch (e) {}
+}
+function snd(name, dur) {
+  if (name === "con" || name === "ecc" || name === "pau") { stimTone(name, dur); return; }
+  var s = SNDS[name]; if (s) s.forEach(sndTone);
+}
 function beep(freq, dur, vol) { sndTone({ f: freq || 880, d: dur || 0.12, v: Math.min(0.7, (vol || 0.25) * 2) }); }
-var SND_NAMES = [["ecc", "Baja / regresa: tono que cae"], ["pau", "Quieto: tic-tic"], ["con", "Sube / tira: tono que sube"], ["tick", "Cada segundo de una fase larga"], ["rep", "Repetición"], ["top", "Tope del rango"], ["count", "Cuenta regresiva"], ["go", "¡Vamos!"], ["end", "Fin del tiempo"]];
+var SND_NAMES = [["con", "FUERZA (subes, empujas, tiras): «tuiii», sube", 1], ["ecc", "REGRESO (bajas o regresas): «tiuuu», cae", 2], ["pau", "MANTENER (quieto, aguantas): «tu-tu-tu», parejo", 1.2], ["rep", "Nueva repetición: «toc»"], ["top", "Llegaste al tope del rango: campana"], ["count", "Cuenta 3-2-1: «pip»"], ["go", "¡Vamos!: «piiip»"], ["side", "Cambia de lado: «tin-tin»"], ["end", "Fin del tiempo: gong"]];
 function soundTest(out) {
   audio();
-  SND_NAMES.forEach(function (s, i) { setTimeout(function () { snd(s[0]); if (out) { out.hidden = false; out.textContent = "Sonido: " + s[1]; } }, i * 750); });
-  setTimeout(function () { if (!out) return; out.textContent = "Si no se oye bien, sube el volumen del equipo o elige «Máximo» en Ajustes."; if (out.id === "p-hfmsg") setTimeout(hfPaint, 4000); }, SND_NAMES.length * 750 + 300);
+  var at = 0;
+  SND_NAMES.forEach(function (s) { setTimeout(function () { snd(s[0], s[2]); if (out) { out.hidden = false; out.textContent = "Sonido: " + s[1]; } }, at); at += Math.max(900, (s[2] || 0.5) * 1000 + 700); });
+  setTimeout(function () { if (!out) return; out.textContent = "Si no se oye bien, sube el volumen del equipo o elige «Máximo» en Ajustes."; if (out.id === "p-hfmsg") setTimeout(hfPaint, 4000); }, at + 300);
 }
 var voices = [];
 function loadVoices() { try { voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; } catch (e) { voices = []; } }
@@ -2596,12 +2772,20 @@ function say(text, urgent) {
     if (urgent) speechSynthesis.cancel(); else if (speechSynthesis.pending) return;
     var u = new SpeechSynthesisUtterance(t), v = esVoice(), rate = +pref("vozRate", 1.05) || 1.05;
     if (v) u.voice = v; u.lang = v ? v.lang : "es-ES"; u.rate = rate; u.volume = 1;
-    SAY.last = t; SAY.lastT = Date.now(); SAY.until = Date.now() + 700 + t.length * 70 / rate;
-    u.onend = function () { if (SAY.last === t) SAY.until = Math.min(SAY.until, Date.now() + 300); };
+    var est = t.length * 72 / rate;
+    SAY.last = t; SAY.lastT = Date.now(); SAY.until = Date.now() + 900 + est;
+    u.onstart = function () { if (SAY.last === t) SAY.until = Math.max(SAY.until, Date.now() + est + 400); };
+    u.onend = u.onerror = function () { if (SAY.last === t) SAY.until = Date.now() + 350; };
     speechSynthesis.speak(u);
   } catch (e) {}
 }
 function speak(text) { say(text, true); }
+/* ¿La app está hablando? Usa lo que dice el navegador (con tope por si se queda pegado) y la estimación */
+function ttsBusy() {
+  var n = Date.now();
+  try { if (window.speechSynthesis && (speechSynthesis.speaking || speechSynthesis.pending) && n < SAY.until + 4000) return true; } catch (e) {}
+  return n < SAY.until;
+}
 var wakeLock = null;
 function keepAwake() { try { if (navigator.wakeLock && navigator.wakeLock.request) navigator.wakeLock.request("screen").then(function (l) { wakeLock = l; }).catch(function () {}); } catch (e) {} }
 function releaseAwake() { try { if (wakeLock) wakeLock.release(); } catch (e) {} wakeLock = null; }
@@ -2658,6 +2842,7 @@ function openSession(key, resume) {
     P.elapsed = resume.elapsed || 0; P.log = resume.log || []; P.flags = resume.flags || [];
   }
   P.intro = resume && resume.date === date ? "Seguimos donde quedaste." : D.day + ". " + (plan.opts.mode === "stop" && D.stopPlan ? D.stopPlan.title : D.type === "aero" ? D.weeks.A.title : D.title) + ". " + Math.round(plan.total / 60) + " minutos.";
+  P.prep = !(resume && resume.date === date) && D.type === "train" && pref("prepScreen", true) !== false;
   startPlayer(routeHTML(plan, false) + '<span class="p-marker" id="p-marker"></span>');
 }
 function openSeg(which) {
@@ -2686,6 +2871,7 @@ function openRoutine(id) {
 function resetP() {
   P.idx = 0; P.elapsed = 0; P.paused = false; P.done = false; P.log = []; P.flags = []; P.kneeAfter = null; P.feel = null; P.notice = ""; P.lastLog = null; P.marks = {};
   P.fb = ""; P.intro = ""; P.leadNext = 0; P.lgOpen = false; P.autoItem = false; P.hfSaid = false; P.autoSaid = false; GEST.since = 0; GEST.needDown = false;
+  P.prep = false; P.sideAuto = false; P.side1 = null; SPK.names = {}; SPK.loads = {}; PREP.plan = null;
 }
 function startPlayer(routeHtml) {
   audio(); keepAwake();
@@ -2697,8 +2883,9 @@ function startPlayer(routeHtml) {
   if (P.timer) clearInterval(P.timer);
   P.timer = setInterval(tick, 200);
   if (pref("cam", false) && (P.kind === "session" || P.kind === "routine") && !CAM.on) camStart();
-  hfSync();
-  enterStep(P.idx, true);
+  asstSync(false);
+  if (P.prep) { renderPrep(); speak((P.intro ? P.intro + " " : "") + prepStartSay()); P.intro = ""; }
+  else enterStep(P.idx, true);
   try { $("p-main").focus(); } catch (e) {}
 }
 function closePlayer() {
@@ -2708,6 +2895,7 @@ function closePlayer() {
   try { if (window.speechSynthesis && !TALK.on) speechSynthesis.cancel(); } catch (e) {}
   if (!TALK.on) releaseAwake();
   camStop(true); askClose(); hfStop(); fbHide();
+  if (TALK.on && TALK.bySession) talkStop();
   $("player").hidden = true; document.body.classList.remove("playing");
   renderDay(current);
   v4AfterClose(ids);
@@ -2724,15 +2912,22 @@ function enterStep(i, announce) {
   metro.stop(); pacerStop();
   if (i >= P.steps.length) { finish(); return; }
   if (i < 0) i = 0;
+  if (P.prep) { P.prep = false; P.idx = -1; }
+  var old = P.idx, prevSt = P.steps[old];
   P.idx = i; P.marks = {}; P.lgOpen = false; P.autoItem = false;
   var st = P.steps[i];
+  /* 5.0: terminaste el lado 1 → el lado 2 empieza solo, con una cuenta corta para cambiar */
+  P.sideAuto = i === old + 1 && sameMove(prevSt, st) && prevSt.side === 1 && st.side === 2 && pref("sideAuto", true) !== false;
   if (st.type === "wait") { P.remaining = st.target - P.elapsed; P.running = true; }
   else if (isTimed(st)) { P.remaining = st.dur; P.running = !needsStart(st); }
   else if (st.type === "item" && autoItemsOn()) { P.autoItem = true; P.remaining = st.item.est || EST.item; P.running = true; }
   else { P.remaining = 0; P.running = false; }
+  if (P.sideAuto && needsStart(st)) { P.running = true; P.remaining = st.dur + SIDE_LEAD; }
   saveRun();
   renderStep();
+  if (P.sideAuto) snd("side");
   if (announce !== false) announceStep(st);
+  if (P.sideAuto && st.type === "work" && pacerEligible(st)) { pacerStart(st, SIDE_LEAD); updateButtons(); }
   if (st.type === "wait" && P.remaining <= 0) setTimeout(function () { if (P.steps[P.idx] === st && !P.done) enterStep(P.idx + 1); }, 400);
 }
 function stepLabel(st) {
@@ -2750,22 +2945,57 @@ function nextWork(i) {
   for (var j = i + 1; j < P.steps.length; j++) { var s = P.steps[j]; if (s.type !== "rest" && s.type !== "wait" && s.type !== "gap") return s; }
   return null;
 }
+var SIDE_LEAD = 6;
+function sameMove(a, b) {
+  if (!a || !b || a.type !== b.type) return false;
+  if (a.ex && b.ex) return a.ex.id === b.ex.id && a.round === b.round;
+  if (a.item && b.item) return a.item === b.item && a.set === b.set;
+  return false;
+}
 function sideHint(st) { return st.side === 1 ? "Lado 1: empieza por el más débil." : st.side === 2 ? "Lado 2: iguala las repeticiones del lado 1." : ""; }
+/* Qué se dijo hace poco, para no repetir el nombre del ejercicio 2 o 3 veces seguidas (5.0) */
+var SPK = { names: {}, loads: {} };
+function saidRecently(map, k, ms) { var t = map[k]; return !!t && Date.now() - t < (ms || 75000); }
+function exShort(x) { return String(x.name || "").replace(/\s*\([^)]*\)\s*/g, " ").trim(); }
+function nextSay(n) {
+  if (!n) return "Es lo último.";
+  if (n.ex) { SPK.names[n.ex.id] = Date.now(); return "Sigue: " + exShort(n.ex) + (n.side === 2 ? ", lado 2" : "") + "."; }
+  if (n.item) return "Sigue: " + n.item.name + ".";
+  return "Sigue: " + stepLabel(n) + ".";
+}
 function announceStep(st) {
   var t = "";
-  if (st.type === "work") { var es = st.round === 1 && (st.side || 1) === 1 ? eqSay(effLoadText(st.ex)) : ""; t = st.ex.code + ". " + st.ex.name + ". Serie " + st.round + " de " + st.rounds + ". " + setDose(st.ex) + ". " + sideHint(st) + (es ? " Con " + es + "." : ""); if (pref("hf", false) && HF.want && !P.hfSaid) { P.hfSaid = true; t += " Al terminar, di «listo» o «hice ocho»."; } }
-  else if (st.type === "hold") t = st.ex.code + ". " + st.ex.name + ". " + (st.side ? "Lado " + st.side + ". " : "") + "Toca empezar cuando estés en posición.";
-  else if (st.type === "itemhold") t = st.item.name + (st.side ? ", lado " + st.side : "") + ". Toca empezar.";
+  if (st.type === "work" || st.type === "hold") {
+    var x = st.ex, named = saidRecently(SPK.names, x.id);
+    if (st.side === 2 && P.sideAuto) t = "Cambia de lado. " + (st.type === "hold" ? "Aguanta igual." : "Iguala las repeticiones.");
+    else {
+      var lt = effLoadText(x), es = st.round === 1 && (st.side || 1) === 1 && !saidRecently(SPK.loads, lt, 120000) ? eqSay(lt) : "";
+      if (es) SPK.loads[lt] = Date.now();
+      t = (named ? "" : x.code + ". " + exShort(x) + ". ") + "Serie " + st.round + " de " + st.rounds + ": " + setDose(x) + (st.side ? " por lado" : "") + "." +
+        (st.side === 1 ? " Empieza por tu lado más débil." : st.side === 2 ? " Lado 2." : "") + (es ? " Con " + es + "." : "") +
+        (st.type === "hold" ? " Toca empezar cuando estés en posición." : "");
+      if (st.type === "work" && pref("hf", false) && HF.want && !P.hfSaid) { P.hfSaid = true; t += " Al terminar, di «listo» o «hice ocho»."; }
+    }
+    SPK.names[x.id] = Date.now();
+  }
+  else if (st.type === "itemhold") t = st.item.name + (st.side ? ", lado " + st.side : "") + ". " + (st.side === 2 && P.sideAuto ? "" : "Toca empezar.");
   else if (st.type === "item") { t = st.item.name + ", " + st.item.dose + "."; if (P.autoItem && !P.autoSaid) { P.autoSaid = true; t += " Avanzo solo en " + Math.round(P.remaining) + " segundos; di «listo» si terminas antes."; } }
   else if (st.type === "gap") t = "Pausa, " + st.dur + " segundos.";
-  else if (st.type === "rest") { var n = nextWork(P.idx), ps = eqPrepSay(P.idx); if (st.note && /disco/i.test(st.note) && /^Cambia/.test(ps)) ps = ""; t = "Descanso, " + st.dur + " segundos. " + (st.note ? st.note + " " : "") + "Sigue " + (n ? stepLabel(n) : "el final") + "." + (ps ? " " + ps : ""); }
-  else if (st.type === "wait") t = st.first ? "El circuito empieza en el minuto " + Math.round(st.target / 60) + "." : "Descansa hasta el minuto " + Math.round(st.target / 60) + ".";
+  else if (st.type === "rest") { var ps = restPrepSay(P.idx); t = "Descanso, " + st.dur + " segundos. " + (st.note && !ps ? st.note + " " : "") + (ps ? ps + " " : "") + nextSay(nextWork(P.idx)); }
+  else if (st.type === "wait") { var ps2 = restPrepSay(P.idx); t = (st.first ? "El circuito empieza en el minuto " : "Descansa hasta el minuto ") + Math.round(st.target / 60) + ". " + (ps2 ? ps2 + " " : "") + nextSay(nextWork(P.idx)); }
   else if (st.type === "phase") t = st.ex.name + ". Treinta minutos. Toca empezar.";
   else if (st.type === "seg") t = st.seg[0] + ", " + (st.seg[1] >= 60 ? Math.round(st.seg[1] / 60) + " minutos" : st.seg[1] + " segundos") + ".";
   var pre = "";
   if (P.intro) { pre += P.intro + " "; P.intro = ""; }
   if (P.fb) { pre += P.fb + " "; P.fb = ""; }
   speak(pre + t);
+}
+/* Lo que se dice al entrar a un descanso sobre el equipo (el planificador inteligente lo reemplaza si existe) */
+function restPrepSay(i) {
+  if (typeof prepPlanSay === "function") { var r = prepPlanSay(i); if (r != null) return r; }
+  var st = P.steps[i], ps = eqPrepSay(i);
+  if (st && st.note && /disco/i.test(st.note) && /^Cambia/.test(ps)) return st.note;
+  return ps;
 }
 function rxRow(x, noCap) {
   var h = '<dl class="p-rx">';
@@ -2818,24 +3048,25 @@ function kneeBox(x) {
     '<button class="pbtn" data-p="kneeopt" data-v="dolor" type="button">Dolor mayor a 2/10</button><button class="pbtn" data-p="kneeopt" data-v="hueso" type="button">Hueso desubicado</button><button class="pbtn" data-p="kneeopt" data-v="chasquido" type="button">Chasquido con dolor</button><button class="pbtn quiet" data-p="kneecancel" type="button">Era falsa alarma</button></div></div>';
 }
 function renderStep() {
+  if (P.prep) { renderPrep(); return; }
   var st = P.steps[P.idx];
   var tone = st.block ? st.block.tone : st.type === "seg" ? (st.fast ? "fuerza" : "prep") : (P.routine ? P.routine.tone : "prep");
   $("p-body").className = "p-body t-" + st.type + " tone-" + tone;
-  var k = "", t = "", s = "", x = "", more = "", moreLab = "Detalles: carga, tempo y técnica";
+  var k = "", t = "", s = "", x = "", ln = "", more = "", moreLab = "Detalles: carga, tempo y técnica";
   var mod = P.plan && P.plan.opts.mode === "mod";
   if (P.notice) { x += '<p class="p-note warn">' + esc(P.notice) + "</p>"; P.notice = ""; }
   if (st.type === "work" || st.type === "hold") {
     var ex = st.ex, lt = effLoadText(ex), cap = gobletCap(ex);
     k = "Bloque " + st.block.label + " · " + st.block.name;
     t = ex.code + ". " + ex.name;
-    s = '<span class="p-setline">Serie ' + st.round + " de " + st.rounds + (st.side ? " · lado " + st.side : "") + lvlChip(ex) + "</span>" +
+    ln = '<span class="p-setline">Serie ' + st.round + " de " + st.rounds + (st.side ? " · lado " + st.side : "") + lvlChip(ex) + "</span>" + (st.side ? '<span class="p-side">' + esc(st.side === 1 ? "Empieza por tu lado más débil" : P.sideAuto ? "Cambia de lado: iguala las repeticiones" : "Iguala las repeticiones del lado 1") + "</span>" : "");
+    s =
       '<span class="p-dose">' + esc(setDose(ex)) + "</span>" + metaLine(ex) +
       (lt && eqParse(lt) ? '<span class="p-loadline">' + eqChipHTML(lt) + "</span>" : "");
-    if (st.side) s += '<span class="p-side">' + esc(sideHint(st)) + "</span>";
     if (mod && ex.modNote) x += '<p class="p-note warn">' + esc(ex.modNote) + "</p>";
     if (cap) x += '<p class="p-note warn">' + esc(cap) + "</p>";
     x += cuesShort(ex) + kneeBox(ex);
-    more = rxRow(ex, true) + levelHTML(ex) + (st.type === "work" && tempoParts(ex.tempo) ? tempoBarHTML(ex, true) : "") + cuesMore(ex) + '<div class="how">' + howHTML(ex) + "</div>";
+    more = rxRow(ex, true) + levelHTML(ex) + (st.type === "work" && tempoParts(ex.tempo) ? tempoBarHTML(ex, true) : "") + cuesMore(ex) + '<div class="how">' + howHTML(ex, true) + "</div>";
   } else if (st.type === "item" || st.type === "itemhold") {
     k = st.block.name;
     t = st.item.name + (st.side ? ", lado " + st.side : "");
@@ -2845,16 +3076,15 @@ function renderStep() {
   } else if (st.type === "rest" || st.type === "gap") {
     k = st.type === "gap" ? st.block.name : "Bloque " + st.block.label + " · " + st.block.name;
     t = st.type === "gap" ? "Pausa" : "Descanso";
-    if (st.type === "rest") x += '<div class="p-restbar"><button class="tbtn act plus15" data-p="plus" type="button">+15 s</button></div>';
-    if (st.note) x += '<p class="p-note">' + esc(st.note) + "</p>";
-    x += upNextHTML(nextWork(P.idx)) + eqPrepHTML(P.idx, true) + '<div id="p-login"></div>';
+    if (st.note && !(P.kind === "session" && /disco/i.test(st.note) && prepNow(P.idx).some(function (q) { return /^<b>Discos/.test(q.html); }))) x += '<p class="p-note">' + esc(st.note) + "</p>";
+    x += P.kind === "session" ? '<div id="p-login"></div>' + prepNowHTML(P.idx) + upNextHTML(nextWork(P.idx)) + prepAheadHTML(P.idx) : upNextHTML(nextWork(P.idx)) + eqPrepHTML(P.idx, true) + '<div id="p-login"></div>';
   } else if (st.type === "wait") {
     k = st.block.name;
     t = st.first ? "El circuito empieza en el minuto " + fmt(st.target) : "Descanso hasta el minuto " + fmt(st.target);
     s = "Cada ronda empieza en su minuto exacto";
     var n2 = nextWork(P.idx);
-    if (n2 && n2.ex) x += upNextHTML(n2);
-    x += eqPrepHTML(P.idx, true) + '<div id="p-login"></div>';
+    if (P.kind === "session") x += '<div id="p-login"></div>' + prepNowHTML(P.idx) + (n2 && n2.ex ? upNextHTML(n2) : "") + prepAheadHTML(P.idx);
+    else { if (n2 && n2.ex) x += upNextHTML(n2); x += eqPrepHTML(P.idx, true) + '<div id="p-login"></div>'; }
   } else if (st.type === "phase") {
     k = st.block.name; t = st.ex.name;
     s = '<span class="p-dose">30 minutos a 170-180 pasos por minuto</span>';
@@ -2867,8 +3097,16 @@ function renderStep() {
     if (P.idx === 0) x += '<p class="p-note">' + esc(P.segDef.lead) + "</p>";
   }
   if (more) x += '<details class="p-more" id="p-more"' + (moreOpen() ? " open" : "") + "><summary>" + esc(moreLab) + "</summary>" + more + "</details>";
+  var dm = "";
+  if ((st.type === "work" || st.type === "hold") && pref("demo", true) !== false) dm = demoHTML(st.ex, st.type === "work", "big");
+  else if ((st.type === "item" || st.type === "itemhold") && ITEM_DEMO[st.item.name] && pref("demo", true) !== false) dm = demoHTML(itemDemoEx(st.item), false, "big");
+  else if (st.type === "phase" && demoOf(st.ex.id) && pref("demo", true) !== false) dm = demoHTML(st.ex, false, "big");
+  else if (st.type === "rest" || st.type === "gap") dm = st.type === "rest" ? '<button class="tbtn act plus15" data-p="plus" type="button">+15 s</button>' : "";
+  $("p-demo").innerHTML = dm;
+  $("p-hero").className = "p-hero" + (dm && dm.indexOf("<svg") === 0 ? " has-demo" : dm ? " has-side" : "");
   $("p-kind").textContent = k;
   $("p-title").textContent = t;
+  var pl = $("p-line"); if (pl) { pl.innerHTML = ln; pl.hidden = !ln; }
   $("p-sub").innerHTML = s;
   $("p-extra").innerHTML = x;
   var how = $("p-how"); how.hidden = true; how.open = false;
@@ -2892,7 +3130,7 @@ function pacerEligible(st) { return pref("tempo", false) && st && st.type === "w
 function pacerStart(st, lead) {
   var p = tempoParts(st.ex.tempo), order = st.ex.start === "bottom" ? [2, 3, 0, 1] : [0, 1, 2, 3], names = st.ex.phNames || PH.squat;
   PC.phases = [];
-  order.forEach(function (i, n) { var q = p[i]; if (!q.s && !q.x) return; PC.phases.push({ n: n, dur: q.s || 1, name: q.x ? names[i] + " rápido" : names[i], kind: i === 0 ? "ecc" : i === 2 ? "con" : "pau" }); });
+  order.forEach(function (i, n) { var q = p[i]; if (!q.s && !q.x) return; PC.phases.push({ n: n, dur: q.s || 1, x: !!q.x, i: i, name: q.x ? names[i] + " rápido" : names[i], kind: i === 0 ? "ecc" : i === 2 ? "con" : "pau" }); });
   PC.cycle = PC.phases.reduce(function (a, q) { return a + q.dur; }, 0) || 1;
   PC.running = true; PC.paused = false; PC.t0 = performance.now(); PC.pausedTotal = 0; PC.reps = 0; PC.key = -1; PC.sec = 0; PC.lead = lead || 3; PC.lastLead = PC.lead + 1;
   PC.top = repsRange(st.ex.reps)[1];
@@ -2900,6 +3138,10 @@ function pacerStart(st, lead) {
   if (PC.timer) clearInterval(PC.timer);
   PC.timer = setInterval(pacerTick, 30);
   pacerTick();
+}
+function side2Done(cs, reps) {
+  if (!P.active || P.done || P.steps[P.idx] !== cs) return;
+  pacerStop(); logWork(cs, reps); enterStep(P.idx + 1);
 }
 function pacerStop() { var r = PC.reps; if (PC.timer) clearInterval(PC.timer); PC.timer = null; var was = PC.running; PC.running = false; PC.paused = false; return was ? r : null; }
 function pacerTime() { var now = performance.now(); return (now - PC.t0 - PC.pausedTotal - (PC.paused ? now - PC.pauseAt : 0)) / 1000; }
@@ -2910,23 +3152,30 @@ function pacerTick() {
   var reps = Math.floor(t / PC.cycle), inC = t - reps * PC.cycle, acc = 0, ph = 0;
   for (ph = 0; ph < PC.phases.length - 1; ph++) { if (inC < acc + PC.phases[ph].dur) break; acc += PC.phases[ph].dur; }
   var q = PC.phases[ph], inPh = inC - acc, newRep = reps !== PC.reps, words = pref("tempoWords", true);
-  if (newRep) { PC.reps = reps; snd(reps === PC.top ? "top" : "rep"); }
+  if (newRep) {
+    PC.reps = reps; if (reps > 0) snd(reps === PC.top ? "top" : "rep");
+    /* 5.0: en el lado 2, al igualar las repeticiones del lado 1 la serie termina sola */
+    var cs = P.steps[P.idx], s1 = P.side1;
+    if (reps > 0 && cs && cs.type === "work" && cs.side === 2 && s1 && s1.x === cs.ex.id && s1.s === cs.round && !s1.auto && s1.r > 0 && reps >= s1.r && pref("side2End", true) !== false) {
+      PC.running = false; setTimeout(function () { side2Done(cs, reps); }, 380); return;
+    }
+  }
   var key = reps * 10 + ph;
   if (key !== PC.key) {
     PC.key = key; PC.sec = 0;
-    if (!newRep) snd(q.kind);
+    snd(q.kind, q.x ? 0.3 : q.dur);   // cada fase con SU sonido, también la primera de cada repetición
     var txt = "";
     if (newRep && reps > 0) txt = reps === PC.top ? reps + ". Tope del rango." : String(reps);
     if (words && q.dur >= 2 && !(newRep && reps === PC.top)) txt += (txt ? ". " : "") + q.name;
     if (txt) say(txt, true);
-  } else if (q.dur >= 2) { var sec = Math.floor(inPh); if (sec > PC.sec) { PC.sec = sec; snd("tick"); } }
+  } else if (q.dur >= 2 && pref("tempoTone", "largo") === "corto") { var sec = Math.floor(inPh); if (sec > PC.sec) { PC.sec = sec; snd("tick"); } }
   paintPacer(ph, 0, inPh / q.dur);
 }
 function paintPacer(ph, lead, frac) {
   var el = $("p-pacer"); if (!el) return;
   var q = ph >= 0 ? PC.phases[ph] : null;
   el.innerHTML = '<div class="pc-rep"><span>' + (lead ? "Prepárate" : "Repetición") + "</span><b>" + (lead ? lead : PC.reps + 1) + "</b></div>" +
-    '<div class="pc-ph ' + (q ? q.kind : "") + '"><b>' + (q ? esc(q.name) : "…") + '</b><i style="width:' + Math.round(clamp(frac, 0, 1) * 100) + '%"></i></div>' +
+    '<div class="pc-ph ' + (q ? q.kind : PC.phases[0] ? PC.phases[0].kind + " pc-lead" : "") + '"><b>' + (q ? esc(q.name) : PC.phases[0] ? "Primero: " + esc(PC.phases[0].name.toLowerCase()) : "…") + '</b><i style="width:' + Math.round(clamp(frac, 0, 1) * 100) + '%"></i></div>' +
     '<p class="pc-done">Hechas: ' + PC.reps + (PC.top ? " de " + PC.top : "") + "</p>";
   var segs = document.querySelectorAll("#p-extra .tbar.big .tb");
   for (var i = 0; i < segs.length; i++) segs[i].classList.toggle("now", !!q && +segs[i].getAttribute("data-ph") === q.n);
@@ -2945,22 +3194,64 @@ function logWork(st, reps, force) {
   else e.r = repsMid(x.reps);
   var cr = x.unit === "pasos" ? null : camTake(st);
   if (cr) { if (!force) e.r = cr.reps; e.auto = false; e.q = cr.q; }
+  if (st.side === 2) { var e1 = P.log.find(function (z) { return z.x === e.x && z.s === e.s && z.side === 1 && !z.skip; }); if (e1 && e1.rir != null && e.rir == null) e.rir = e1.rir; }
   logSet(e);
+  if (st.side === 1) P.side1 = { x: x.id, s: st.round, r: e.r, auto: e.auto };
+  if (st.side === 1 && sameMove(st, P.steps[P.idx + 1])) return;   // la opinión de la serie va al terminar los dos lados
   afterSet(st, e);
 }
 function logHold(st, secs) { logSet({ x: st.ex.id, code: st.ex.code, s: st.round, n: st.rounds, side: st.side || 0, lvl: st.ex.rung, t: Math.round(secs), auto: false }); }
-function renderLogBar() {
-  var el = $("p-log"), inl = $("p-login"), e = P.lastLog;
-  if (inl) inl.innerHTML = "";
-  var show = !!e && !P.done && pref("logsets", true) && !e.skip && !((EX[e.x] || {}).pacer === false && e.t == null);
-  if (!show) { el.hidden = true; return; }
-  var st = P.steps[P.idx];
-  if (inl && st && (st.type === "rest" || st.type === "gap" || st.type === "wait") && lastWorkIs(e)) { inl.innerHTML = logEditorHTML(e, "Anota la serie que terminaste"); el.hidden = true; return; }
-  el.innerHTML = logLineHTML(e) + (P.lgOpen ? logEditorHTML(e, "") : "");
-  el.hidden = false;
+/* 5.0: el registro va SOLO en los descansos (nada abajo tapa el contador) y junta lo hecho
+   desde el descanso anterior: los dos lados de una serie en un solo cuadro, o toda la ronda de un circuito. */
+function restLike(st) { return !!st && (st.type === "rest" || st.type === "gap" || st.type === "wait"); }
+function logWorthy(e) { return !!e && !e.skip && !((EX[e.x] || {}).pacer === false && e.t == null); }
+function logGroups(i) {
+  var j = i - 1, keys = [], seen = {};
+  while (j >= 0 && !restLike(P.steps[j])) {
+    var s = P.steps[j];
+    if ((s.type === "work" || s.type === "hold") && s.ex) { var k = s.ex.id + "|" + s.round; if (!seen[k]) { seen[k] = 1; keys.unshift(k); } }
+    j--;
+  }
+  return keys.map(function (k) {
+    var p = k.split("|"), x = p[0], sN = +p[1], li = [];
+    P.log.forEach(function (e, n) { if (e.x === x && e.s === sN && !e.skip) li.push(n); });
+    li.sort(function (a, b) { return (P.log[a].side || 0) - (P.log[b].side || 0); });
+    return { x: x, s: sN, li: li };
+  }).filter(function (g) { return g.li.length && logWorthy(P.log[g.li[0]]); });
 }
-function editLog(d) {
-  var e = P.lastLog; if (!e) return;
+function lastGroupLi() {
+  var e = P.lastLog, out = []; if (!e || e.skip) return out;
+  P.log.forEach(function (z, n) { if (z.x === e.x && z.s === e.s && !z.skip) out.push(n); });
+  return out;
+}
+function groupEditorHTML(g) {
+  var e0 = P.log[g.li[0]], ex = EX[g.x] || {}, isT = e0.t != null, two = g.li.length > 1;
+  var auto = g.li.some(function (n) { return P.log[n].auto; });
+  var h = '<div class="lg-ed lg-g"><p class="lg-name">' + esc(e0.code + ". " + exShort(ex) + " · serie " + g.s) + (auto ? ' <span class="pg-note">sin confirmar</span>' : "") + "</p>";
+  h += '<div class="lg-row lg-reps">';
+  g.li.forEach(function (n) {
+    var e = P.log[n];
+    h += '<span class="lg-side"><span class="lg-l">' + (two ? "Lado " + e.side : isT ? "Segundos" : "Reps") + '</span><button class="pbtn sq" data-p="lgminus" data-li="' + n + '" type="button" aria-label="Menos">−</button><b class="lg-v">' + (isT ? e.t : e.r) + '</b><button class="pbtn sq" data-p="lgplus" data-li="' + n + '" type="button" aria-label="Más">+</button></span>';
+  });
+  h += "</div>";
+  if (!isT) {
+    var rir = P.log[g.li[g.li.length - 1]].rir;
+    h += '<div class="lg-row"><span class="lg-l">RIR</span>' + [0, 1, 2, 3, 4].map(function (v) { return '<button class="rir' + (rir === v ? " on" : "") + '" data-p="rir" data-g="' + g.li.join(",") + '" data-v="' + v + '" type="button">' + (v === 4 ? "4+" : v) + "</button>"; }).join("") + "</div>";
+  }
+  return h + "</div>";
+}
+function renderLogBar() {
+  var el = $("p-log"), inl = $("p-login");
+  if (el) { el.hidden = true; el.innerHTML = ""; }
+  if (inl) inl.innerHTML = "";
+  if (P.done || !pref("logsets", true) || !inl) return;
+  var st = P.steps[P.idx]; if (!restLike(st)) return;
+  var gs = logGroups(P.idx); if (!gs.length) return;
+  inl.innerHTML = '<p class="lg-head">' + (gs.length > 1 ? "Anota lo que hiciste" : "Anota la serie que terminaste") + "</p>" + gs.map(groupEditorHTML).join("");
+}
+function setGroupRir(lis, v) { lis.forEach(function (n) { var e = P.log[n]; if (e && e.t == null && !e.skip) { e.rir = v; e.auto = false; } }); saveRun(); renderLogBar(); }
+function editLog(d, li) {
+  var e = li != null && P.log[li] ? P.log[li] : P.lastLog; if (!e) return;
   if (e.t != null) e.t = Math.max(0, e.t + d * 5); else e.r = Math.max(0, (e.r || 0) + d);
   e.auto = false; saveRun(); renderLogBar();
 }
@@ -2969,6 +3260,7 @@ function editLog(d) {
 function updateButtons() {
   var st = P.steps[P.idx], main = $("p-main"), plus = $("p-plus"), pause = $("p-pause"), prev = $("p-prev");
   if (P.done) { main.textContent = "Cerrar"; plus.hidden = true; pause.hidden = true; prev.hidden = true; return; }
+  if (P.prep) { main.textContent = "Empezar"; plus.hidden = true; pause.hidden = true; prev.hidden = true; return; }
   pause.hidden = false; prev.hidden = false;
   pause.textContent = P.paused ? "Seguir" : "Pausa";
   if (st.type === "work") main.textContent = pacerEligible(st) && !PC.running ? "Empezar serie" : "Hecho";
@@ -3012,7 +3304,7 @@ function mark(k) { if (P.marks[k]) return false; P.marks[k] = true; return true;
 function tick() {
   var now = performance.now(), dt = (now - P.last) / 1000;
   P.last = now;
-  if (!P.active || P.paused || P.done) return;
+  if (!P.active || P.paused || P.done || P.prep) return;
   P.elapsed += dt;
   var st = P.steps[P.idx]; if (!st) return;
   if (st.type === "item" && P.autoItem) {
@@ -3031,10 +3323,12 @@ function tick() {
       if (l <= 3 && mark("L" + l)) { snd("count"); say(String(l), true); }
     } else if (needsStart(st) && st.dur && mark("go")) {
       snd("go"); say("¡Vamos!", true);
+      if (st.type === "hold" || st.type === "itemhold") setTimeout(function () { if (P.active && P.steps[P.idx] === st && !P.paused) snd("pau", 1.6); }, 520);
       if (st.type === "phase" && pref("metro", true)) metro.start();
     }
     if (st.type !== "phase" || P.remaining < 4) { if (r >= 1 && r <= 3 && P.remaining < (st.dur || Infinity) && mark("c" + r)) { snd("count"); say(String(r), true); } }
-    if ((st.type === "rest" || st.type === "wait") && r === 10 && mark("ten")) { var n = nextWork(P.idx); speak("Diez segundos. Sigue " + (n ? stepLabel(n) : "el final") + "."); }
+    /* A los 10 s solo un aviso corto: el nombre de lo que sigue ya se dijo al empezar el descanso */
+    if ((st.type === "rest" || st.type === "wait") && r === 10 && mark("ten") && (st.type === "wait" || (st.dur || 0) >= 25)) say("Diez segundos. Ponte en posición.", false);
     if (st.type === "phase" && st.checks) {
       var inStep = st.dur - P.remaining;
       st.checks.forEach(function (c) { if (inStep >= c && mark("k" + c)) { snd("warn"); speak("Chequeo: si no podrías conversar, baja la velocidad y acorta el paso."); } });
@@ -3049,6 +3343,7 @@ function tick() {
 }
 function mainAction() {
   if (P.done) { closePlayer(); return; }
+  if (P.prep) { audio(); enterStep(0, true); return; }
   var st = P.steps[P.idx]; audio();
   var ld = P.leadNext || 0; P.leadNext = 0;
   if (st.type === "work") {
@@ -3279,6 +3574,8 @@ document.addEventListener("click", function (e) {
     else if (act === "camprep") camPrep();
     else if (act === "camlimreset") { setPref("camLim", {}); renderGlobal(); }
     else if (act === "vol") { setPref("vol", t.getAttribute("data-v")); renderGlobal(); snd("rep"); }
+    else if (act === "micmode") { setPref("micMode", t.getAttribute("data-v")); renderGlobal(); }
+    else if (act === "tempotone") { setPref("tempoTone", t.getAttribute("data-v")); renderGlobal(); snd("con", 1.5); }
     else if (act === "vozrate") { setPref("vozRate", +t.getAttribute("data-v")); renderGlobal(); say("Así hablo ahora.", true); }
     else if (act === "sndtest") soundTest($("snd-out"));
     else if (act === "aiprov") { var pv = t.getAttribute("data-v"); setPref("aiProv", pv); if (pv === "chrome") chrCheck().then(function () { renderGlobal(); }); renderGlobal(); }
@@ -3311,6 +3608,7 @@ document.addEventListener("click", function (e) {
   else if (p === "camlimit") { CAM.limitArm = !CAM.limitArm; camLimitBtn(); if (CAM.limitArm) say("Haz una repetición hasta tu caja", true); }
   else if (p === "camkeep") { camCancelClose(); if (CAM.eng) CAM.eng.lastEnd = performance.now() / 1000; }
   else if (p === "voice") { setPref("voice", !voiceOn()); setToolBtns(); hfSync(); if (voiceOn()) speak("Voz activada."); else { try { speechSynthesis.cancel(); } catch (e) {} } }
+  else if (p === "asst") asstToggle();
   else if (p === "hf") { prefToggle("hf"); if (pref("hf", false)) { if (!hfSupported()) hfMsg("Este navegador no entiende la voz: usa Chrome. El gesto con la cámara sí funciona."); else say("Manos libres activado. Di «listo» cuando termines cada serie.", true); } else hfMsg("Manos libres apagado."); }
   else if (p === "snd") soundTest($("p-hfmsg"));
   else if (p === "lgopen") { P.lgOpen = !P.lgOpen; renderLogBar(); }
@@ -3320,9 +3618,9 @@ document.addEventListener("click", function (e) {
     else { P.exitArmed = Date.now(); t.textContent = "Toca otra vez"; setTimeout(function () { t.textContent = "Salir"; }, 3000); }
   }
   else if (p === "confirmall") { P.log.forEach(function (e) { e.auto = false; }); document.querySelectorAll(".fs-in.auto").forEach(function (i) { i.classList.remove("auto"); }); refreshFinish(); }
-  else if (p === "lgminus") editLog(-1);
-  else if (p === "lgplus") editLog(1);
-  else if (p === "rir") { if (P.lastLog) { P.lastLog.rir = +t.getAttribute("data-v"); P.lastLog.auto = false; saveRun(); renderLogBar(); } }
+  else if (p === "lgminus") editLog(-1, t.hasAttribute("data-li") ? +t.getAttribute("data-li") : null);
+  else if (p === "lgplus") editLog(1, t.hasAttribute("data-li") ? +t.getAttribute("data-li") : null);
+  else if (p === "rir") { if (t.hasAttribute("data-g")) setGroupRir(t.getAttribute("data-g").split(",").map(Number), +t.getAttribute("data-v")); else if (P.lastLog) { P.lastLog.rir = +t.getAttribute("data-v"); P.lastLog.auto = false; saveRun(); renderLogBar(); } }
   else if (p === "knee") { var o = t.parentNode.querySelector(".kopts"); if (o) o.hidden = !o.hidden; }
   else if (p === "kneecancel") { var o2 = t.closest(".kopts"); if (o2) o2.hidden = true; }
   else if (p === "kneeopt") kneeStop(t.getAttribute("data-v"));
@@ -3389,12 +3687,12 @@ document.addEventListener("keydown", function (e) {
   else if (e.key === "ArrowLeft") { e.preventDefault(); if (!P.done) enterStep(Math.max(0, P.idx - 1)); }
   else if (e.key === "ArrowUp") { e.preventDefault(); editLog(1); }
   else if (e.key === "ArrowDown") { e.preventDefault(); editLog(-1); }
-  else if (/^[0-4]$/.test(e.key) && P.lastLog && P.lastLog.t == null) { P.lastLog.rir = +e.key; P.lastLog.auto = false; saveRun(); renderLogBar(); }
+  else if (/^[0-4]$/.test(e.key) && P.lastLog && P.lastLog.t == null) setGroupRir(lastGroupLi(), +e.key);
   else if (e.key === "p" || e.key === "P") togglePause();
   else if ((e.key === "c" || e.key === "C") && (P.kind === "session" || P.kind === "routine")) { if (CAM.on) camStop(); else camStart(); setToolBtns(); }
   else if (e.key === "?") askOpen(null);
   else if (e.key === "v" || e.key === "V") { setPref("voice", !voiceOn()); setToolBtns(); }
-  else if (e.key === "m" || e.key === "M") prefToggle("hf");
+  else if (e.key === "m" || e.key === "M" || e.key === "h" || e.key === "H") asstToggle();
   else if (e.key === "s" || e.key === "S") soundTest($("p-hfmsg"));
   else if ((e.key === "t" || e.key === "T") && P.kind === "session") { setPref("tempo", !pref("tempo", false)); setToolBtns(); if (PC.running) { pacerStop(); $("p-pacer").hidden = true; } updateButtons(); }
 });
@@ -4480,10 +4778,11 @@ document.addEventListener("keydown", function (e) {
    ===================================================================== */
 
 /* ---------- 1. Ajustes ---------- */
-var PREF_DEF = { logsets: true, camAuto: true, camCount: true, voice: true, tempoWords: true, camGest: true, aiSpeak: true };
+var PREF_DEF = { logsets: true, camAuto: true, camCount: true, voice: true, tempoWords: true, camGest: true, aiSpeak: true, demo: true, prepScreen: true, sideAuto: true, side2End: true };
 function autoItemsOn() { var v = pref("autoItems", null); return v == null ? !!pref("hf", false) : !!v; }
 function prefVal(k) { return k === "autoItems" ? autoItemsOn() : !!pref(k, !!PREF_DEF[k]); }
 function prefToggle(k) {
+  if (k === "asst") { var on = !asstOn(); setPref("asst", on); setPref("hf", on); if (P.active) asstSync(true); return; }
   setPref(k, !prefVal(k));
   if (k === "hf" && pref("hf", false) && !voiceOn()) setPref("voice", true);
   if (k === "hf" || k === "voice") hfSync();
@@ -4525,10 +4824,14 @@ function cuesShort(x) { var c = (x.cues || []).slice(0, 2); return c.length ? '<
 function cuesMore(x) { var c = (x.cues || []).slice(2); if (x.breath) c.push(x.breath); return c.length ? '<ul class="p-cues">' + c.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : ""; }
 function upNextHTML(n) {
   if (n && n.ex) {
-    var lt = effLoadText(n.ex), bits = [setDose(n.ex)];
+    var lt = effLoadText(n.ex), bits = [setDose(n.ex) + (n.ex.side ? " por lado" : "")];
     if (n.side) bits.push("lado " + n.side);
     if (n.ex.rungs > 1) bits.push("nivel " + (Math.min(n.ex.rung || 0, n.ex.rungs - 1) + 1) + " de " + n.ex.rungs);
-    return '<div class="p-upnext"><span class="k">Sigue</span><b>' + esc(n.ex.code + ". " + n.ex.name) + "</b><span>" + esc(bits.join(" · ")) + "</span>" + (lt && eqParse(lt) ? eqChipHTML(lt) : "") + "</div>";
+    var dm = pref("demo", true) !== false ? demoHTML(n.ex, false) : "", setup = String(n.ex.setup || "").split(". ")[0];
+    if (setup && !/\.$/.test(setup)) setup += ".";
+    if (setup.length > 110) setup = setup.slice(0, 106).replace(/\s+\S*$/, "") + "…";
+    return '<div class="p-upnext' + (dm ? " has-demo" : "") + '"><div class="un-txt"><span class="k">Sigue</span><b>' + esc(n.ex.code + ". " + n.ex.name) + "</b><span>" + esc(bits.join(" · ")) + "</span>" + (lt && eqParse(lt) ? eqChipHTML(lt) : "") +
+      (setup ? '<p class="un-setup">' + esc(setup) + "</p>" : "") + "</div>" + (dm ? '<div class="un-demo">' + dm + "</div>" : "") + "</div>";
   }
   return n ? '<div class="p-upnext"><span class="k">Sigue</span><b>' + esc(n.item ? n.item.name : stepLabel(n)) + "</b></div>" : "";
 }
@@ -4561,6 +4864,7 @@ var HF = { rec: null, want: false, restarts: 0, lastStart: 0, done: {}, confirm:
 var HF_NUM = { cero: 0, un: 1, uno: 1, una: 1, dos: 2, tres: 3, cuatro: 4, cinco: 5, seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10, once: 11, doce: 12, trece: 13, catorce: 14, quince: 15, dieciseis: 16, diecisiete: 17, dieciocho: 18, diecinueve: 19, veinte: 20, veintiuno: 21, veintidos: 22, veintitres: 23, veinticuatro: 24, veinticinco: 25, treinta: 30 };
 var HF_QUICK = { listo: "go", lista: "go", hecho: "go", siguiente: "go", pausa: "pause", anterior: "prev", silencio: "hush", callate: "hush", basta: "hush", repite: "repeat" };
 var HF_HELP = [
+  ["«¿Qué preparo?»", "te digo qué discos, liga o mancuerna dejar lista ahora y lo que viene."],
   ["«Listo», «hecho», «siguiente»", "= el botón azul: empezar, terminar o saltar."],
   ["«Pausa» / «sigue»", "detiene y reanuda el tiempo."],
   ["«Anterior»", "vuelve un paso."],
@@ -4574,10 +4878,15 @@ var HF_HELP = [
   ["«Recuerda que…»", "guarda una nota que la IA tendrá en cuenta, en todos tus equipos."]
 ];
 function hfSupported() { return !!(window.SpeechRecognition || window.webkitSpeechRecognition); }
-function hfWanted() { return !!pref("hf", false) && P.active && !P.done && !HF.held && !TALK.on && document.visibilityState !== "hidden"; }
+function hfWanted() { return asstOn() && P.active && !P.done && !HF.held && !TALK.on && document.visibilityState !== "hidden"; }
 function hfNum(w) { if (/^\d{1,2}$/.test(w)) return +w; return HF_NUM[w] != null ? HF_NUM[w] : null; }
+/* Quita muletillas al inicio y al final: «ok listo», «bueno, pausa», «siguiente por favor» */
+var HF_FILL = /^(ok|okay|oki|bueno|bien|eh|em|este|a ver|oye|coach|entrenador|entonces|y)\s+(?=\S)/;
+function hfClean(n) { var o = String(n || "").trim(), k = 0; while (k++ < 3 && HF_FILL.test(o)) o = o.replace(HF_FILL, ""); return o.replace(/\s+(por favor|porfa|porfavor|ya)$/, ""); }
+var RIR_RE = /(?:\brir\b|reserva|me quedaban|me quedan|me quedaron|me quedo|quedaban|quedaron|me sobraban|me sobraron|sobraban|sobraron)\s+(\w+)/;
 function hfParse(n) {
   if (!n) return null;
+  n = hfClean(n);
   var m, words = n.split(" ").length;
   if (/^(silencio|callate|basta|shh+|para de hablar)\b/.test(n)) return { cmd: "hush" };
   if (/^(conversemos|hablemos|conversa conmigo|quiero conversar|modo conversacion)\b/.test(n)) return { cmd: "talk" };
@@ -4590,13 +4899,15 @@ function hfParse(n) {
   if (m) {
     var v = hfNum(m[1]);
     if (v != null && v <= 60) {
-      var o = { cmd: "reps", n: v }, mr = n.match(/(?:\brir\b|reserva|quedaban|quedan|sobraban)\s+(\w+)/);
+      var o = { cmd: "reps", n: v }, mr = n.match(RIR_RE);
       if (mr && hfNum(mr[1]) != null) o.rir = Math.min(4, hfNum(mr[1]));
+      else if (/\b(al fallo|a la falla|ninguna mas|no me quedaba ninguna)\b/.test(n)) o.rir = 0;
       return o;
     }
   }
-  m = n.match(/(?:\brir\b|reserva|me quedaban|me quedan|quedaban|me sobraban|sobraban)\s+(\w+)/);
+  m = n.match(RIR_RE);
   if (m && hfNum(m[1]) != null) return { cmd: "rir", n: Math.min(4, hfNum(m[1])) };
+  if (/\b(llegue al fallo|fue al fallo|al fallo|a la falla|no me quedaba ninguna|ninguna mas)\b/.test(n)) return { cmd: "rir", n: 0 };
   if (/^(listo|lista|hecho|ya|ya esta|ya termine|termine|acabe|siguiente|empezar|empieza|empiezo|comienza|comenzar|dale|vamos|go|start)( ya)?$/.test(n)) return { cmd: "go" };
   if (/^(anterior|atras|regresa|volver|vuelve)$/.test(n)) return { cmd: "prev" };
   if (/^(pausa|para|espera|detente|alto|stop|pausar)( (el tiempo|la sesion|un momento|ahi))?$/.test(n)) return { cmd: "pause" };
@@ -4605,6 +4916,12 @@ function hfParse(n) {
   if (/^(repite|repitelo|repetir|otra vez|que dijiste|no escuche)$/.test(n)) return { cmd: "repeat" };
   if (/(duele la rodilla|dolor de rodilla|molestia de rodilla|molesta la rodilla|me duele rodilla|rodilla me duele|hueso desubicado|chasquido)/.test(n)) return { cmd: "knee" };
   if (/^(que sigue|que viene|y ahora|lo siguiente|que hago ahora)$/.test(n)) return { cmd: "next" };
+  if (/^(que preparo|que alisto|que necesito|que equipo necesito|que tengo que preparar|que cambio|que discos pongo ahora)$/.test(n)) return { cmd: "prep" };
+  /* Más tolerante: frases cortas que contienen el comando («listo ya está», «eh siguiente», «pausa un rato») */
+  if (words <= 4 && /\b(listo|lista|listos|hecho|echo|siguiente|termine|acabe)\b/.test(n) && !/^(que|como|cuando|cuanto|cuantas|por que|porque)\b/.test(n)) return { cmd: "go" };
+  if (words <= 3 && /\bpausa\b/.test(n)) return { cmd: "pause" };
+  if (words <= 3 && /\b(seguimos|continua|continuamos|reanuda|reanudamos)\b/.test(n)) return { cmd: "resume" };
+  if (words <= 2 && P.active && restLike(P.steps[P.idx]) && P.lastLog && !P.lastLog.skip && (m = n.match(/^(\w+)( repeticiones| reps)?$/)) && hfNum(m[1]) != null && hfNum(m[1]) <= 40) return { cmd: "reps", n: hfNum(m[1]) };
   if (/^(cuantas|cuantas son|cuantas repeticiones|cuantas hago|cuanto peso|que peso|cuantos kilos|que carga|que discos)$/.test(n)) return { cmd: "dose" };
   if (/^(cuanto falta|cuanto queda|que tiempo|cuanto tiempo|en que minuto voy|cuanto llevo)$/.test(n)) return { cmd: "time" };
   if (words >= 2 && words <= 25 && /^(como|que|por que|porque|cuando|donde|cuanto|cuanta|cuantas|cuantos|puedo|debo|es normal|explicame|explica|dime|me duele|me molesta|tengo|sirve|para que|cual|cuales)\b/.test(n)) return { cmd: "ask", q: n };
@@ -4668,10 +4985,11 @@ function hfHold(on) { if (on) { if (HF.rec || HF.want) { HF.held = true; hfStop(
 document.addEventListener("visibilitychange", function () { if (P.active) hfSync(); });
 function hfMsg(t) { HF.msg = t; HF.msgT = Date.now(); hfPaint(); }
 function hfPaint() {
-  var b = $("p-hf"); if (b) b.setAttribute("aria-pressed", !!pref("hf", false));
+  var b = $("p-hf"); if (b) b.setAttribute("aria-pressed", asstOn());
+  asstPaint();
   var el = $("p-hfmsg"); if (!el) return;
   var fresh = !!HF.msg && Date.now() - HF.msgT < 4500;
-  var idle = pref("hf", false) && P.active && !P.done ? (HF.want ? "Escuchando: «listo», «pausa», «hice 8», «¿qué sigue?»…" : "") : "";
+  var idle = asstOn() && P.active && !P.done ? (HF.want ? "Asistente: te escucho · «listo», «pausa», «hice 8», «¿qué preparo?»…" : TALK.on ? "" : "") : "";
   var txt = fresh ? HF.msg : idle;
   el.textContent = txt; el.hidden = !txt; el.classList.toggle("heard", fresh);
   clearTimeout(HF.pt); if (fresh) HF.pt = setTimeout(hfPaint, 4600);
@@ -4686,7 +5004,7 @@ function hfDo(c, raw) {
     if (c.cmd === "yes" && cf.cmd === "knee" && st && st.ex && st.ex.id === cf.x) kneeStop("dolor"); else say("Sigo.", true);
     return;
   }
-  if (c.cmd === "talk") { talkStart(); return; }
+  if (c.cmd === "talk") { if (!TALK.on) { TALK.bySession = !!P.active; talkStart(); } return; }
   if (c.cmd === "mem") { var mt = memIntent(raw || c.q || ""); if (mt && memAdd(mt)) { snd("ok"); say("Anotado.", true); } return; }
   if (P.done) { if (c.cmd === "go") closePlayer(); return; }
   if (c.cmd === "go") { snd("ok"); P.leadNext = 6; mainAction(); }
@@ -4694,15 +5012,16 @@ function hfDo(c, raw) {
   else if (c.cmd === "pause") { if (!P.paused) { togglePause(); say("Pausa. Di «sigue» para continuar.", true); } }
   else if (c.cmd === "resume") { if (P.paused) { togglePause(); say("Seguimos.", true); } }
   else if (c.cmd === "more") { if (st && (st.type === "rest" || st.type === "gap" || st.type === "seg" || (st.type === "item" && P.autoItem))) { P.remaining += 15; P.marks = {}; updateCount(); say("Quince segundos más.", true); } else say("Ahora no hay tiempo que alargar.", true); }
-  else if (c.cmd === "repeat") { if (st) announceStep(st); }
+  else if (c.cmd === "repeat") { if (st) { SPK.names = {}; SPK.loads = {}; announceStep(st); } }
   else if (c.cmd === "knee") {
     if (st && st.ex && st.ex.knee && (st.type === "work" || st.type === "hold")) { HF.confirm = { cmd: "knee", x: st.ex.id, until: Date.now() + 9000 }; say("¿Corto " + st.ex.name + " por la rodilla? Di sí o no.", true); }
     else say("Si la rodilla molesta, para. Esta noche anótalo en el chequeo.", true);
   }
   else if (c.cmd === "reps") hfReps(c);
-  else if (c.cmd === "rir") { if (P.lastLog && P.lastLog.t == null && !P.lastLog.skip) { P.lastLog.rir = c.n; P.lastLog.auto = false; saveRun(); renderLogBar(); snd("ok"); say("Anotado: te quedaban " + c.n + ".", true); } }
+  else if (c.cmd === "rir") { if (P.lastLog && P.lastLog.t == null && !P.lastLog.skip) { setGroupRir(lastGroupLi(), c.n); snd("ok"); say("Anotado: te quedaban " + c.n + ".", true); } }
   else if (c.cmd === "next") { var n = nextWork(P.idx); say(n ? "Sigue " + stepLabel(n) + "." : "Es lo último.", true); }
   else if (c.cmd === "dose") doseSay();
+  else if (c.cmd === "prep") prepVoice();
   else if (c.cmd === "time") timeSay();
   else if (c.cmd === "ask") hfAsk(c.q || norm(raw));
 }
@@ -4717,7 +5036,7 @@ function hfReps(c) {
     return;
   }
   if (P.lastLog && P.lastLog.t == null && !P.lastLog.skip) {
-    P.lastLog.r = c.n; P.lastLog.auto = false; if (c.rir != null) P.lastLog.rir = c.rir;
+    lastGroupLi().forEach(function (n) { var z = P.log[n]; if (z.t == null) { z.r = c.n; z.auto = false; if (c.rir != null) z.rir = c.rir; } });
     saveRun(); renderLogBar(); snd("ok");
     say("Corregido: " + c.n + (c.rir != null ? ", te quedaban " + c.rir : "") + ".", true);
   }
@@ -4983,7 +5302,7 @@ function askEquipo() {
 }
 function askAnswer(k, x) {
   var lib = EX[x.id] || {}, t = "", h = "";
-  if (k === "como") t = (x.setup ? "Posición: " + x.setup + " " : "") + (x.steps ? "Pasos: " + x.steps.map(function (s, i) { return (i + 1) + ") " + s; }).join(" ") : "") + (!x.setup && !x.steps && x.how ? x.how : "");
+  if (k === "como") { t = (x.setup ? "Posición: " + x.setup + " " : "") + (x.steps ? "Pasos: " + x.steps.map(function (s, i) { return (i + 1) + ") " + s; }).join(" ") : "") + (!x.setup && !x.steps && x.how ? x.how : ""); if (x.id && demoOf(x.id) && pref("demo", true) !== false) h = '<div class="how-demo">' + demoHTML(x, false) + '</div><p class="how-video"><a href="' + esc(videoURL(x)) + '" target="_blank" rel="noopener">Ver videos de la técnica en YouTube</a> <span class="muted">(con internet)</span></p>'; }
   else if (k === "error") t = (x.errors && x.errors.length ? "Errores comunes: " + x.errors.join("; ") + ". " : "") + (x.cues && x.cues.length ? "Claves: " + x.cues.join("; ") + "." : "");
   else if (k === "resp") t = x.breath || "Exhala en el esfuerzo e inhala al volver.";
   else if (k === "porque") t = (x.why || "") + (x.muscles ? " Trabaja: " + x.muscles.join(", ") + "." : "");
@@ -5431,7 +5750,7 @@ function aiContext(x, budget) {
 function aiSys(mode) {
   return [
     "Eres el entrenador de la app de Ram (Sistema 3.0): entrena en casa con un plan de fuerza, hipertrofia, rodilla y aeróbico. Respondes en español neutro, claro y práctico, como un buen entrenador que conoce su plan al detalle.",
-    mode === "live" ? "Conversas por voz en tiempo real mientras Ram entrena, con el celular a 2-3 metros. Habla en español neutro, natural y breve: 1 o 2 frases por turno, salvo que te pida explicar algo; sin listas. La app ya anuncia con su propia voz los pasos, las series, los descansos y los tiempos: si oyes esos avisos, no respondas ni los repitas. Usa las funciones: estado_sesion antes de responder algo que dependa del momento de la sesión; anotar_serie cuando diga cuántas repeticiones hizo (y el RIR si lo dice); control_sesion para pasar, volver, pausar, seguir, dar más tiempo o repetir el aviso; progreso para cómo va a largo plazo; guardar_nota si pide recordar algo; cortar_por_rodilla solo si confirma dolor de rodilla en un ejercicio que la carga. Después de usar una función, confirma en pocas palabras." : mode === "review" ? "Tus respuestas se leen en pantalla." :
+    mode === "live" ? "Conversas por voz en tiempo real mientras Ram entrena, con el celular a 2-3 metros. Habla en español neutro, natural y breve: 1 o 2 frases por turno, salvo que te pida explicar algo; sin listas. La app ya anuncia con su propia voz los pasos, las series, los descansos y los tiempos: si oyes esos avisos, no respondas ni los repitas. Si lo que oyes no va dirigido a ti (otra persona, la tele, música, ruido) o son palabras sueltas sin sentido, quédate callado. Cuando Ram dice un comando corto («listo», «pausa», «sigue», «hice ocho»), la app lo hace al instante: no lo repitas ni lo comentes. Usa las funciones: estado_sesion antes de responder algo que dependa del momento de la sesión; anotar_serie cuando diga cuántas repeticiones hizo (y el RIR si lo dice); control_sesion para pasar, volver, pausar, seguir, dar más tiempo o repetir el aviso; progreso para cómo va a largo plazo; guardar_nota si pide recordar algo; cortar_por_rodilla solo si confirma dolor de rodilla en un ejercicio que la carga. Después de usar una función, confirma en pocas palabras." : mode === "review" ? "Tus respuestas se leen en pantalla." :
     mode === "voice" ? "Tu respuesta se leerá en voz alta mientras entrena a 2-3 metros del celular: 1 a 3 frases cortas, sin listas, sin markdown y sin emojis." : mode === "set" ? "Comenta la serie que acaba de terminar en 1 o 2 frases: qué estuvo bien y una sola corrección o decisión concreta. Sin listas ni markdown." : "Responde en 2 a 6 frases; si ayuda, una lista corta de pasos. Sin relleno.",
     "Usa primero los datos de la app (ficha, plan, escalera, reglas, historial). Si algo no está, dilo y da la opción más prudente. No diagnostiques lesiones; si un dolor sigue o empeora, sugiere consultarlo con un profesional.",
     "Reglas de rodilla que nunca contradices: dolor de rodilla mayor a 2/10, sensación de hueso desubicado o chasquido con dolor = se corta ese ejercicio. En la fase 1, nada de saltos ni impacto. No propongas apoyar las rodillas en el piso.",
@@ -5542,9 +5861,10 @@ function aiSettingsHTML() {
   return h;
 }
 function hfSettingsHTML() {
-  return '<details class="card" data-k="manos"><summary>Manos libres</summary>' +
-    '<p class="muted">Para entrenar con el celular a 2-3 m sin tocarlo. También se prende con el botón «Manos libres» de la sesión.</p><div class="set-grid">' +
-    toggleRow("hf", "Escuchar comandos de voz durante la sesión", !!pref("hf", false)) +
+  return '<details class="card" data-k="manos"><summary>Asistente de voz (manos libres)</summary>' +
+    '<p class="muted">Para entrenar con el celular a 2-3 m sin tocarlo. Se prende con el botón «Asistente» de la sesión. Con tu clave gratis de Google e internet usa Gemini Live (conversa y maneja la sesión); sin eso, entiende los comandos de abajo.</p><div class="set-grid">' +
+    toggleRow("asst", "Asistente encendido en cada sesión", asstOn()) +
+    optRow("Micrófono", "micmode", [["normal", "Normal"], ["ruido", "Hay ruido o tele"], ["lejos", "Estoy lejos del celular"]], pref("micMode", "normal")) +
     toggleRow("autoItems", "Calentamiento y enfriamiento avanzan solos", autoItemsOn()) +
     toggleRow("camGest", "Con la cámara: manos arriba 1 segundo = «Hecho»", prefVal("camGest")) + "</div>" +
     '<h3 class="mini">Lo que entiendo</h3><ul class="plain hf-list">' + HF_HELP.map(function (r) { return "<li><b>" + esc(r[0]) + "</b> " + esc(r[1]) + "</li>"; }).join("") + "</ul>" +
@@ -5659,7 +5979,7 @@ function photoHTML() {
    4. Conversación en tiempo real: Gemini Live (gratis, con internet) o conversación
       local (Ollama o las respuestas sin internet), con voz que no espera a terminar.
    ===================================================================== */
-var APP_VER = "4.1";
+var APP_VER = "5.0";
 var DATAV = 0;   // sube con cada cambio de datos: el entrenador recalcula solo cuando hace falta
 PREF_DEF.coachAuto = true; PREF_DEF.liveVad = true; PREF_DEF.live = true;
 
@@ -5779,7 +6099,7 @@ function mergeRec(a, b) {
 /* ---------- Ajustes que viajan entre equipos ----------
    Solo lo que es del entrenamiento (tu equipo de discos, cómo registras y tempo).
    Voz, volumen, cámara, IA y claves son de cada equipo y no viajan. */
-var SYNC_PREFS = { equip: 1, eq05: 1, coachAuto: 1, tempo: 1, tempoWords: 1, logsets: 1, autoItems: 1, camGest: 1, voice: 1, vozRate: 1, aiSpeak: 1, aiSet: 1, aiVision: 1, live: 1, liveCam: 1, liveVad: 1, camAuto: 1, camCount: 1 };
+var SYNC_PREFS = { equip: 1, eq05: 1, coachAuto: 1, tempo: 1, tempoWords: 1, tempoTone: 1, asst: 1, micMode: 1, demo: 1, sideAuto: 1, side2End: 1, prepScreen: 1, logsets: 1, autoItems: 1, camGest: 1, voice: 1, vozRate: 1, aiSpeak: 1, aiSet: 1, aiVision: 1, live: 1, liveCam: 1, liveVad: 1, camAuto: 1, camCount: 1 };
 var PREFSYNC = { applying: false };
 function prefSyncPut(k, v) {
   if (k === "aiKey_gemini" && typeof keysPut === "function") { keysPut(); return; }   // viaja cifrada, no en «ajustes»
@@ -6932,8 +7252,8 @@ function sayQueue(t) {
     var u = new SpeechSynthesisUtterance(s), v = esVoice(), rate = +pref("vozRate", 1.05) || 1.05, now = Date.now();
     if (v) u.voice = v; u.lang = v ? v.lang : "es-ES"; u.rate = rate; u.volume = 1;
     SAY.last = (SAY.until > now ? SAY.last + " " : "") + s; SAY.lastT = now;
-    SAY.until = Math.max(SAY.until, now) + 700 + s.length * 70 / rate;
-    u.onend = function () { try { if (!speechSynthesis.pending && !speechSynthesis.speaking) SAY.until = Math.min(SAY.until, Date.now() + 300); } catch (e) {} };
+    SAY.until = Math.max(SAY.until, now) + 700 + s.length * 72 / rate;
+    u.onend = u.onerror = function () { try { if (!speechSynthesis.pending && !speechSynthesis.speaking) SAY.until = Date.now() + 350; } catch (e) {} };
     speechSynthesis.speak(u);
   } catch (e) {}
 }
@@ -6979,6 +7299,7 @@ function talkStart() {
 }
 function talkStop(msg) {
   if (!TALK.on) return;
+  TALK.bySession = false;
   var eng = TALK.eng;
   TALK.on = false; TALK.eng = "";
   if (eng === "live") liveStop(); else talkLocalStop();
@@ -6993,6 +7314,7 @@ function talkPaint() {
   var on = TALK.on, txt = on ? (TALK_ST[TALK.state] || "En conversación") + " · " + talkEngName() : "";
   var pill = $("talk-pill"), st = $("talk-st"), b = $("p-talk"), tb = $("talk-btn"), tl = $("talk-line");
   if (pill) pill.hidden = !on || !$("ask").hidden || P.active;
+  asstPaint();
   if (st) st.textContent = txt;
   if (b) b.setAttribute("aria-pressed", on ? "true" : "false");
   if (tb) { tb.textContent = on ? "Terminar conversación" : "Conversar por voz"; tb.classList.toggle("on", on); }
@@ -7129,7 +7451,7 @@ function liveSetupMsg() {
     generationConfig: { responseModalities: ["AUDIO"], temperature: 0.7 },
     systemInstruction: { parts: [{ text: liveSys() }] },
     tools: [{ functionDeclarations: LIVE_FNS }],
-    realtimeInputConfig: { automaticActivityDetection: { disabled: false, prefixPaddingMs: 300, silenceDurationMs: 800 }, activityHandling: "START_OF_ACTIVITY_INTERRUPTS" },
+    realtimeInputConfig: { automaticActivityDetection: { disabled: false, startOfSpeechSensitivity: pref("micMode", "normal") === "lejos" ? "START_SENSITIVITY_HIGH" : "START_SENSITIVITY_LOW", prefixPaddingMs: 300, silenceDurationMs: 800 }, activityHandling: "START_OF_ACTIVITY_INTERRUPTS" },
     inputAudioTranscription: {}, outputAudioTranscription: {},
     contextWindowCompression: { slidingWindow: {} },
     sessionResumption: LV.handle ? { handle: LV.handle } : {}
@@ -7160,22 +7482,29 @@ function liveMicStart() {
 /* Micrófono → Gemini. Solo manda audio cuando hablas (con 0.3 s de antes) y nunca mientras la app habla. */
 function liveMic(pcm) {
   if (!LV.ready) return;
-  var now = Date.now(), g = LV.gate, r = rms16(pcm);
-  var gated = now < SAY.until + 250 || (!!pref("liveEcho", false) && now < LV.speakUntil + 300);
-  if (gated) { g.pre = []; if (g.open) { g.open = false; liveEndAudio(); } return; }
+  var now = Date.now(), g = LV.gate, r = rms16(pcm), aiTalk = now < LV.speakUntil + 200;
+  var gated = ttsBusy() || now < SAY.until + 250 || (!!pref("liveEcho", false) && now < LV.speakUntil + 300);
+  if (gated) { g.pre = []; g.hot = 0; if (g.open) { g.open = false; liveEndAudio(); } return; }
   if (!prefVal("liveVad")) { liveAudio(pcm); return; }
-  var thr = Math.max(0.012, g.floor * 3) * (now < LV.speakUntil ? 1.8 : 1);
-  if (r > thr) {
+  /* Mientras la IA habla, el micrófono escucha su eco: se aprende ese nivel y solo una voz
+     bastante más fuerte (tú hablándole) la interrumpe, y no con un golpe suelto sino seguido. */
+  var mf = MIC_F[pref("micMode", "normal")] || 1;
+  if (aiTalk && !g.open) LV.echo = LV.echo ? LV.echo * 0.92 + r * 0.08 : r;
+  var thr = Math.max(0.012, g.floor * 3) * mf;
+  if (aiTalk) thr = Math.max(thr * 1.8, (LV.echo || 0) * 2.4);
+  if (r > thr) g.hot = (g.hot || 0) + 1; else g.hot = 0;
+  if (r > thr && (g.open || !aiTalk || g.hot >= 3)) {
     if (!g.open) { g.open = true; g.pre.forEach(liveAudio); g.pre = []; if (TALK.state !== "hablando") talkStatus("oyendo"); }
     g.until = now + 1300; LV.lastVoice = now; liveAudio(pcm);
   } else if (g.open) {
     liveAudio(pcm);
     if (now > g.until) { g.open = false; liveEndAudio(); }
   } else {
-    g.floor = g.floor * 0.97 + r * 0.03;
+    if (!aiTalk) g.floor = g.floor * 0.97 + r * 0.03;
     g.pre.push(pcm); if (g.pre.length > 10) g.pre.shift();
   }
 }
+var MIC_F = { normal: 1, ruido: 1.6, lejos: 0.75 };
 function liveAudio(pcm) { if (liveSend({ realtimeInput: { audio: { data: i16b64(pcm), mimeType: "audio/pcm;rate=16000" } } })) LV.sentEnd = false; }
 function liveEndAudio() { if (!LV.sentEnd) { LV.sentEnd = true; liveSend({ realtimeInput: { audioStreamEnd: true } }); } if (TALK.state === "oyendo") talkStatus("pensando"); }
 function liveOutInit() {
@@ -7186,7 +7515,7 @@ function liveOutInit() {
   } catch (e) { LV.outGain = null; }
 }
 function livePlay(b64) {
-  var a = audio(); if (!a) return;
+  var a = audio(); if (!a || LV.muteTurn) return;
   liveOutInit();
   var bin = atob(b64), n = bin.length >> 1, f = new Float32Array(n);
   for (var i = 0; i < n; i++) { var lo = bin.charCodeAt(2 * i), hi = bin.charCodeAt(2 * i + 1), v = (hi << 8) | lo; if (v >= 32768) v -= 65536; f[i] = v / 32768; }
@@ -7223,6 +7552,7 @@ function liveState() {
   var st = P.steps[P.idx], parts = ["Paso actual: " + stepLabel(st) + "."];
   if (st && st.ex && (st.type === "work" || st.type === "hold")) parts.push("Dosis: " + setDose(st.ex) + (st.ex.tempo ? ", tempo " + st.ex.tempo : "") + (st.ex.rir ? ", RIR " + st.ex.rir : "") + ". Carga: " + (effLoadText(st.ex) || "peso corporal") + ".");
   var nx = nextWork(P.idx); if (nx) parts.push("Sigue: " + stepLabel(nx) + ".");
+  if (P.kind === "session" && st && (st.type === "rest" || st.type === "wait")) { var pn = prepNow(P.idx); if (pn.length) parts.push("Prepara ahora: " + pn.map(function (t) { return t.say; }).join(" ")); var ah = prepAhead(P.idx, 3); if (ah.length) parts.push("Luego: " + ah.map(function (q) { return q.code + " " + q.name + " (" + q.what + ")"; }).join("; ") + "."); }
   if (st && P.running && isTimed(st)) parts.push("Quedan " + Math.round(P.remaining) + " s de este paso.");
   parts.push("Van " + fmt(P.elapsed) + " de " + fmt(P.total) + (P.kind === "session" ? "; faltan " + remainingSets() + " series" : "") + "." + (P.paused ? " En pausa." : ""));
   if (P.lastLog && !P.lastLog.skip) parts.push("Última anotada: " + P.lastLog.code + " serie " + P.lastLog.s + ", " + (P.lastLog.t != null ? P.lastLog.t + " s" : P.lastLog.r + " repeticiones") + (P.lastLog.rir != null ? ", RIR " + P.lastLog.rir : "") + ".");
@@ -7231,6 +7561,8 @@ function liveState() {
 var LIVE_ACT = { siguiente: "go", anterior: "prev", pausa: "pause", seguir: "resume", mas_tiempo: "more", repetir_aviso: "repeat" };
 function liveTool(name, a) {
   a = a || {};
+  if ((name === "anotar_serie" || name === "control_sesion" || name === "cortar_por_rodilla") && Date.now() - (LV.cmdAt || 0) < 6000) return "La app ya lo hizo al oír tu voz; no repitas la acción. " + liveState();
+  if (name === "anotar_serie" || name === "control_sesion" || name === "cortar_por_rodilla") { LV.toolAt = Date.now(); clearTimeout(LV.cmdT); }
   if (name === "estado_sesion") return liveState();
   if (name === "anotar_serie") {
     if (!P.active || P.done) return "No hay una sesión abierta: no anoté nada.";
@@ -7277,9 +7609,11 @@ function liveMsg(m) {
   if (m.sessionResumptionUpdate) { var u = m.sessionResumptionUpdate; if (u.resumable && u.newHandle) { LV.handle = u.newHandle; LV.handleT = Date.now(); } }
   if (m.goAway) { liveReconnect(); return; }
   var sc = m.serverContent; if (!sc) return;
-  if (sc.interrupted) { liveStopAudio(); liveTurnEnd(true); talkStatus("oyendo"); }
+  if (sc.interrupted) { liveStopAudio(); liveTurnEnd(true); talkStatus("oyendo"); LV.muteTurn = false; LV.cmdDone = false; }
   if (sc.inputTranscription && sc.inputTranscription.text) {
+    if (LV.turnDone) { LV.turnDone = false; LV.cmdDone = false; LV.muteTurn = false; }
     LV.inTxt += sc.inputTranscription.text;
+    liveCmdCheck();
     if (!LV.box) LV.box = talkBox(LV.inTxt.trim()); else if (LV.box.q) LV.box.q.textContent = LV.inTxt.trim();
     TALK.line = "«" + LV.inTxt.trim().slice(-60) + "»"; talkPaint();
   }
@@ -7292,7 +7626,30 @@ function liveMsg(m) {
     if (!LV.box) LV.box = talkBox(LV.inTxt.trim() || null);
     LV.box.a.textContent = LV.outTxt.trim();
   }
-  if (sc.turnComplete) liveTurnEnd(false);
+  if (sc.turnComplete) { liveTurnEnd(false); LV.turnDone = true; LV.muteTurn = false; }
+}
+/* Los comandos («listo», «pausa», «hice ocho y me quedaban dos») se hacen al instante en la app con
+   lo que Gemini transcribe de tu voz, sin esperar a que la IA decida llamar una función. */
+var LIVE_QUICK = { go: 1, prev: 1, pause: 1, resume: 1, more: 1, repeat: 1, next: 1, dose: 1, time: 1 };
+function liveCmdCheck() {
+  clearTimeout(LV.cmdT);
+  if (!P.active || P.done) return;
+  var raw = LV.inTxt.trim(), n = norm(raw); if (!n) return;
+  var c = hfParse(n), words = n.split(" ").length;
+  if (LV.cmdDone) {   // ya se hizo algo en este turno: solo completa el RIR si llegó después
+    if (c && (c.cmd === "rir" || (c.cmd === "reps" && c.rir != null)) && LV.cmdKind === "reps") { LV.cmdT = setTimeout(function () { hfDo({ cmd: "rir", n: c.cmd === "rir" ? c.n : c.rir }, raw); }, 300); }
+    return;
+  }
+  if (!c || c.cmd === "ask" || c.cmd === "talk" || c.cmd === "mem") return;
+  var run = function () {
+    var c2 = hfParse(norm(LV.inTxt.trim())) || c;
+    if (!c2 || c2.cmd === "ask" || c2.cmd === "talk" || c2.cmd === "mem") return;
+    if (Date.now() - (LV.toolAt || 0) < 6000 && c2.cmd !== "hush") { LV.cmdDone = true; return; }   // la IA ya lo hizo con una función
+    LV.cmdDone = true; LV.cmdAt = Date.now(); LV.cmdKind = c2.cmd;
+    if (c2.cmd !== "hush") { LV.muteTurn = true; liveStopAudio(); }
+    hfDo(c2, LV.inTxt.trim());
+  };
+  if (LIVE_QUICK[c.cmd] && words <= 3) run(); else LV.cmdT = setTimeout(run, 650);
 }
 function liveConnect() {
   var key = aiKeyOf("gemini"), ws;
@@ -7322,25 +7679,32 @@ function liveErrText(r) {
   if (/not found|not supported|unsupported|is not available/i.test(r)) return "El modelo de conversación no está disponible.";
   return "Se cortó la conversación con Gemini" + (r ? " (" + r.slice(0, 80) + ")" : "") + ".";
 }
-function liveFind() {
+function liveFind() { return liveFindAll().then(function (l) { return l[0] || null; }); }
+function liveFindAll() {
   var key = aiKeyOf("gemini");
   return fetch(AI_PROV.gemini.url + "/v1beta/models?pageSize=200", { headers: { "x-goog-api-key": key } }).then(function (r) { return r.ok ? r.json() : { models: [] }; }).then(function (j) {
     var ids = (j.models || []).filter(function (m) { return (m.supportedGenerationMethods || []).indexOf("bidiGenerateContent") >= 0; }).map(function (m) { return String(m.name).replace(/^models\//, ""); });
     var c = ids.filter(function (id) { return /live|native-audio/.test(id) && !/translate|transcribe|tts|extended|thinking/.test(id); });
     function ver(id) { var mm = id.match(/gemini-(\d+(?:\.\d+)?)/); return (mm ? parseFloat(mm[1]) : 0) * 10 - (/preview|exp/.test(id) ? 1 : 0); }
     c.sort(function (a, b) { return ver(b) - ver(a); });
-    return c[0] || null;
-  }).catch(function () { return null; });
+    return c;
+  }).catch(function () { return []; });
+}
+function liveNextModel(r, quota) {
+  LV.tried = LV.tried || {}; LV.tried[LV.model] = 1;
+  talkStatus("conectando", quota ? "ese modelo no tiene cuota gratis ahora: pruebo otro" : "buscando otro modelo");
+  liveFindAll().then(function (list) {
+    if (!LV.want) return;
+    var m = (list || []).filter(function (id) { return !LV.tried[id]; })[0];
+    if (m) { LV.model = m; if (!quota) setPref("liveModel", m); LV.retries = 0; liveConnect(); }
+    else liveFail(liveErrText(r), true);
+  });
 }
 function liveClosed(code, reason) {
   var r = String(reason || "");
   if (/api.?key|key not valid|permission|unauthenticated|denied/i.test(r)) { liveFail(liveErrText(r), false); return; }
-  if (/quota|exhaust|rate limit|resource/i.test(r)) { liveFail(liveErrText(r), true); return; }
-  if (/not found|not supported|unsupported|is not available/i.test(r) && !LV.triedFind) {
-    LV.triedFind = true; talkStatus("conectando", "buscando otro modelo");
-    liveFind().then(function (m) { if (!LV.want) return; if (m && m !== LV.model) { LV.model = m; setPref("liveModel", m); liveConnect(); } else liveFail(liveErrText(r), true); });
-    return;
-  }
+  if (/quota|exhaust|rate limit|resource/i.test(r)) { if (Object.keys(LV.tried || {}).length < 4) liveNextModel(r, true); else liveFail(liveErrText(r), true); return; }
+  if (/not found|not supported|unsupported|is not available/i.test(r) && Object.keys(LV.tried || {}).length < 4) { liveNextModel(r, false); return; }
   if (LV.retries >= 4) { liveFail("Se cortó la conversación varias veces. Revisa el internet.", true); return; }
   LV.retries++; talkStatus("conectando", "reconectando");
   setTimeout(function () { if (LV.want && !LV.ws) liveConnect(); }, 700 * LV.retries);
@@ -7348,11 +7712,12 @@ function liveClosed(code, reason) {
 function liveFail(msg, fallback) {
   liveStop();
   if (!TALK.on) return;
+  if (P.active && asstOn()) { talkStop(msg + " Sigo con los comandos de voz del celular."); return; }
   if (fallback && hfSupported()) { TALK.eng = "local"; talkNote(msg + " Sigo con la conversación local."); talkLocalStart(); talkStatus("escuchando"); return; }
   TALK.on = false; TALK.eng = ""; hfHold(false); talkPaint(); talkNote(msg);
 }
 function liveStart() {
-  LV.want = true; LV.retries = 0; LV.triedFind = false; LV.bytes = 0;
+  LV.want = true; LV.retries = 0; LV.triedFind = false; LV.bytes = 0; LV.tried = {}; LV.echo = 0; LV.muteTurn = false; LV.cmdDone = false; LV.turnDone = false; LV.cmdAt = 0; LV.toolAt = 0;
   LV.handle = null; LV.greet = true; LV.inTxt = ""; LV.outTxt = ""; LV.box = null;   // conversación nueva (la continuidad va en el contexto)
   LV.model = String(pref("liveModel", "") || "").trim() || LIVE_DEF;
   liveOutInit();
@@ -7509,6 +7874,555 @@ function v4Init() {
   window.addEventListener("storage", function (e) { if (e.key === LS_KEY + ".recs" && !P.active) { ST.recs = lsGet(LS_KEY + ".recs") || {}; DATAV++; rerender(); } });
   talkPaint();
 }
+
+/* =====================================================================
+   VERSIÓN 5.0
+   1. Equipo inteligente: pantalla «Prepara tu equipo» al empezar y, en cada
+      descanso, lo que conviene preparar AHORA pensando 2-3 pasos adelante
+      (discos, liga, mancuerna que sigue), más un vistazo a lo que viene.
+   ===================================================================== */
+/* Qué pide cada ejercicio además de las mancuernas. liga = dónde va anclada. */
+var EQX = {
+  facepull: { liga: "cara" }, remoexp: { liga: "pecho" }, jalon: { liga: "arriba" }, curlbay: { liga: "suelta" }, extrod: { liga: "silla", it: ["silla"] },
+  remo1m: { it: ["silla"] }, triover: { it: ["silla con respaldo"] }, arnold: { it: ["silla con respaldo"] }, copen: { it: ["silla", "toalla"] }, flexexp: { it: ["silla contra la pared"] },
+  pressinc: { it: ["mochila firme"] }, pullover: { it: ["mochila firme"] }, latinc: { it: ["marco de la puerta"] }, splitsq: { it: ["cojín a tu altura"] },
+  curlfem: { it: ["toalla en el piso liso"] }, stepdown: { it: ["escalón junto a la pared"] }, talonpie: { it: ["escalón junto a la pared"] }, hipthrust: { it: ["sofá o cama firme", "toalla"] },
+  deficit: { it: ["2 pilas de libros"] }, goblet: { it: ["tu caja"], moch: 1 }, farmer: { moch: 1 }, rdl1p: { it: ["pared cerca"] }
+};
+var LIGA_TXT = { cara: "anclada en la puerta, a la altura de tu cara", pecho: "anclada a la altura del pecho", arriba: "anclada arriba de la puerta", suelta: "suelta, para pisarla", silla: "atada a la pata trasera de la silla" };
+var LIGA_DO = { cara: "Ancla la liga en la puerta, a la altura de tu cara", pecho: "Ancla la liga a la altura del pecho", arriba: "Ancla la liga arriba de la puerta", suelta: "Ten una liga suelta para pisarla", silla: "Ata la liga a la pata trasera de la silla" };
+function prepNeeds(st) {
+  var x = st.ex, q = EQX[x.id] || {}, lt = effLoadText(x), sp = eqParse(lt);
+  return { lt: lt, db: sp && (sp.kind === "par" || sp.kind === "una") ? lt : null, pick: sp && (sp.kind === "antigua" || sp.kind === "vinilos") ? lt : null,
+    liga: q.liga || null, it: q.it || [], moch: !!q.moch || !!(sp && sp.moch) };
+}
+function isWorkSt(s) { return !!s && (s.type === "work" || s.type === "hold") && !!s.ex; }
+/* Reparte los cambios de equipo en los descansos: cada cambio va en el descanso más largo que
+   queda entre el último uso de lo anterior y el primer uso de lo nuevo (si el 3.0 marca uno, ese). */
+function prepPlan(steps) {
+  var inv = eqInv(), state = eqStart(inv), at = {}, start = [], lastDb = -1, liga = null, lastLiga = -1, slots = [];
+  steps.forEach(function (s, i) { if (s.type === "rest" || s.type === "wait") slots.push(i); });
+  function len(i) { var s = steps[i]; return s.type === "rest" ? s.dur || 0 : Math.max(0, (s.target || 0) - (s.planAt || 0)); }
+  function add(i, t) { if (i === -1) start.push(t); else (at[i] = at[i] || []).push(t); }
+  function slot(from, to, noteRe) {
+    if (from < 0) return -1;
+    var c = slots.filter(function (i) { return i > from && i < to; });
+    if (!c.length) return from;   // sin descanso entre medio: justo después del último uso
+    if (noteRe) { var n = c.filter(function (i) { return steps[i].note && noteRe.test(steps[i].note); }); if (n.length) return n[n.length - 1]; }
+    /* el descanso más largo; si empatan, el que tenga menos tareas y, luego, el más cercano a cuando se usa */
+    function score(i) { return len(i) - 8 * ((at[i] || []).length); }
+    var best = c[0]; c.forEach(function (i) { if (score(i) >= score(best)) best = i; });
+    return best;
+  }
+  steps.forEach(function (s, j) {
+    if (!isWorkSt(s)) return;
+    var nd = prepNeeds(s);
+    if (nd.db) {
+      var r = eqApply(state, nd.db, inv);
+      if (r.steps.length) add(slot(lastDb, j, /disco/i), { k: "db", j: j, txt: r.steps.join(" "), lt: nd.db, code: s.ex.code });
+      state = r.state; lastDb = j;
+    }
+    if (nd.liga && nd.liga !== liga) { add(slot(liga ? lastLiga : -1, j, null), { k: "liga", j: j, from: liga, to: nd.liga, code: s.ex.code }); liga = nd.liga; }
+    if (nd.liga) lastLiga = j;
+  });
+  return { start: start, at: at };
+}
+var PREP = { plan: null, key: "" };
+function prepFor() { var k = P.title + "|" + P.steps.length; if (!PREP.plan || PREP.key !== k) { PREP.plan = prepPlan(P.steps); PREP.key = k; } return PREP.plan; }
+function stepCode(j) { var s = P.steps[j]; return s && s.ex ? s.ex.code : ""; }
+function prepTaskTxt(t) {
+  if (t.k === "db") return { say: t.txt, html: '<b>Discos</b> ' + esc(t.txt) + ' <span class="pp-for">para ' + esc(t.code) + "</span>", lt: t.lt };
+  var tx = LIGA_DO[t.to] + (t.from ? " (mueve la que usabas o usa otra)" : "") + ".";
+  return { say: tx, html: '<b>Liga</b> ' + esc(tx) + ' <span class="pp-for">para ' + esc(t.code) + "</span>" };
+}
+function workIdxAfter(i) { for (var j = i + 1; j < P.steps.length; j++) if (isWorkSt(P.steps[j])) return j; return -1; }
+function workIdxBefore(i) { for (var j = i - 1; j >= 0; j--) if (isWorkSt(P.steps[j])) return j; return -1; }
+/* Lo que conviene hacer en el descanso i */
+function prepNow(i) {
+  if (P.kind !== "session") return [];
+  var out = (prepFor().at[i] || []).map(prepTaskTxt), n = workIdxAfter(i);
+  if (n >= 0) {
+    var nd = prepNeeds(P.steps[n]), pv = workIdxBefore(n), pd = pv >= 0 ? prepNeeds(P.steps[pv]) : null, same = pv >= 0 && P.steps[pv].ex.id === P.steps[n].ex.id;
+    var firstTime = true; for (var j = 0; j < n; j++) if (isWorkSt(P.steps[j]) && P.steps[j].ex.id === P.steps[n].ex.id) { firstTime = false; break; }
+    if (!same && firstTime) {
+      if (nd.pick && (!pd || pd.pick !== nd.pick)) out.push({ say: "Ten a mano " + eqSay(nd.pick) + ".", html: "<b>Ten a mano</b> " + esc(eqSay(nd.pick)), lt: nd.pick });
+      var used = {}; for (var k = 0; k < n; k++) if (isWorkSt(P.steps[k])) prepNeeds(P.steps[k]).it.forEach(function (z) { used[z] = 1; });
+      var it = nd.it.filter(function (x) { return !used[x]; });
+      if (nd.moch && !(pd && pd.moch)) it.push("la mochila con peso");
+      if (it.length) out.push({ say: "Ten a mano: " + it.join(", ") + ".", html: "<b>Ten a mano</b> " + esc(it.join(" · ")) });
+    }
+  }
+  return out;
+}
+function prepPlanSay(i) {
+  var t = prepNow(i); if (!t.length) return "";
+  return "Mientras: " + t.map(function (x) { return x.say; }).join(" ");
+}
+/* Los 2-3 ejercicios que vienen después del siguiente, con lo que usan */
+function prepAhead(i, nMax) {
+  var out = [], seen = {}, first = workIdxAfter(i);
+  if (first >= 0) seen[P.steps[first].ex.id] = 1;
+  for (var k = 0; k < i; k++) if (isWorkSt(P.steps[k])) seen[P.steps[k].ex.id] = 1;   // lo ya hecho no es «lo que viene»
+  for (var j = first + 1; first >= 0 && j < P.steps.length && out.length < (nMax || 3); j++) {
+    var s = P.steps[j]; if (!isWorkSt(s) || seen[s.ex.id]) continue; seen[s.ex.id] = 1;
+    var nd = prepNeeds(s), bits = [];
+    if (nd.db || nd.pick) bits.push(eqSay(nd.db || nd.pick)); else if (nd.lt && !/^peso corporal$/i.test(nd.lt)) bits.push(nd.lt);
+    if (nd.liga) bits.push("liga " + LIGA_TXT[nd.liga]);
+    nd.it.forEach(function (x) { if (!(nd.liga && /silla/.test(x) && nd.liga === "silla")) bits.push(x); });
+    out.push({ code: s.ex.code, name: exShort(s.ex), what: bits.join(" · ") || "sin equipo" });
+  }
+  return out;
+}
+function prepNowHTML(i) {
+  var now = prepNow(i);
+  return now.length ? '<div class="pp-now"><span class="k">Mientras descansas</span><ul>' + now.map(function (t) { return "<li>" + t.html + "</li>"; }).join("") + "</ul></div>" : "";
+}
+function prepAheadHTML(i) {
+  var ah = prepAhead(i, 3);
+  return ah.length ? '<div class="pp-ahead"><span class="k">Luego</span><ol>' + ah.map(function (a) { return "<li><b>" + esc(a.code + " " + a.name) + "</b> <span>" + esc(a.what) + "</span></li>"; }).join("") + "</ol></div>" : "";
+}
+/* ---------- Pantalla «Prepara tu equipo» al empezar la sesión ---------- */
+function prepStartData() {
+  var D = DAYS[P.key] || {}, mode = P.plan && P.plan.opts.mode, pl = prepFor();
+  var setup = (mode === "stop" && D.stopPlan && D.stopPlan.setup ? D.stopPlan.setup : D.setup || []).filter(function (l) { return !/principal/i.test(l); });
+  var first = -1; for (var j = 0; j < P.steps.length; j++) if (isWorkSt(P.steps[j]) && prepNeeds(P.steps[j]).db) { first = j; break; }
+  var dbNow = pl.start.filter(function (t) { return t.k === "db"; }), lt = first >= 0 ? prepNeeds(P.steps[first]).db : null;
+  var later = []; Object.keys(pl.at).map(Number).sort(function (a, b) { return a - b; }).forEach(function (i) { pl.at[i].forEach(function (t) { if (t.k === "db") later.push({ i: i, t: t }); }); });
+  return { D: D, setup: setup, prep: D.prep || [], lt: lt, first: first, dbNow: dbNow, later: later };
+}
+function prepWhen(i) {
+  var s = P.steps[i]; if (!s) return "";
+  if (s.type === "rest" || s.type === "wait") { var b = s.block; var lastOfBlock = true; for (var j = i + 1; j < P.steps.length; j++) { if (P.steps[j].block !== b) break; if (P.steps[j].type === "rest" || P.steps[j].type === "wait") { lastOfBlock = false; break; } } return (lastOfBlock ? "En el último descanso del bloque " : "En un descanso del bloque ") + (b ? b.label : ""); }
+  return "Después de " + (s.ex ? s.ex.code : "ese ejercicio");
+}
+function prepStartHTML() {
+  var d = prepStartData(), h = "";
+  if (d.lt) {
+    h += '<div class="pp-db"><span class="k">Mancuernas para empezar' + (d.first >= 0 ? " (" + esc(P.steps[d.first].ex.code) + ")" : "") + "</span>" + eqHTML(d.lt, true) +
+      (d.dbNow.length ? '<p class="eq-how">' + esc(d.dbNow.map(function (t) { return t.txt; }).join(" ")) + "</p>" : '<p class="muted">Como las guardas ya sirven.</p>') + "</div>";
+    if (d.later.length) h += '<div class="pp-later"><span class="k">Cambios durante la sesión</span><ul>' + d.later.map(function (o) { return "<li><b>" + esc(prepWhen(o.i)) + ":</b> " + esc(o.t.txt) + "</li>"; }).join("") + "</ul></div>";
+  }
+  var rows = d.setup.map(function (l, k) { return '<li><button class="pp-chk" data-v5="ppchk" type="button" aria-pressed="false">' + esc(l) + "</button></li>"; }).join("");
+  if (rows) h += '<div class="pp-list"><span class="k">Deja listo</span><ul>' + rows + "</ul></div>";
+  if (d.prep.length) h += '<div class="pp-list pp-small"><span class="k">Antes</span><ul>' + d.prep.map(function (l) { return '<li><button class="pp-chk" data-v5="ppchk" type="button" aria-pressed="false">' + esc(l) + "</button></li>"; }).join("") + "</ul></div>";
+  return h;
+}
+function prepStartSay() {
+  var d = prepStartData(), parts = [];
+  if (d.dbNow.length) parts.push(d.dbNow.map(function (t) { return t.txt; }).join(" "));
+  else if (d.lt) parts.push("Empiezas con " + eqSay(d.lt) + ".");
+  if (d.setup.length) parts.push("Deja listo: " + d.setup.map(function (l) { return l.replace(/\s*\([^)]*\)\s*/g, " ").replace(/,.*$/, "").trim(); }).join("; ") + ".");
+  return "Antes de empezar. " + parts.join(" ") + " Toca empezar cuando estés listo.";
+}
+function renderPrep() {
+  var tone = "prep";
+  $("p-body").className = "p-body t-prep tone-" + tone;
+  $("p-kind").textContent = "Antes de empezar";
+  $("p-title").textContent = "Prepara tu equipo";
+  var pl = $("p-line"); if (pl) { pl.innerHTML = ""; pl.hidden = true; }
+  $("p-demo").innerHTML = ""; $("p-hero").className = "p-hero";
+  $("p-sub").innerHTML = '<span class="p-dose">' + esc(minLabel(P.total)) + " · " + countSets(P.steps) + " series</span>";
+  $("p-extra").innerHTML = prepStartHTML();
+  $("p-count").textContent = ""; $("p-count").className = "p-count empty";
+  $("p-pacer").hidden = true;
+  var nx = P.steps[0]; $("p-next").textContent = nx ? "Primero: " + stepLabel(nx) : "";
+  $("p-live").textContent = "Prepara tu equipo";
+  updateButtons(); updateClock(); renderLogBar();
+}
+document.addEventListener("click", function (e) {
+  var t = e.target.closest ? e.target.closest("[data-v5]") : null; if (!t) return;
+  var a = t.getAttribute("data-v5");
+  if (a === "ppchk") t.setAttribute("aria-pressed", t.getAttribute("aria-pressed") === "true" ? "false" : "true");
+  else if (a === "seen50") { setPref("seen50", true); var c = t.closest(".news"); if (c) c.remove(); }
+});
+/* =====================================================================
+   2. Demostración animada de cada ejercicio (sin internet).
+   Figura en 3D muy simple, vista en 3/4 y dibujada en SVG. Cada ejercicio tiene
+   dos posturas: C (al terminar el esfuerzo) y E (al terminar el regreso). La figura
+   se mueve con el mismo tempo que suena: rojo = fuerza, azul = regreso, morado = mantener.
+   Ejes: x = hacia la derecha de la figura, y = arriba, z = hacia adelante. Ángulos en grados:
+   φ (0 = colgando, 90 = al frente, 180 = arriba, −90 = atrás) y α (0 = pegado, 90 = al costado).
+   El lado que trabaja en los ejercicios de un lado es el derecho (el que queda cerca de la cámara).
+   ===================================================================== */
+var DM = { tor: 50, nk: 6, hd: 9, sh: 12, hip: 8, ua: 27, fa: 25, th: 41, sn: 40, ft: 12 };
+function vAdd(a, b, k) { k = k == null ? 1 : k; return [a[0] + b[0] * k, a[1] + b[1] * k, a[2] + b[2] * k]; }
+function vSub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+function vLen(a) { return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]) || 1e-9; }
+function vNorm(a) { var l = vLen(a); return [a[0] / l, a[1] / l, a[2] / l]; }
+function vDot(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+function vLerp(a, b, k) { return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k]; }
+function dirA(phi, alp, side) { var f = phi * Math.PI / 180, a = alp * Math.PI / 180; return [side * Math.sin(a), -Math.cos(a) * Math.cos(f), Math.cos(a) * Math.sin(f)]; }
+/* Dos huesos que llegan a un punto; la articulación del medio se dobla hacia «pole» */
+function ik2(root, tgt, a, b, pole) {
+  var d = vSub(tgt, root), L = vLen(d), u = [d[0] / L, d[1] / L, d[2] / L];
+  L = clamp(L, Math.abs(a - b) + 0.5, a + b - 0.01);
+  var ca = clamp((a * a + L * L - b * b) / (2 * a * L), -1, 1), sa = Math.sqrt(1 - ca * ca);
+  var w = vSub(pole, vAdd([0, 0, 0], u, vDot(pole, u))); if (vLen(w) < 1e-6) w = [0, 0, 1]; w = vNorm(w);
+  var mid = vAdd(vAdd(root, u, a * ca), w, a * sa);
+  return [mid, vAdd(root, u, L)];
+}
+/* q = { p: pelvis [x,y,z], t: [inclinación adelante, lateral, giro], h: cabeza,
+         aR/aL/a: [φ brazo, α brazo, φ antebrazo, α antebrazo] o { k: [x,y,z] mano, pole },
+         lR/lL/l: [φ muslo, α muslo, φ pierna, α pierna, φ pie] o { k: [x,y,z] tobillo, pole, f } } */
+function demoSkel(q) {
+  var J = {}, p = q.p || [0, 85, 0], t = q.t || [0, 0, 0], lam = t[0] * Math.PI / 180, bet = (t[1] || 0) * Math.PI / 180, tw = (t[2] || 0) * Math.PI / 180, ro = (t[3] || 0) * Math.PI / 180;
+  var T = vNorm([Math.sin(bet), Math.cos(lam) * Math.cos(bet), Math.sin(lam) * Math.cos(bet)]);
+  function lat(a) { var X = [Math.cos(a), 0, -Math.sin(a)]; X = vNorm(vSub(X, vAdd([0, 0, 0], T, vDot(X, T)))); if (ro) { var C = [T[1] * X[2] - T[2] * X[1], T[2] * X[0] - T[0] * X[2], T[0] * X[1] - T[1] * X[0]]; X = vNorm(vAdd(vAdd([0, 0, 0], X, Math.cos(ro)), C, Math.sin(ro))); } return X; }
+  var X = lat(tw), X0 = lat(0);
+  J.pel = p; J.hipR = vAdd(p, X0, DM.hip); J.hipL = vAdd(p, X0, -DM.hip);
+  J.neck = vAdd(p, T, DM.tor);
+  var shc = vAdd(J.neck, T, -3); J.shR = vAdd(shc, X, DM.sh); J.shL = vAdd(shc, X, -DM.sh);
+  var hl = lam + ((q.h || 0) * Math.PI / 180), Th = vNorm([Math.sin(bet), Math.cos(hl) * Math.cos(bet), Math.sin(hl) * Math.cos(bet)]);
+  J.head = vAdd(J.neck, Th, DM.nk + DM.hd);
+  J.face = [0, -Math.sin(hl), Math.cos(hl)];
+  if (ro) { var F = J.face, TF = [T[1] * F[2] - T[2] * F[1], T[2] * F[0] - T[0] * F[2], T[0] * F[1] - T[1] * F[0]]; J.face = vNorm(vAdd(vAdd(vAdd([0, 0, 0], F, Math.cos(ro)), TF, Math.sin(ro)), T, vDot(T, F) * (1 - Math.cos(ro)))); }
+  [["R", 1], ["L", -1]].forEach(function (sd) {
+    var S = sd[0], g = sd[1], a = q["a" + S] || q.a || [0, 8, 0, 8], l = q["l" + S] || q.l || [0, 4, 0, 4, 90], r;
+    if (a.k) { var ak = a.k.length === 3 && q.a && q.a.k && !q["a" + S] ? [g * Math.abs(a.k[0]), a.k[1], a.k[2]] : a.k; r = ik2(J["sh" + S], ak, DM.ua, DM.fa, a.pole ? [a.pole[0] * g, a.pole[1], a.pole[2]] : [g * 0.5, -0.4, -1]); J["el" + S] = r[0]; J["wr" + S] = r[1]; }
+    else { J["el" + S] = vAdd(J["sh" + S], dirA(a[0], a[1], g), DM.ua); J["wr" + S] = vAdd(J["el" + S], dirA(a[2], a[3], g), DM.fa); }
+    if (l.k) { var lk = q.l && q.l.k && !q["l" + S] ? [g * Math.abs(l.k[0]), l.k[1], l.k[2]] : l.k; r = ik2(J["hip" + S], lk, DM.th, DM.sn, l.pole ? [l.pole[0] * g, l.pole[1], l.pole[2]] : [0, 0.2, 1]); J["kn" + S] = r[0]; J["an" + S] = r[1]; }
+    else { J["kn" + S] = vAdd(J["hip" + S], dirA(l[0], l[1], g), DM.th); J["an" + S] = vAdd(J["kn" + S], dirA(l[2], l[3], g), DM.sn); }
+    var fa = l.k ? (l.f == null ? 90 : l.f) : (l[4] == null ? 90 : l[4]);
+    J["to" + S] = vAdd(J["an" + S], dirA(fa, 0, g), DM.ft);
+  });
+  return J;
+}
+function demoJoints(D, q) {
+  var J = demoSkel(q);
+  if (D.g === "feet") {
+    var sh = [-(J.anR[0] + J.anL[0]) / 2, 4 - Math.min(J.anR[1], J.anL[1], J.toR[1] + 1, J.toL[1] + 1), -(J.anR[2] + J.anL[2]) / 2 + (D.gz || 0)];
+    Object.keys(J).forEach(function (k) { if (k !== "face") J[k] = vAdd(J[k], sh, 1); });
+  }
+  return J;
+}
+function demoLerpPose(A, B, k) {
+  if (!B || k <= 0) return A; if (k >= 1) return B;
+  var o = {};
+  Object.keys(A).concat(Object.keys(B)).forEach(function (key) {
+    if (o[key] !== undefined) return;
+    var a = A[key], b = B[key] === undefined ? a : B[key]; if (a === undefined) a = b;
+    if (typeof a === "number") o[key] = a + (b - a) * k;
+    else if (Array.isArray(a) && Array.isArray(b)) o[key] = a.map(function (v, i) { return v + ((b[i] == null ? v : b[i]) - v) * k; });
+    else if (a && a.k && b && b.k) o[key] = { k: vLerp(a.k, b.k, k), pole: a.pole, f: a.f == null ? null : a.f + ((b.f == null ? a.f : b.f) - a.f) * k };
+    else o[key] = k < 0.5 ? a : b;
+  });
+  return o;
+}
+/* Cámara: ψ gira alrededor de la figura (90 = de costado) y θ mira un poco desde arriba */
+function demoCam(v) { var y = (v && v[0] != null ? v[0] : 62) * Math.PI / 180, p = (v && v[1] != null ? v[1] : 12) * Math.PI / 180; return { cy: Math.cos(y), sy: Math.sin(y), cp: Math.cos(p), sp: Math.sin(p) }; }
+function demoProj(P, c) { var x = P[0] * c.cy + P[2] * c.sy, d = P[0] * c.sy - P[2] * c.cy, y = P[1] * c.cp - d * c.sp; return [x, -y, d]; }
+var DEMO_SEGS = [["pel", "neck", "t", 11], ["hipR", "hipL", "t", 8], ["shR", "shL", "t", 8], ["shR", "elR", "aR", 7], ["elR", "wrR", "aR", 6.5], ["shL", "elL", "aL", 7], ["elL", "wrL", "aL", 6.5],
+  ["hipR", "knR", "lR", 8.5], ["knR", "anR", "lR", 7.5], ["anR", "toR", "lR", 5.5], ["hipL", "knL", "lL", 8.5], ["knL", "anL", "lL", 7.5], ["anL", "toL", "lL", 5.5]];
+/* Objetos: caja (silla, escalón, sofá, mochila, cojín, toalla), poste (marco de puerta), pared, liga */
+function hull2(pts) {
+  pts = pts.slice().sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
+  function cr(o, a, b) { return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]); }
+  var lo = [], up = [], i;
+  for (i = 0; i < pts.length; i++) { while (lo.length >= 2 && cr(lo[lo.length - 2], lo[lo.length - 1], pts[i]) <= 0) lo.pop(); lo.push(pts[i]); }
+  for (i = pts.length - 1; i >= 0; i--) { while (up.length >= 2 && cr(up[up.length - 2], up[up.length - 1], pts[i]) <= 0) up.pop(); up.push(pts[i]); }
+  up.pop(); lo.pop(); return lo.concat(up);
+}
+function demoBox(b, c, cls) {   // b = [x0,x1, y0,y1, z0,z1]
+  var P = [], k;
+  for (k = 0; k < 8; k++) P.push(demoProj([b[k & 1 ? 1 : 0], b[k & 2 ? 3 : 2], b[k & 4 ? 5 : 4]], c));
+  var h = hull2(P), top = [P[2], P[3], P[7], P[6]];
+  return '<polygon class="dp ' + (cls || "") + '" points="' + h.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(" ") + '"/>' +
+    '<polygon class="dp-top ' + (cls || "") + '" points="' + top.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(" ") + '"/>';
+}
+function demoProps(D, J, c) {
+  var h = "";
+  (D.props || []).forEach(function (o) {
+    if (o.box) h += demoBox(o.box, c, o.c);
+    else if (o.post) { var a = demoProj([o.post[0], 0, o.post[1]], c), b = demoProj([o.post[0], o.post[2] || 200, o.post[1]], c); h += '<line class="dpost" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"/>'; }
+    else if (o.at && J[o.at]) { var w = o.w || [10, 2, 10], q = J[o.at], dy = o.dy || 0; h += demoBox([q[0] - w[0], q[0] + w[0], q[1] - 3 + dy, q[1] - 3 + dy + w[1], q[2] - w[2], q[2] + w[2]], c, o.c); }
+  });
+  return h;
+}
+function demoBand(D, J, c) {
+  if (!D.band) return "";
+  var A = typeof D.band.from === "string" ? J[D.band.from] : D.band.from, out = "";
+  (D.band.to || ["wrR"]).forEach(function (j) { var a = demoProj(A, c), b = demoProj(J[j], c); out += '<line class="dband" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"/>'; });
+  return out;
+}
+function demoDumbbells(D, J, c) {
+  var out = "", kind = D.db; if (!kind) return "";
+  function bell(P, axis, small) {
+    var a = demoProj(vAdd(P, axis, -6), c), b = demoProj(vAdd(P, axis, 6), c), r = small ? 3.2 : 4.6;
+    return '<line class="dbar" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"/><circle class="dplate" cx="' + a[0].toFixed(1) + '" cy="' + a[1].toFixed(1) + '" r="' + r + '"/><circle class="dplate" cx="' + b[0].toFixed(1) + '" cy="' + b[1].toFixed(1) + '" r="' + r + '"/>';
+  }
+  if (kind === "hip") return bell(vAdd(J.pel, [0, 1, 0], 9), [1, 0, 0], false);
+  if (kind === "two") { var m = vLerp(J.wrR, J.wrL, 0.5); return bell(vAdd(m, [0, 1, 0], D.dbOff || 0), [0, 1, 0], false); }
+  if (kind === "R" || kind === "LR") out += bell(J.wrR, [1, 0, 0], D.dbSmall);
+  if (kind === "L" || kind === "LR") out += bell(J.wrL, [1, 0, 0], D.dbSmall);
+  return out;
+}
+/* Dibuja la figura: ph = "con" | "ecc" | "pau" | "" colorea lo que trabaja */
+function demoDraw(D, q, ph, fit) {
+  var c = demoCam(D.v), J = demoJoints(D, q), segs = [], work = D.work || [];
+  DEMO_SEGS.forEach(function (s) {
+    var a = demoProj(J[s[0]], c), b = demoProj(J[s[1]], c);
+    segs.push({ a: a, b: b, d: (a[2] + b[2]) / 2, g: s[2], w: s[3] });
+  });
+  var hp = demoProj(J.head, c), torD = demoProj(J.pel, c)[2];
+  segs.push({ head: hp, d: hp[2] });
+  segs.sort(function (u, v) { return u.d - v.d; });
+  var body = "";
+  segs.forEach(function (s) {
+    if (s.head) { var nz = demoProj(vAdd(J.head, J.face, DM.hd * 0.9), c); body += '<circle class="dhead" cx="' + s.head[0].toFixed(1) + '" cy="' + s.head[1].toFixed(1) + '" r="' + DM.hd + '"/><circle class="dnose" cx="' + nz[0].toFixed(1) + '" cy="' + nz[1].toFixed(1) + '" r="2.4"/>'; return; }
+    var far = s.d < torD - 3 && s.g !== "t", on = ph && work.indexOf(s.g) >= 0;
+    body += '<line class="dseg' + (far ? " far" : "") + (on ? " w-" + ph : "") + '" stroke-width="' + s.w + '" x1="' + s.a[0].toFixed(1) + '" y1="' + s.a[1].toFixed(1) + '" x2="' + s.b[0].toFixed(1) + '" y2="' + s.b[1].toFixed(1) + '"/>';
+  });
+  var fl = demoProj([0, 0, 0], c), floor = '<ellipse class="dshadow" cx="' + fl[0].toFixed(1) + '" cy="' + fl[1].toFixed(1) + '" rx="46" ry="7"/>';
+  var pack = "";
+  if (D.pack) { var a0 = vAdd(vLerp(J.pel, J.neck, 0.35), J.face, -9), a1 = vAdd(vLerp(J.pel, J.neck, 0.85), J.face, -9), pa = demoProj(a0, c), pb = demoProj(a1, c); pack = '<line class="dpack" x1="' + pa[0].toFixed(1) + '" y1="' + pa[1].toFixed(1) + '" x2="' + pb[0].toFixed(1) + '" y2="' + pb[1].toFixed(1) + '"/>'; }
+  return floor + demoProps(D, J, c) + demoBand(D, J, c) + pack + body + demoDumbbells(D, J, c);
+}
+/* Encuadre: caja que contiene las dos posturas y los objetos */
+function demoFit(D) {
+  if (D._fit) return D._fit;
+  var c = demoCam(D.v), xs = [], ys = [];
+  [D.C, D.E].forEach(function (q) { if (!q) return; var J = demoJoints(D, q); Object.keys(J).forEach(function (k) { if (k === "face") return; var p = demoProj(J[k], c); xs.push(p[0]); ys.push(p[1]); }); var hp = demoProj(J.head, c); ys.push(hp[1] - DM.hd); });
+  if (D.band && typeof D.band.from !== "string") { var bp = demoProj(D.band.from, c); xs.push(bp[0]); ys.push(bp[1]); }
+  (D.props || []).forEach(function (o) { if (o.box) for (var k = 0; k < 8; k++) { var p = demoProj([o.box[k & 1 ? 1 : 0], o.box[k & 2 ? 3 : 2], o.box[k & 4 ? 5 : 4]], c); xs.push(p[0]); ys.push(p[1]); } });
+  var fl = demoProj([0, 0, 0], c); ys.push(fl[1] + 7); xs.push(fl[0] - 46, fl[0] + 46);
+  var x0 = Math.min.apply(null, xs) - 10, x1 = Math.max.apply(null, xs) + 10, y0 = Math.min.apply(null, ys) - 10, y1 = Math.max.apply(null, ys) + 8;
+  var w = x1 - x0, h = y1 - y0, side = Math.max(w, h * 1.15);
+  D._fit = [x0 - (side - w) / 2, y0 - (side / 1.15 - h) / 2, side, side / 1.15];
+  return D._fit;
+}
+/* Objetos de la escena: silla (asiento + respaldo + patas), caja, pared */
+function dmChair(x0, x1, z0, z1, seat, back) {   // back = "z0" | "z1" | null
+  var o = [{ box: [x0, x1, seat - 4, seat, z0, z1], c: "wood" }];
+  [[x0, z0], [x1 - 3, z0], [x0, z1 - 3], [x1 - 3, z1 - 3]].forEach(function (q) { o.push({ box: [q[0], q[0] + 3, 0, seat - 4, q[1], q[1] + 3], c: "wood" }); });
+  if (back === "z0") o.push({ box: [x0, x1, seat, seat + 40, z0, z0 + 3], c: "wood" });
+  if (back === "z1") o.push({ box: [x0, x1, seat, seat + 40, z1 - 3, z1], c: "wood" });
+  return o;
+}
+/* Posturas de cada ejercicio. v = [giro de cámara, altura]; C = al terminar el esfuerzo; E = al terminar el regreso.
+   g: "feet" = pies apoyados en el piso; db = dónde van las mancuernas; work = lo que se colorea según la fase. */
+var DEMOS = {
+  remo1m: { v: [72, 14], db: "R", work: ["aR"], props: dmChair(-30, 2, 44, 74, 46, "z1"),
+    C: { p: [0, 79, 0], t: [52, 0, 0], h: 12, aR: [-72, 10, -4, 6], aL: { k: [-14, 47, 54], pole: [-0.2, 0.6, -1] }, lR: [-12, 4, -6, 4], lL: [14, 4, 4, 4] },
+    E: { p: [0, 79, 0], t: [52, 0, 0], h: 12, aR: [4, 6, 4, 6], aL: { k: [-14, 47, 54], pole: [-0.2, 0.6, -1] }, lR: [-12, 4, -6, 4], lL: [14, 4, 4, 4] } },
+  arquero: { v: [54, 22], work: ["aR", "aL"],
+    C: { p: [0, 40, -10], t: [76, 0, 0], h: 4, a: { k: [32, 2, 42], pole: [0.5, 0.2, -1] }, l: { k: [7, 5, -88], f: 8 } },
+    E: { p: [7, 22, -8], t: [86, 8, 0], h: 4, aR: { k: [32, 2, 42], pole: [0.6, 0.3, -1] }, aL: { k: [-32, 2, 42], pole: [-0.6, 0.3, -1] }, l: { k: [7, 5, -88], f: 8 } } },
+  pike: { v: [80, 10], work: ["aR", "aL"],
+    C: { p: [0, 80, -66], t: [140, 0, 0], h: 6, a: { k: [12, 2, 0], pole: [0.3, 0.3, -1] }, l: { k: [7, 5, -100], f: 30 } },
+    E: { p: [0, 75, -62], t: [151, 0, 0], h: 6, a: { k: [12, 2, 0], pole: [0.2, 0.4, -1] }, l: { k: [7, 5, -100], f: 30 } } },
+  facepull: { v: [40, 12], g: "feet", work: ["aR", "aL"], band: { from: [0, 146, 80], to: ["wrR", "wrL"] },
+    C: { t: [-2, 0, 0], a: { k: [22, 150, 0], pole: [1, 0.3, -0.4] }, lR: [8, 6, 3, 6], lL: [-8, 6, -3, 6] },
+    E: { t: [2, 0, 0], a: { k: [8, 144, 48], pole: [0.6, -0.4, -1] }, lR: [8, 6, 3, 6], lL: [-8, 6, -3, 6] } },
+  pressinc: { v: [72, 14], db: "LR", work: ["aR", "aL"], props: [{ box: [-16, 16, 0, 24, -50, -26], c: "pack" }],
+    C: { p: [0, 9, 0], t: [-62, 0, 0], h: 8, a: [178, 6, 178, 4], l: { k: [12, 5, 44], pole: [0, 1, 0.3] } },
+    E: { p: [0, 9, 0], t: [-62, 0, 0], h: 8, a: [-38, 52, 178, 0], l: { k: [12, 5, 44], pole: [0, 1, 0.3] } } },
+  pullover: { v: [72, 14], db: "two", work: ["aR", "aL"], props: [{ box: [-16, 16, 0, 24, -50, -26], c: "pack" }],
+    C: { p: [0, 9, 0], t: [-62, 0, 0], h: 8, a: [170, -14, 170, -14], l: { k: [12, 5, 44], pole: [0, 1, 0.3] } },
+    E: { p: [0, 9, 0], t: [-62, 0, 0], h: 8, a: [-80, -12, -76, -14], l: { k: [12, 5, 44], pole: [0, 1, 0.3] } } },
+  latinc: { v: [12, 10], db: "R", work: ["aR"], props: [{ post: [-40, -4, 205] }, { post: [-40, 6, 205] }],
+    C: { p: [6, 85, 0], t: [0, 13, 0], aR: [0, 88, 0, 82], aL: { k: [-38, 116, 2], pole: [-0.5, -1, 0] }, lR: [0, 1, 0, 1], lL: [0, 5, 0, 5] },
+    E: { p: [6, 85, 0], t: [0, 13, 0], aR: [0, 10, 0, 8], aL: { k: [-38, 116, 2], pole: [-0.5, -1, 0] }, lR: [0, 1, 0, 1], lL: [0, 5, 0, 5] } },
+  curlbay: { v: [112, 10], g: "feet", work: ["aR"], band: { from: "toR", to: ["wrR"] },
+    C: { t: [10, 0, 0], aR: [-34, 10, 150, 8], aL: [4, 8, 4, 8], lR: [-20, 4, -10, 4], lL: [18, 4, 4, 4] },
+    E: { t: [10, 0, 0], aR: [-34, 10, -32, 8], aL: [4, 8, 4, 8], lR: [-20, 4, -10, 4], lL: [18, 4, 4, 4] } },
+  triover: { v: [70, 10], db: "two", dbOff: -6, work: ["aR", "aL"], props: dmChair(-17, 17, -18, 16, 46, "z0"),
+    C: { p: [0, 50, 0], t: [-4, 0, 0], a: [176, -10, 176, -10], l: [86, 7, 0, 7] },
+    E: { p: [0, 50, 0], t: [-4, 0, 0], a: [166, -10, -20, -12], l: [86, 7, 0, 7] } },
+  planchaesc: { v: [76, 14], work: ["t"],
+    C: { p: [0, 46, -14], t: [77, 0, 0], h: 6, a: { k: [13, 2, 36], pole: [0.2, 0, -1] }, l: { k: [6, 5, -85], f: 8 } },
+    E: { p: [0, 43, -14], t: [80, 0, 0], h: 6, a: { k: [13, 2, 36], pole: [0.2, 0, -1] }, l: { k: [6, 5, -85], f: 8 } } },
+  bichomuerto: { v: [60, 24], work: ["aR", "lL"],
+    C: { p: [0, 9, 0], t: [-90, 0, 0], h: -6, a: [180, 6, 180, 6], l: [180, 6, 90, 6, 140] },
+    E: { p: [0, 9, 0], t: [-90, 0, 0], h: -6, aR: [-86, 6, -86, 6], aL: [180, 6, 180, 6], lR: [180, 6, 90, 6, 140], lL: [96, 6, 94, 6, 160] } },
+  splitsq: { v: [80, 10], db: "two", work: ["lR", "lL"], props: [{ box: [-20, 4, 0, 12, -42, -20], c: "soft" }],
+    C: { p: [0, 78, -6], t: [6, 0, 0], h: 4, a: { k: [5, 120, 14], pole: [1, -0.6, 0] }, lR: { k: [8, 5, 34] }, lL: { k: [-8, 9, -48], pole: [0, -0.3, 1], f: 25 } },
+    E: { p: [0, 50, -9], t: [12, 0, 0], h: 4, a: { k: [5, 93, 14], pole: [1, -0.6, 0] }, lR: { k: [8, 5, 34] }, lL: { k: [-8, 9, -48], pole: [0, -0.3, 1], f: 25 } } },
+  rdl1p: { v: [82, 10], db: "R", work: ["lL", "t"],
+    C: { p: [0, 84, 0], t: [0, 0, 0], aR: [2, 6, 2, 6], aL: [12, 22, 12, 22], lL: { k: [-8, 4, 2] }, lR: [-10, 4, -6, 4] },
+    E: { p: [0, 79, -16], t: [80, 0, 0], h: 8, aR: [0, 4, 0, 4], aL: [0, 30, 0, 30], lL: { k: [-8, 4, 2] }, lR: [-94, 4, -94, 4, 0] } },
+  curlfem: { v: [70, 18], work: ["lR", "lL"], props: [{ box: [-15, 15, 0, 2.5, 22, 44], c: "soft", key: "C" }],
+    C: { p: [0, 40, 0], t: [-122, 0, 0], h: -20, a: [84, 14, 88, 14], l: { k: [9, 6, 32], pole: [0, 1, 0.4] } },
+    E: { p: [0, 22, -4], t: [-104, 0, 0], h: -20, a: [84, 14, 88, 14], l: { k: [9, 6, 70], pole: [0, 1, 0.2] } } },
+  extrod: { v: [76, 10], work: ["lR"], props: dmChair(-18, 18, -18, 16, 46, "z0"), band: { from: [8, 6, -16], to: ["anR"] },
+    C: { p: [0, 50, 0], t: [-6, 0, 0], a: { k: [20, 48, 6], pole: [1, 0, -0.3] }, lR: [88, 5, 45, 5], lL: [88, 7, 0, 7] },
+    E: { p: [0, 50, 0], t: [-6, 0, 0], a: { k: [20, 48, 6], pole: [1, 0, -0.3] }, lR: [88, 5, 2, 5], lL: [88, 7, 0, 7] } },
+  stepdown: { v: [18, 12], work: ["lR"], props: [{ box: [-4, 24, 0, 12, -16, 18], c: "wood" }],
+    C: { p: [2, 97, 0], t: [0, 0, 0], a: [30, 10, 40, 10], lR: { k: [9, 16, 2] }, lL: [6, 10, 8, 10] },
+    E: { p: [4, 76, -12], t: [16, -4, 0], a: [55, 10, 60, 10], lR: { k: [9, 16, 2], pole: [0, 0, 1] }, lL: { k: [-20, 5, 4] } } },
+  hipthrust: { v: [74, 12], db: "hip", work: ["lR", "lL", "t"], props: [{ box: [-34, 34, 0, 40, -98, -44], c: "soft" }, { box: [-34, 34, 40, 70, -98, -84], c: "soft" }],
+    C: { p: [0, 47, 0], t: [-92, 0, 0], h: -30, a: { k: [12, 58, 2], pole: [1, 0.4, -0.5] }, l: { k: [10, 5, 42], pole: [0, 1, 0.5] } },
+    E: { p: [0, 22, -8], t: [-58, 0, 0], h: -30, a: { k: [12, 33, -6], pole: [1, 0.4, -0.5] }, l: { k: [10, 5, 42], pole: [0, 1, 0.5] } } },
+  talonpie: { v: [80, 10], db: "R", work: ["lR"], props: [{ box: [-14, 20, 0, 12, 4, 30], c: "wood" }, { box: [-60, 60, 0, 190, 62, 66], c: "wall" }],
+    C: { p: [0, 106, 0], aR: [0, 6, 0, 6], aL: { k: [-14, 128, 58], pole: [-0.5, -1, 0] }, lR: [0, 2, 0, 2, 32], lL: [-12, 6, -78, 6, 0] },
+    E: { p: [0, 90, 0], aR: [0, 6, 0, 6], aL: { k: [-14, 112, 58], pole: [-0.5, -1, 0] }, lR: [0, 2, 0, 2, 124], lL: [-12, 6, -78, 6, 0] } },
+  copen: { v: [90, 16], work: ["lL", "t"], props: dmChair(-22, 22, -70, -38, 46, null),
+    C: { p: [0, 40, -4], t: [84, 0, 0, 90], h: 0, aL: [0, 0, 90, 0], aR: [-40, 0, 40, 0], lR: [-90, 0, -90, 0, 0], lL: [-88, 0, -88, 0, 0] },
+    E: { p: [0, 38, -4], t: [86, 0, 0, 90], h: 0, aL: [0, 0, 90, 0], aR: [-40, 0, 40, 0], lR: [-90, 0, -90, 0, 0], lL: [-70, 0, -60, 0, 0] } },
+  flexexp: { v: [80, 10], work: ["aR", "aL"], props: dmChair(-22, 22, 30, 60, 46, "z1").concat([{ box: [-70, 70, 0, 170, 62, 66], c: "wall" }]),
+    C: { p: [0, 58, -32], t: [56, 0, 0], h: 4, a: { k: [15, 48, 42], pole: [0.4, 0, -1] }, l: { k: [7, 5, -94], f: 8 } },
+    E: { p: [0, 44, -26], t: [64, 0, 0], h: 4, a: { k: [15, 48, 42], pole: [0.6, 0.2, -1] }, l: { k: [7, 5, -94], f: 8 } } },
+  remoexp: { v: [70, 10], g: "feet", work: ["aR", "aL"], band: { from: [0, 118, 86], to: ["wrR", "wrL"] },
+    C: { t: [4, 0, 0], a: { k: [17, 106, 4], pole: [0.5, -0.2, -1] }, lR: [6, 6, 2, 6], lL: [-6, 6, -2, 6] },
+    E: { t: [6, 0, 0], a: { k: [10, 114, 48], pole: [0.5, -0.4, -1] }, lR: [6, 6, 2, 6], lL: [-6, 6, -2, 6] } },
+  arnold: { v: [38, 10], db: "LR", work: ["aR", "aL"], props: dmChair(-17, 17, -18, 16, 46, "z0"),
+    C: { p: [0, 50, 0], t: [-3, 0, 0], a: { k: [14, 152, 4], pole: [1, 0, 0] }, l: [86, 8, 0, 8] },
+    E: { p: [0, 50, 0], t: [-3, 0, 0], a: { k: [10, 101, 14], pole: [0.3, -1, 0.6] }, l: [86, 8, 0, 8] } },
+  remosup: { v: [80, 12], g: "feet", db: "LR", work: ["aR", "aL"],
+    C: { t: [50, 0, 0], h: 14, a: [-76, 10, -8, 8], l: [12, 6, -6, 6] },
+    E: { t: [50, 0, 0], h: 14, a: [4, 8, 4, 8], l: [12, 6, -6, 6] } },
+  deficit: { v: [78, 14], work: ["aR", "aL"], props: [{ box: [8, 24, 0, 10, 32, 50], c: "wood" }, { box: [-24, -8, 0, 10, 32, 50], c: "wood" }],
+    C: { p: [0, 46, -14], t: [76, 0, 0], h: 4, a: { k: [16, 12, 40], pole: [0.5, 0.2, -1] }, l: { k: [7, 5, -90], f: 8 } },
+    E: { p: [0, 24, -14], t: [84, 0, 0], h: 4, a: { k: [16, 12, 40], pole: [0.7, 0.4, -1] }, l: { k: [7, 5, -90], f: 8 } } },
+  jalon: { v: [70, 10], work: ["aR", "aL"], band: { from: [0, 160, 56], to: ["wrR", "wrL"] },
+    C: { p: [0, 9, 0], t: [-8, 0, 0], a: { k: [18, 72, 6], pole: [1, -1, -0.3] }, l: [92, 8, 90, 8, 180] },
+    E: { p: [0, 9, 0], t: [-4, 0, 0], a: { k: [12, 104, 26], pole: [1, -0.6, -0.4] }, l: [92, 8, 90, 8, 180] } },
+  latpie: { v: [10, 8], g: "feet", db: "LR", work: ["aR", "aL"],
+    C: { a: [0, 88, 0, 84], l: [0, 5, 0, 5] }, E: { a: [0, 12, 0, 10], l: [0, 5, 0, 5] } },
+  martillo: { v: [68, 10], g: "feet", db: "LR", work: ["aR", "aL"],
+    C: { a: [6, 8, 158, 6], l: [0, 5, 0, 5] }, E: { a: [3, 8, 3, 8], l: [0, 5, 0, 5] } },
+  frances: { v: [70, 16], db: "LR", work: ["aR", "aL"],
+    C: { p: [0, 9, 0], t: [-90, 0, 0], h: -10, a: [178, 6, 178, 6], l: { k: [12, 5, 40], pole: [0, 1, 0.3] } },
+    E: { p: [0, 9, 0], t: [-90, 0, 0], h: -10, a: [172, 6, -70, 6], l: { k: [12, 5, 40], pole: [0, 1, 0.3] } } },
+  yraise: { v: [55, 16], g: "feet", db: "LR", dbSmall: 1, work: ["aR", "aL"],
+    C: { t: [80, 0, 0], h: 12, a: [100, 34, 100, 34], l: [16, 6, -8, 6] },
+    E: { t: [80, 0, 0], h: 12, a: [2, 8, 2, 8], l: [16, 6, -8, 6] } },
+  planchalat: { v: [90, 16], work: ["t", "lR"],
+    C: { p: [0, 36, 0], t: [84, 0, 0, 90], aL: [0, 0, 90, 0], aR: [-40, 0, 40, 0], lL: [-84, 0, -84, 0, 0], lR: [-104, 0, -104, 0, 0] },
+    E: { p: [0, 34, 0], t: [86, 0, 0, 90], aL: [0, 0, 90, 0], aR: [-40, 0, 40, 0], lL: [-84, 0, -84, 0, 0], lR: [-96, 0, -96, 0, 0] } },
+  rdl2p: { v: [80, 10], g: "feet", db: "LR", work: ["t"],
+    C: { t: [0, 0, 0], a: [6, 6, 4, 6], l: [0, 6, 0, 6] },
+    E: { t: [72, 0, 0], h: 10, a: [0, 6, 0, 6], l: [16, 6, -6, 6] } },
+  goblet: { v: [74, 10], db: "two", pack: 1, work: ["lR", "lL"], props: [{ box: [-18, 18, 0, 41, -44, -18], c: "wood" }],
+    C: { p: [0, 85, -2], t: [4, 0, 0], a: { k: [5, 122, 14], pole: [1, -0.6, 0] }, l: { k: [14, 4, 2], pole: [0.5, 0.2, 1] } },
+    E: { p: [0, 50, -22], t: [32, 0, 0], h: -10, a: { k: [5, 92, 16], pole: [1, -0.6, 0] }, l: { k: [14, 4, 2], pole: [0.5, 0.2, 1] } } },
+  pressmil: { v: [40, 10], g: "feet", db: "LR", work: ["aR", "aL"],
+    C: { a: { k: [14, 188, 2], pole: [1, 0, 0] }, l: [0, 6, 0, 6] },
+    E: { a: { k: [16, 136, 8], pole: [0.5, -1, 0.3] }, l: [0, 6, 0, 6] } },
+  maleta: { v: [70, 8], g: "feet", db: "R", walk: 1, work: ["t"],
+    C: { t: [0, 0, 0], aR: [0, 10, 0, 10], aL: [14, 8, 20, 8], lR: [22, 4, 6, 4], lL: [-16, 4, -14, 4, 70] },
+    E: { t: [0, 0, 0], aR: [0, 10, 0, 10], aL: [-12, 8, -6, 8], lR: [-16, 4, -14, 4, 70], lL: [22, 4, 6, 4] } },
+  farmer: { v: [70, 8], g: "feet", db: "LR", pack: 1, walk: 1, work: ["t"],
+    C: { t: [0, 0, 0], a: [0, 12, 0, 12], lR: [22, 4, 6, 4], lL: [-16, 4, -14, 4, 70] },
+    E: { t: [0, 0, 0], a: [0, 12, 0, 12], lR: [-16, 4, -14, 4, 70], lL: [22, 4, 6, 4] } },
+  trote: { v: [72, 8], g: "feet", walk: 0.34, work: ["lR", "lL"],
+    C: { t: [6, 0, 0], aR: [-40, 6, 60, 6], aL: [30, 6, 120, 6], lR: [30, 4, -10, 4], lL: [-14, 4, -40, 4, 60] },
+    E: { t: [6, 0, 0], aR: [30, 6, 120, 6], aL: [-40, 6, 60, 6], lR: [-14, 4, -40, 4, 60], lL: [30, 4, -10, 4] } }
+};
+/* Tiempo de la demostración: mismas fases que la guía de tempo */
+function demoEase(f) { return f * f * (3 - 2 * f); }
+function demoPhases(x, D) {
+  if (D.walk) { var w = typeof D.walk === "number" && D.walk < 1 ? D.walk : 0.6; return [{ k: "pau", d: w, to: "E" }, { k: "pau", d: w, to: "C" }]; }
+  var p = tempoParts(x.tempo), out = [];
+  if (!p) {
+    if (x.hold) return [{ k: "pau", d: 1.8, to: "E" }, { k: "pau", d: 1.8, to: "C" }];
+    var s = x.tempo === "Lento" ? 2.4 : 1.6; return [{ k: "ecc", d: s, to: "E" }, { k: "pau", d: 0.5, to: "E" }, { k: "con", d: s, to: "C" }, { k: "pau", d: 0.5, to: "C" }];
+  }
+  (x.start === "bottom" ? [2, 3, 0, 1] : [0, 1, 2, 3]).forEach(function (i) { var q = p[i]; if (!q.s && !q.x) return; out.push({ k: i === 0 ? "ecc" : i === 2 ? "con" : "pau", d: q.x ? 0.45 : q.s, to: i <= 1 ? "E" : "C" }); });
+  return out;
+}
+function demoStart(x, D) { return D.walk || (!tempoParts(x.tempo) && x.hold) ? "C" : x.start === "bottom" ? "E" : "C"; }
+function demoAt(D, x, t, phases) {
+  var cyc = phases.reduce(function (a, q) { return a + q.d; }, 0) || 1, tc = ((t % cyc) + cyc) % cyc, acc = 0, from = demoStart(x, D);
+  for (var n = 0; n < phases.length; n++) {
+    var q = phases[n];
+    if (tc < acc + q.d || n === phases.length - 1) { var f = clamp((tc - acc) / q.d, 0, 1); return { q: demoLerpPose(from === "E" ? D.E : D.C, q.to === "E" ? D.E : D.C, demoEase(f)), ph: q.k }; }
+    acc += q.d; from = q.to;
+  }
+  return { q: D.C, ph: "" };
+}
+/* Con la guía de tempo corriendo, la figura sigue exactamente el mismo reloj */
+function demoAtPacer(D, x) {
+  var t = pacerTime() - PC.lead; if (t < 0) return { q: demoStart(x, D) === "E" ? D.E : D.C, ph: "" };
+  var ph = PC.phases.map(function (q) { return { k: q.kind, d: q.dur, to: q.i <= 1 ? "E" : "C" }; });
+  return demoAt(D, x, t, ph);
+}
+var DEMO = { raf: 0, t0: 0, last: 0, rm: false };
+try { DEMO.rm = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+function demoOf(id) { return DEMOS[id] || null; }
+/* x = el ejercicio ya resuelto (con su tempo y peldaño). sync = sigue la guía de tempo de la serie actual. */
+function demoHTML(x, sync, cls) {
+  var D = x && demoOf(x.id); if (!D) return "";
+  var f = demoFit(D), r = demoAt(D, x, 0, demoPhases(x, D));
+  if (!DEMO.t0) DEMO.t0 = performance.now();
+  setTimeout(demoKick, 0);
+  return '<svg class="demo' + (cls ? " " + cls : "") + '" data-demo="' + esc(x.id) + '" data-tempo="' + esc(x.tempo || "") + '" data-start="' + esc(x.start || "") + '" data-hold="' + (x.hold || "") + '"' + (sync ? ' data-sync="1"' : "") +
+    ' viewBox="' + f.map(function (v) { return v.toFixed(1); }).join(" ") + '" role="img" aria-label="Cómo se hace: ' + esc(x.name) + '">' + demoDraw(D, r.q, DEMO.rm ? "" : r.ph) + "</svg>";
+}
+function demoPaint(el, now) {
+  var id = el.getAttribute("data-demo"), D = demoOf(id); if (!D) return;
+  var x = { id: id, tempo: el.getAttribute("data-tempo"), start: el.getAttribute("data-start"), hold: +el.getAttribute("data-hold") || 0 };
+  var st = P.active ? P.steps[P.idx] : null, r;
+  if (el.hasAttribute("data-sync") && PC.running && st && st.ex && st.ex.id === id) r = demoAtPacer(D, x);
+  else r = demoAt(D, x, (now - DEMO.t0) / 1000, demoPhases(x, D));
+  el.innerHTML = demoDraw(D, r.q, r.ph);
+}
+function demoTick(now) {
+  DEMO.raf = 0;
+  var els = document.querySelectorAll("svg.demo[data-demo]"), live = 0;
+  if (now - DEMO.last >= (CAM.on ? 85 : 45)) {   // ~22 cuadros por segundo (menos con la cámara, para cuidar la batería)
+    DEMO.last = now;
+    for (var i = 0; i < els.length; i++) { var el = els[i]; if (!el.getClientRects().length) continue; live++; demoPaint(el, now); }
+  } else live = els.length;
+  if (live && !DEMO.rm && document.visibilityState !== "hidden") DEMO.raf = requestAnimationFrame(demoTick);
+}
+function demoKick() { if (!DEMO.raf && !DEMO.rm && window.requestAnimationFrame) DEMO.raf = requestAnimationFrame(demoTick); }
+document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") demoKick(); });
+/* Video de referencia (con internet): búsqueda en YouTube del ejercicio */
+function videoURL(x) { return "https://www.youtube.com/results?search_query=" + encodeURIComponent(String(x.name || "").replace(/\s*\([^)]*\)/g, "") + " técnica correcta"); }
+var ITEM_DEMO = { "Split squat sin peso": "splitsq", "Sentadillas a tu caja": "goblet", "Peso muerto rumano ligero": "rdl2p", "Serie ligera de press Arnold": "arnold", "Flexiones rápidas en la silla": "flexexp", "Elevaciones de talón": "talonpie", "Series de aproximación": "remo1m" };
+function itemDemoEx(it) { var id = ITEM_DEMO[it.name], x = EX[id] || {}; return { id: id, name: it.name, tempo: "", start: x.start, hold: 0 }; }
+/* =====================================================================
+   3. Un solo asistente de voz en la sesión.
+   Encendido: con clave de Google e internet usa Gemini Live (te oye, conversa, maneja la sesión
+   y los comandos se hacen al instante con lo que transcribe); si no, los comandos de voz del celular.
+   Si Live se corta o se acaba la cuota, sigue solo con los comandos del celular.
+   ===================================================================== */
+function asstOn() { var v = pref("asst", null); return v == null ? !!pref("hf", false) : !!v; }
+function asstEngine() { return liveReady() && navigator.onLine !== false ? "live" : "local"; }
+function asstSync(announce) {
+  if (!P.active || P.done) { hfSync(); return; }
+  if (asstOn() && asstEngine() === "live" && !TALK.on) { TALK.bySession = true; talkStart(); LV.greet = false; }
+  else if (!asstOn() && TALK.on && TALK.bySession) talkStop();
+  hfSync();
+  if (announce) {
+    if (!asstOn()) say("Asistente apagado.", true);
+    else if (TALK.on && TALK.eng === "live") say("Asistente con Gemini: háblame cuando quieras. Los comandos como «listo» o «pausa» los hago al instante.", true);
+    else if (hfSupported()) say("Asistente activado. Di «listo» al terminar cada serie, «pausa» o «hice ocho».", true);
+    else hfMsg("Este navegador no entiende la voz: usa Chrome. El gesto con la cámara sí funciona.");
+  }
+  asstPaint();
+}
+function asstToggle() { var on = !asstOn(); setPref("asst", on); setPref("hf", on); asstSync(true); }
+function asstPaint() {
+  var b = $("p-asst"); if (!b) return;
+  var on = asstOn(), live = TALK.on && TALK.eng === "live";
+  b.setAttribute("aria-pressed", on ? "true" : "false");
+  b.textContent = on ? (live ? "Asistente · Gemini" : "Asistente") : "Asistente";
+  b.classList.toggle("live", on && live);
+}
+function prepVoice() {
+  if (P.kind !== "session") { say("En esta rutina no hay equipo que cambiar.", true); return; }
+  var i = P.idx, st = P.steps[i];
+  if (!restLike(st)) { for (var j = i; j < P.steps.length; j++) if (restLike(P.steps[j])) { i = j; break; } }
+  var now = prepNow(i), ah = prepAhead(i, 2);
+  var t = now.length ? (restLike(st) ? "Ahora: " : "En el próximo descanso: ") + now.map(function (q) { return q.say; }).join(" ") : "Nada que cambiar por ahora.";
+  if (ah.length) t += " Luego: " + ah.map(function (q) { return q.name + (q.what && q.what !== "sin equipo" ? ", con " + q.what : ""); }).join("; ") + ".";
+  say(t, true);
+}
+/* Tarjeta de novedades (una vez) */
+function whatsNewHTML() {
+  if (pref("seen50", false)) return "";
+  return '<section class="card news"><h2 class="sec-title">Novedades de la versión 5.0</h2><ul class="plain">' +
+    "<li><b>Al empezar:</b> «Prepara tu equipo» con las mancuernas armadas y todo lo que usarás.</li>" +
+    "<li><b>En cada descanso:</b> anotas reps y RIR, ves qué preparar ahora (discos, liga) y lo que viene, con la figura del ejercicio que sigue.</li>" +
+    "<li><b>Figura animada</b> que se mueve con el tempo: rojo = fuerza, azul = regreso, morado = mantener.</li>" +
+    "<li><b>Sonidos:</b> «tuiii» que sube = fuerza; «tiuuu» que cae = regreso; «tu-tu-tu» parejo = mantener.</li>" +
+    "<li><b>Ejercicios por lado:</b> el lado 2 empieza solo y se anota una vez al final.</li>" +
+    "<li><b>Un solo botón «Asistente»:</b> con tu clave de Google conversa con Gemini Live y hace tus comandos al instante; sin internet, entiende los comandos de voz.</li>" +
+    '</ul><div class="hero-actions"><button class="btn" data-v5="seen50" type="button">Entendido</button></div></section>';
+}
+window.S3v5 = { demoHTML: demoHTML, demoDraw: demoDraw, demoFit: demoFit, DEMOS: DEMOS, prepPlan: prepPlan, enterStep: enterStep, prepNow: prepNow };
+/*V5JS*/
 
 /* ===================== Inicio ===================== */
 function pickInitial() {

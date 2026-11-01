@@ -4,7 +4,7 @@
      y la app recarga sola cuando no estás en una sesión ni en una conversación.
    - El detector de postura de la cámara (MediaPipe) se guarda la primera vez que lo usas.
    - No toca nada más (tu IA, GitHub, Gemini): esas conexiones pasan directo. */
-const APP = "s3-app-v5";
+const APP = "s3-app-v6";
 const CDN = "s3-cdn-v1";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 
